@@ -2,7 +2,7 @@
 const { Client } = require('pg');
 
 // change the DB_NAME string to whatever your group decides on
-const DB_NAME = 'univ-boilerplate';
+const DB_NAME = 'grace-shopper';
 
 const DB_URL =
   process.env.DATABASE_URL || `postgres://localhost:5432/${DB_NAME}`;
@@ -20,7 +20,10 @@ if (process.env.CI) {
   });
 } else {
   // local / heroku client config
-  client = new Client(DB_URL);
+  client = new Client({DB_URL, ssl:
+    process.env.NODE_ENV === "production"
+      ? { rejectUnauthorized: false }
+      : undefined,});
 }
 
 module.exports = client;
