@@ -1,12 +1,12 @@
 // grab our db client connection to use with our adapters
 const client = require('../client');
 const bcrypt = require('bcrypt');
-const { unstable_renderSubtreeIntoContainer } = require('react-dom');
-const { useReducer } = require('react');
+
 
 const SALT_COUNT = 10;
 
-// user functions
+// DB user functions
+
 async function createUser({email, name, password}){
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT)
   try{
@@ -14,11 +14,12 @@ async function createUser({email, name, password}){
       INSERT INTO users (email, name, password)
       VALUES ($1, $2. $3)
       ON CONFLICT (email) DO NOTHING
-      RETURNING name, id;
+      RETURNING email, name, id;
     `, [email, name, hashedPassword]);
     return user
   }
   catch (error) {
+    console.error("error in createUser")
     throw error;
   }
 }
@@ -37,6 +38,7 @@ async function getUser({email, password}){
         return user;
     }
   } catch (error) {
+    console.error("error in getUser")
     throw error;
   }
 }
@@ -51,6 +53,7 @@ async function getUserById(userId) {
 
     return user;
   } catch (error) {
+    console.error("error in getUserById")
     throw error;
   }
 }
@@ -65,6 +68,7 @@ async function getUserByEmail(email) {
 
     return user;
   } catch (error) {
+    console.error ("error in getUserByEmail")
     throw error;
   }
 }
@@ -79,7 +83,7 @@ async function updateUser ({ id, ...fields }) {
   }
 
   try {
-    const { rows: [routine]} = await client.query(`
+    const { rows: [user]} = await client.query(`
       UPDATE users
       SET ${ setString }
       WHERE id=${id}
@@ -88,16 +92,32 @@ async function updateUser ({ id, ...fields }) {
 
     return user;
   } catch (error) {
+    console.error("error in updateUser")
     throw error;
   }
 }
 
 async function getAllUsers() {
-  /* this adapter should fetch a list of users from your db */
+  try{
+    const allUsers = await client.query(`
+    SELECT *
+    FROM users;
+    `);
+
+    return {allUsers}
+  } catch (error){
+    console.error("error in getAllUsers")
+    throw error;
+  }
 }
 
 
 module.exports = {
   // add your database adapter fns here
   getAllUsers,
+  getUser,
+  createUser,
+  getUserById,
+  getUserByEmail,
+  updateUser
 };
