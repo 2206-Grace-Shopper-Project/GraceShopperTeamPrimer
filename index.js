@@ -7,6 +7,9 @@ const server = express();
 const cors = require('cors');
 server.use(cors());
 
+//bringing in .envconfig file
+require("dotenv").config()
+
 // create logs for everything
 const morgan = require('morgan');
 server.use(morgan('dev'));
