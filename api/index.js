@@ -1,8 +1,14 @@
-const { Router } = require('express');
 const apiRouter = require('express').Router();
 const {JWT_SECRET} = process.env;
 const jwt = require('jsonwebtoken');
 const {getUserById} = require('../db');
+const userRouter = require("./users")
+const movieRouter = require('./movies')
+const orderRouter = require('./orders')
+const reviewRouter = require('./reviews')
+const cartRouter = require('./carts')
+const cartMovieRouter = require('./cartMovies')
+
 
 apiRouter.use(async(req, res, next) => {
   const prefix = "Bearer ";
@@ -14,7 +20,7 @@ apiRouter.use(async(req, res, next) => {
     const token = auth.slice(prefix.length);
 
     try {
-      const { id } = jwt.verify(token, process.env.JWT_SECRET);
+      const { id } = jwt.verify(token, JWT_SECRET);
 
       if (id) {
         req.user = await getUserById(id);
@@ -30,9 +36,6 @@ apiRouter.use(async(req, res, next) => {
       message: `Authorization token must start with ${prefix}`,
     });
   }
-
-
-
 })
 
 
@@ -51,5 +54,36 @@ apiRouter.get('/health', (req, res, next) => {
 });
 
 // place your routers here
+apiRouter.use('/users', userRouter)
+apiRouter.use('/movies', movieRouter)
+apiRouter.use('/carts', cartRouter)
+apiRouter.use('/cart_movies', cartMovieRouter)
+apiRouter.use('/orders', orderRouter)
+apiRouter.use('/reviews', reviewRouter)
+
+apiRouter.use((req, res, next) => {
+  next({
+    error: "Error!",
+    name: "PageNotFound",
+    message: "The page you are looking for is not here",
+    status: 404,
+  });
+});
+
+apiRouter.use((error, req, res, next) => {
+  let errorStatus = 400;
+  if (error.status) {
+    errorStatus = error.status;
+  }
+
+  res.status(errorStatus).send({
+    message: error.message,
+    name: error.name,
+    error: error.error,
+  });
+});
+
+
+
 
 module.exports = apiRouter;
