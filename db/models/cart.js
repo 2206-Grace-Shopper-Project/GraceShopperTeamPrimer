@@ -1,16 +1,18 @@
 const client = require('../client')
 
-async function createCart (userId) {
+async function createCart ({userId}) {
 try {
+    console.log(userId)
     const {rows: [cart] } = await client.query(`
     INSERT INTO cart("userId")
     VALUES ($1)
     RETURNING *;
     `, [userId]
     );
+    
     return cart 
 } catch (error) {
-    console.error(error)
+    console.error("error createCart")
     throw error;
 }
 }
@@ -26,7 +28,7 @@ async function getCartById (id) {
         );
         return cart
     } catch (error) {
-        console.error(error)
+        console.error("error getting cart by id")
         throw error;
     }
 }

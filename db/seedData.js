@@ -4,8 +4,8 @@ const {
   createCart,
   createCartMovie,
   createMovie,
-  createOrders,
-  createReviews
+  createOrder,
+  createReview
 } = require('./');
 
 async function dropTables(){
@@ -81,7 +81,7 @@ async function buildTables() {
       address varchar(255) NOT NULL,
       email varchar(255),
       quantity INTEGER NOT NULL,
-      date INTEGER NOT NULL,
+      date BIGINT NOT NULL,
       price INTEGER NOT NULL
     );
     `)
@@ -116,22 +116,22 @@ async function populateInitialData() {
     const cart = await Promise.all(cartToCreate.map(createCart))
     console.log(cart)
 
-    const cartMovieToCreate = [
-      { cartId:1, movieId:1, quantity:2 }
-    ]
-    const cartMovie = await Promise.all(cartMovieToCreate.map(createCartMovie))
-    console.log(cartMovie)
+    // const cartMovieToCreate = [
+    //   { cartId:1, movieId:1, quantity:2 }
+    // ]
+    // const cartMovie = await Promise.all(cartMovieToCreate.map(createCartMovie))
+    // console.log(cartMovie)
 
     const reviewsToCreate = [
       { movieId:1, userId:1, review:"I'm still laughing!" }
     ]
-    const reviews = await Promise.all(reviewsToCreate.map(createReviews))
+    const reviews = await Promise.all(reviewsToCreate.map(createReview))
     console.log(reviews)
 
     const ordersToCreate = [
       { cartId:1, address:"1234 Albert Lane", email:"albert@hotmail.com", quantity:1 , date:1660157462019 , price:20 }
     ]
-    const orders = await Promise.all(ordersToCreate.map(createOrders))
+    const orders = await Promise.all(ordersToCreate.map(createOrder))
     console.log(orders)
 
     console.log("Finished populating initial data")
@@ -147,7 +147,6 @@ async function rebuildDB(){
 
     await dropTables();
     await buildTables();
-    await populateInitialData();
   } catch(error){
     console.log("Error during rebuildDB")
     throw error
