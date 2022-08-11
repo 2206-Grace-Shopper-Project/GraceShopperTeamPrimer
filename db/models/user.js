@@ -12,7 +12,7 @@ async function createUser({email, name, password}){
   try{
     const {rows: [user]} = await client.query(`
       INSERT INTO users (email, name, password)
-      VALUES ($1, $2. $3)
+      VALUES ($1, $2, $3)
       ON CONFLICT (email) DO NOTHING
       RETURNING email, name, id;
     `, [email, name, hashedPassword]);

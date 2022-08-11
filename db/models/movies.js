@@ -1,102 +1,121 @@
-const client = require("./client");
+const client = require("../client");
 
 const createMovie = async ({
   title,
   genre,
   year,
   rated,
-  plot,
   actors,
+  directors,
+  plot,
   price,
+  poster,
   inventory,
 }) => {
   try {
     const {
       rows: [movie],
-    } = await client.query(`
-        INSERT INTO movies(title, genre, year, rated, plot, actors, price, inventory)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+    } = await client.query(
+      `
+        INSERT INTO movies(title, genre, year, rated, actors, directors,  plot, price, poster, inventory)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
         RETURNING *;
-        `, [ title,
-            genre,
-            year,
-            rated,
-            plot,
-            actors,
-            price,
-            inventory]);
+        `,
+      [
+        title,
+        genre,
+        year,
+        rated,
+        actors,
+        directors,
+        plot,
+        price,
+        poster,
+        inventory,
+      ]
+    );
+    return movie
   } catch (error) {
     console.error;
     throw error;
   }
 };
 
-const getAllMovies = async () =>{
-    try {
-        const {rows: movies} = await client.query(`
+const getAllMovies = async () => {
+  try {
+    const { rows: movies } = await client.query(`
         SELECT *
         FROM movies
         ORDER BY id;
         `);
-        return movies;
-    } catch (error) {
-        console.error
-        throw error
-    }
-}
-
+    return movies;
+  } catch (error) {
+    console.error;
+    throw error;
+  }
+};
 
 const getMovieById = async (id) => {
-    try {
-        const {rows: [movie]} = await client.query(`
+  try {
+    const {
+      rows: [movie],
+    } = await client.query(
+      `
         SELECT *
         FROM movies
         WHERE id=$1
-        `, [id])
-        return movie
-    } catch (error) {
-        console.error
-        throw error
-    }
-}
-
+        `,
+      [id]
+    );
+    return movie;
+  } catch (error) {
+    console.error;
+    throw error;
+  }
+};
 
 const getMovieInventory = async (id) => {
-    try {
-        const {rows: [movie]} = await client.query(`
+  try {
+    const {
+      rows: [movie],
+    } = await client.query(
+      `
         SELECT inventory
         FROM movies
         WHERE id=$1
-        `, [id])
+        `,
+      [id]
+    );
 
-        return movie
-
-    } catch (error) {
-        console.error
-        throw error
-    }
-}
-
+    return movie;
+  } catch (error) {
+    console.error;
+    throw error;
+  }
+};
 
 const deleteMovie = async (id) => {
-    try {
-        const {rows: [movie]} = await client.query(`
+  try {
+    const {
+      rows: [movie],
+    } = await client.query(
+      `
         DELETE *
         FROM movies
         WHERE id=$1
-        `, [id])
+        `,
+      [id]
+    );
 
-        return movie
+    return movie;
+  } catch (error) {
+    console.error;
+    throw error;
+  }
+};
 
-    } catch (error) {
-        console.error
-        throw error
-    }
-}
-
-
-const updateMovie = async ({id, ...fields}) => {
-    const setString = Object.keys(fields)
+const updateMovie = async ({ id, ...fields }) => {
+  const setString = Object.keys(fields)
     .map((key, idx) => `"${key}"=$${idx + 1}`)
     .join(",");
   try {
@@ -116,23 +135,21 @@ const updateMovie = async ({id, ...fields}) => {
     console.error;
     throw error;
   }
-}
-
+};
 
 const attachMoviesToCarts = async () => {
-    try {
-    return null
-    } catch (error) {
-        console.error
-    }
-}
-
+  try {
+    return null;
+  } catch (error) {
+    console.error;
+  }
+};
 
 module.exports = {
-    createMovie,
-    getAllMovies,
-    getMovieById,
-    getMovieInventory,
-    deleteMovie,
-    updateMovie,
-  };
+  createMovie,
+  getAllMovies,
+  getMovieById,
+  getMovieInventory,
+  deleteMovie,
+  updateMovie,
+};
