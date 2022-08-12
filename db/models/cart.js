@@ -34,12 +34,14 @@ async function getCartById (id) {
 }
 
 async function getCartByUser (userId) {
-  try {
+  try {   
+    console.log(userId,"userID from db")
+
     const { rows: [cart] } = await client.query(`
-    SELECT *
+    SELECT cart.*, users.name
     FROM cart
-    JOIN user on cart."userId"=user.id
-    WHERE "isPurchased='false' AND "userId"=$1;
+    JOIN users on cart."userId"=users.id
+    WHERE "isPurchased"='false' AND "userId"=$1;
     `, [userId])
 
 
@@ -53,12 +55,14 @@ async function getCartByUser (userId) {
 
 async function deleteCart (id) {
 try {
-    await client.query(`
-    DELETE FROM cart
-    WHERE id=$1;
-    `)
+   const {rows: [cart]} = await client.query(`
+    UPDATE cart
+    SET "isPurchased"='true'
+    WHERE id=$1
+    RETURNING *;`, [id])
+    return cart
 } catch (error) {
-    console.error(error)
+    console.error('delete cart is not working')
 }   throw error;
 }
 
