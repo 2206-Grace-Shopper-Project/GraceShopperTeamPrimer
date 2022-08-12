@@ -9,7 +9,8 @@ module.exports = {
   ...require('./movies'),
   ...require('./reviews'),
   ...require('./cart-movies'),
-  ...require('./userData')
+  ...require('./userData'),
+  ...require('./movieDataDump')
 };
 
 // then, in your API, you'll require the appropriate model
