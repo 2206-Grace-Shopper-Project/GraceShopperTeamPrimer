@@ -81,7 +81,8 @@ async function updateUser ({ id, ...fields }) {
   if (setString.length === 0) {
     return;
   }
-
+  const hashedPassword = await bcrypt.hash(fields.password, SALT_COUNT)
+  fields.password = hashedPassword
   try {
     const { rows: [user]} = await client.query(`
       UPDATE users
@@ -99,12 +100,12 @@ async function updateUser ({ id, ...fields }) {
 
 async function getAllUsers() {
   try{
-    const allUsers = await client.query(`
+    const {rows: allUsers} = await client.query(`
     SELECT *
     FROM users;
     `);
 
-    return {allUsers}
+    return allUsers
   } catch (error){
     console.error("error in getAllUsers")
     throw error;
