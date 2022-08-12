@@ -65,7 +65,6 @@ router.post('/login', async (req, res, next) => {
 })
 
 // PATCH - update user info 
-// *** will need to add code to REHASH password inside of this update function! ***
 router.patch('/:userId', async (req, res, next) => {
     const {userId} = req.params
     const { email, name, password } = req.body
@@ -112,8 +111,9 @@ router.patch('/:userId', async (req, res, next) => {
 
 // POST - address
 router.post('/address/:userId', async (req, res, next) => {
-    // const userId = req.params;
-    const {address, userId} = req.body
+    const { userId } = req.params;
+    console.log(req.params, 'params')
+    const {address} = req.body
     console.log(req.body, "here's the body from 117")
     const userData = {}
     try{
@@ -121,20 +121,29 @@ router.post('/address/:userId', async (req, res, next) => {
         userData.address = address
         const newAddress = await addAddress(userData)
         console.log(newAddress)
-        
+
+        res.send(newAddress)
 
     } catch ({name, message, error}) {
         next({name, message, error})
     }
-
 })
 
 
 // GET - list of all users (admin)
+router.get('/', async (req, res, next) => {
+    try {
+        const allUsers = await getAllUsers()
+        res.send(allUsers)
+
+    } catch (error) {
+        next()
+    }
+})
 
 // GET - lost password (stretch goal: send email with a reset link to a )
 
 
 
 
-module.exports = router
+module.exports = router;
