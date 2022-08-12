@@ -1,6 +1,7 @@
 const client = require("../client");
 
-const createMovie = async ({
+const createMovie = async (movieIn) => {
+  const {
   title,
   genre,
   year,
@@ -11,8 +12,10 @@ const createMovie = async ({
   price,
   poster,
   inventory,
-}) => {
+} = movieIn
   try {
+    // console.log('I love movies!!!!!!!!!!!????????????')
+    // console.log(movieIn, title, genre, 'we made it!!!!!!$$$$')
     const {
       rows: [movie],
     } = await client.query(
@@ -34,6 +37,7 @@ const createMovie = async ({
         inventory,
       ]
     );
+    // console.log(movie, 'the tables they are empty*******')
     return movie
   } catch (error) {
     console.error;

@@ -5,8 +5,17 @@ const {
   createCartMovie,
   createMovie,
   createOrder,
-  createReview
+  createReview,
+  populateMovieDatabase,
+  sampleCall,
+  addMovieToDataBase
 } = require('./');
+// const fetch = require("node-fetch") 
+// globalThis.fetch = fetch
+// const movieJSON= require('./models/userData.json')
+// const movieData = JSON.parse(movieJSON)
+// console.log(movieData.items)
+// console.log(typeof populateMovieDatabase, '!!!!!')
 
 async function dropTables(){
   console.log("Starting to drop tables")
@@ -45,16 +54,16 @@ async function buildTables() {
     );
     CREATE TABLE movies(
       id SERIAL PRIMARY KEY,
-      title varchar(255) NOT NULL,
-      genre varchar(255) NOT NULL,
-      year INTEGER NOT NULL,
-      rated varchar(255) NOT NULL,
-      plot TEXT NOT NULL,
-      actors varchar(255) NOT NULL,
-      directors varchar(255) NOT NULL,
-      poster varchar(255) NOT NULL,
-      price INTEGER NOT NULL,
-      inventory INTEGER NOT NULL
+      title varchar(255),
+      genre varchar(255),
+      year INTEGER,
+      rated varchar(255),
+      plot TEXT,
+      actors varchar(255),
+      directors varchar(255),
+      poster varchar(255),
+      price INTEGER,
+      inventory INTEGER
     );
     CREATE TABLE cart(
       id SERIAL PRIMARY KEY,
@@ -109,6 +118,7 @@ async function populateInitialData() {
     ]
     const movies = await Promise.all(moviesToCreate.map(createMovie))
     console.log(movies)
+    addMovieToDataBase()
 
     const cartToCreate = [
       { userId:1 }
@@ -147,13 +157,25 @@ async function rebuildDB(){
 
     await dropTables();
     await buildTables();
+    await populateInitialData()
+    console.log('made it to end of rebuildDB')
   } catch(error){
     console.log("Error during rebuildDB")
     throw error
   }
 }
 
-rebuildDB()
-  .then(populateInitialData)
-  .catch(console.error)
-  .finally(() => client.end());
+const runDB = async () => {
+  try {
+    await rebuildDB().then(console.log('this should be after all is inputted'))
+  } catch (error) {
+    console.error('problem over here')
+  } finally{
+    client.end()
+  }
+}
+runDB()
+// await rebuildDB()
+//   .catch(console.error)
+//   .finally(() => {client.end()
+//   console.log('alls well that ends well')});
