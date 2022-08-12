@@ -8,7 +8,9 @@ const {
   createReview,
   populateMovieDatabase,
   sampleCall,
-  addMovieToDataBase
+  addMovieToDataBase,
+  addAddress,
+  getAllUserData
 } = require('./');
 // const fetch = require("node-fetch") 
 // globalThis.fetch = fetch
@@ -110,8 +112,24 @@ async function populateInitialData() {
       { name: "sandra", password: "sandra123", email:"sandra@hotmail.com"},
       { name: "glamgal", password: "glamgal123", email:"glamgal@hotmail.com"},
     ]
-    const users = await Promise.all(usersToCreate.map(createUser))
+    const users = []
+    for (const user of usersToCreate){
+    users.push(await createUser(user))
+    }
     console.log(users)
+
+    const addressesToAdd = [
+      { userId: 1, address: "1245 Bertbert Ave"},
+      { userId: 2, address: "12 Fake Street Washington 84322"},
+      { userId: 3, address: "1577 Townsend Drive Omaha, NE"}
+    ]
+    
+    const address = await Promise.all(addressesToAdd.map(addAddress))
+    console.log(address)
+
+    console.log('Getting user[1] data')
+    console.log(await getAllUserData({userId: 1}))
+
 
     const moviesToCreate = [
       { title:"Feeling vs Felt", genre:"Comedy", year:2022 , rated:"R", actors:"Josie Rodriguez", directors:"Hunter Norris", plot:"A hand puppet appears from the blue to shake Edie out of her funk. Sometimes you just have to be polite and let ethereal puppets complete their mission, even if it's kinda low on your to do list. They're on your hand, after all.", price:20 , poster:"img", inventory:1 }
