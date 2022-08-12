@@ -61,7 +61,7 @@ async function getUserById(userId) {
 async function getUserByEmail(email) {
   try{
     const {rows: [user]} = await client.query(`
-    SELECT id, name, email
+    SELECT *
     FROM users
     WHERE email = $1;
     `, [email]);
