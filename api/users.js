@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const jwt = require('jsonwebtoken')
+const {JWT_SECRET} = process.env
+const bcrypt = require('bcrypt');
+
 const {createUser, getUser, getUserById, getUserByEmail, updateUser, getAllUsers} = require('../db')
 
 
@@ -39,7 +42,8 @@ router.post('/register', async (req, res, next) => {
 // POST - Login 
 router.post('/login', async (req, res, next) => {
     const {email, password} = req.body
-
+    console.log(req.body, 'this is the body')
+    console.log(email, password, "here's some more stuff")
     if (!email || !password){
         next({
             message: "Please supply both an email and password"
@@ -47,8 +51,8 @@ router.post('/login', async (req, res, next) => {
     }
     try{
         const user = await getUserByEmail(email)
-
-        if(user && user.password == password){
+        const isValid = await bcrypt.compare(password, user.password)
+        if(user && isValid){
             const token = jwt.sign({id: user.id, email},
             JWT_SECRET, {expiresIn: '1w'});
             res.send({message:"You're Logged In!", user, token})
@@ -91,7 +95,7 @@ router.patch('/:userId', async (req, res, next) => {
 // POST - address
 // GET - list of all users (admin)
 
-// GET - lost password
+// GET - lost password (stretch goal: send email with a reset link to a )
 
 
 
