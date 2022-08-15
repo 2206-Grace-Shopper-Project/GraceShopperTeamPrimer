@@ -28,8 +28,7 @@ async function getCartMovieById(id) {
       `
         SELECT *
         FROM cart_movies
-        WHERE id=$1
-        RETURNING *
+        WHERE id=$1;
         `,
       [id]
     );
@@ -88,5 +87,6 @@ async function deleteMovie(id) {
 module.exports = {
   addMovietoCart,
   updateQuantity,
+  getCartMovieById,
   deleteMovie,
 };
