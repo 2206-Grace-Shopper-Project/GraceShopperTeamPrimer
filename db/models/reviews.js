@@ -3,6 +3,7 @@ const client = require("../client");
 // DB FUNCTIONS
 
 async function createReview({ movieId, userId, review }) {
+
   try {
     const {
       rows: [user_review],
@@ -15,6 +16,7 @@ async function createReview({ movieId, userId, review }) {
         `,
       [movieId, userId, review]
     );
+   
     return user_review;
   } catch (error) {
     console.error("error in createReview function");
@@ -90,6 +92,24 @@ async function getReviewsByMovieId({ movieId }) {
   }
 }
 
+async function getReviewByReviewId(id){
+  try {
+    const { rows: [user_review] } = await client.query(
+      `
+        SELECT reviews.*
+        FROM reviews
+        WHERE id=$1;
+        `,
+      [id]
+    );
+
+    return user_review;
+  } catch (error) {
+    console.error("error in the getReviewsByReviewId function");
+    throw error;
+  }
+}
+
 async function deleteReview(id) {
   try {
     const { rows } = await client.query(
@@ -112,5 +132,6 @@ module.exports = {
   editReview,
   getReviewsByMovieId,
   getReviewsByUserId,
+  getReviewByReviewId,
   deleteReview,
 };
