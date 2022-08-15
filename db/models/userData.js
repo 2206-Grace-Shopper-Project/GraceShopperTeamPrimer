@@ -18,13 +18,13 @@ const addAddress = async ({userId, address}) => {
     }
 }
 
-const getAllUserData = async ({userId}) =>{
+const getAllUserData = async ({id}) =>{
 try {
     const {rows: userAddresses} = await client.query(`
        SELECT userData.address, userData.id
        FROM userData
        WHERE userData."userId"=$1;
-       `, [userId])
+       `, [id])
     const userData = await getUserById(userId)
     userData.address = userAddresses
 
@@ -35,14 +35,14 @@ try {
 }
 }
 
-const updateAddress = async ({id, address}) =>{
+const updateAddress = async ({userDataId, address}) =>{
     try {
        const {rows: [newAddress]} = await client.query(`
        UPDATE userData
        SET address=$1
        WHERE id=$2
        RETURNING *; 
-       `, [address, id])
+       `, [address, userDataId])
         
         return newAddress
     } catch (error) {
@@ -51,13 +51,13 @@ const updateAddress = async ({id, address}) =>{
     }
 }
 
-const deleteAddress = async ({id}) =>{
+const deleteAddress = async ({userDataId}) =>{
     try {
         const {rows: [deletedAddress]} = await client.query(`
         DELETE FROM userData
         WHERE id=$1
         RETURNING *;
-        `,[id])
+        `,[userDataId])
 
         return deletedAddress
 
