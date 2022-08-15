@@ -3,7 +3,6 @@ const { getReviewsByMovieId } = require('../db/models/reviews')
 const router = express.Router()
 
 
-
 // POST - create review 
 // PATCH - edit review
 // GET - movie specific
