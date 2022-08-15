@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import {  Routes, Route } from 'react-router-dom';
-
+import { grabToken } from '../auth';
+import {Orders} from './'
 
 const App = () => {
-
+  const [token, setToken] = useState(grabToken()) 
 
   return (
-    <div className="app-container">
-      <h1>Hello, World!</h1>
-    </div>
+    <>
+    <Routes>
+      <Route path='/' />
+      <Route path='/orders' element={<Orders setToken={setToken}/>}/>
+    </Routes>
+    </>
   );
 };
 
