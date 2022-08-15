@@ -8,6 +8,7 @@ const {
   createReview,
   getUserById,
   getReviewsByUserId,
+  deleteReview,
 } = require("../db");
 const { requireUser } = require("./utils");
 
@@ -105,7 +106,7 @@ router.delete("/delete/:id", requireUser, async (req, res, next) => {
       });
     }
 
-    const deletedReview = await deletedReview(id);
+    const deletedReview = await deleteReview(id);
     res.send(deletedReview);
   } catch ({ name, message, error }) {
     next({ name, message, error });
