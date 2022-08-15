@@ -1,4 +1,6 @@
 const client = require('../client')
+const {attachMoviesToCarts} = require('./movies')
+
 
 async function createCart ({userId}) {
 try {
@@ -26,7 +28,7 @@ async function getCartById (id) {
         WHERE id=$1;
         `, [id]
         );
-        return cart
+        return attachMoviesToCarts(cart)
     } catch (error) {
         console.error("error getting cart by id")
         throw error;
@@ -46,7 +48,7 @@ async function getCartByUser (userId) {
 
 
  
-    return cart
+    return attachMoviesToCarts(cart)
   } catch (error) {
     console.error(error)
     throw error;
