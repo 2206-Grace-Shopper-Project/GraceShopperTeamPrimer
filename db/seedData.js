@@ -128,8 +128,8 @@ async function populateInitialData() {
     const address = await Promise.all(addressesToAdd.map(addAddress))
     console.log(address)
 
-    console.log('Getting user[1] data')
-    console.log(await getAllUserData({userId: 1}))
+    // console.log('Getting user[1] data')
+    // console.log(await getAllUserData({userId: 1}))
 
 
     const moviesToCreate = [

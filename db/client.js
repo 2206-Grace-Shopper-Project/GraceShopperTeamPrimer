@@ -1,6 +1,8 @@
 // Connect to DB
 const { Client } = require('pg');
 
+const test = []
+
 // change the DB_NAME string to whatever your group decides on
 const DB_NAME = 'grace-shopper';
 
@@ -20,7 +22,7 @@ if (process.env.CI) {
   });
 } else {
   // local / heroku client config
-  client = new Client({connectionString: DB_URL,
+  client = new Client(config={connectionString: DB_URL,
     ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : undefined,});
 }
 // const connectionString =
