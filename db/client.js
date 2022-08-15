@@ -1,6 +1,8 @@
 // Connect to DB
 const { Client } = require('pg');
 
+const test = []
+
 // change the DB_NAME string to whatever your group decides on
 const DB_NAME = 'grace-shopper';
 
