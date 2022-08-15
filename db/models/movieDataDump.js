@@ -1,5 +1,4 @@
 const fetch = require("node-fetch") 
-const { async } = require("q")
 const {createMovie} = require('./movies')
 // import fetch from "node-fetch"
 const gimmeMovies = async () =>{
