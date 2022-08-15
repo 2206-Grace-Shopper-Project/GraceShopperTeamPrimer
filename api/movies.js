@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getAllMovies, createMovie, updateMovie, deleteMovie, getMovieById, getANumberOfMoviesBySearchCategory } = require("../db");
+const { getAllMovies, createMovie, updateMovie,  getMovieById, getANumberOfMoviesBySearchCategory, deleteMovieInDB } = require("../db");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -45,18 +45,22 @@ router.patch("/:movieId", async (req, res, next) => {
 
 router.delete('/:movieId', async (req, res, next) =>{
     try {
-        const id  = req.params.movieId
-        if(!(await getMovieById(id))){
+        const id  = Number(req.params.movieId)
+        console.log(id, '####')
+        const movieCheck = await getMovieById(id)
+        if(!movieCheck){
+          console.log('in the if statemnt')
         next({
             name: "MovieNotFoundError",
             message: `Movie ${id} not found`,
             error: "Error!",
           });
-    }
-    const response = deleteMovie(id)
-    res.send(response)
+    }else{
+    const response = await deleteMovieInDB(id)
+    console.log(response, 'what we got from query')
+    res.send(response)}
 } catch (error) {
-    next()
+    next(error)
 }
 })
 

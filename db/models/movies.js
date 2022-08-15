@@ -127,13 +127,14 @@ const getMovieInventory = async (id) => {
   }
 };
 
-const deleteMovie = async (id) => {
+const deleteMovieInDB = async (id) => {
+  console.log('in the query??????')
   try {
     const {
       rows: [movie],
     } = await client.query(
       `
-        DELETE *
+        DELETE
         FROM movies
         WHERE id=$1
         RETURNING *;
@@ -143,7 +144,7 @@ const deleteMovie = async (id) => {
 
     return movie;
   } catch (error) {
-    console.error;
+    console.error("error in delete movies function");
     throw error;
   }
 };
@@ -203,8 +204,8 @@ module.exports = {
   getAllMovies,
   getMovieById,
   getMovieInventory,
-  deleteMovie,
   updateMovie,
+  deleteMovieInDB,
   attachMoviesToCarts,
   getANumberOfMoviesBySearchCategory,
 };
