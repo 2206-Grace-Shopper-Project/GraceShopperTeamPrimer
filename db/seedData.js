@@ -52,7 +52,8 @@ async function buildTables() {
     CREATE TABLE userData(
       id SERIAL PRIMARY KEY,
       "userId" INTEGER REFERENCES users(id),
-      address varchar(255) NOT NULL
+      address varchar(255) NOT NULL,
+      UNIQUE ("userId", address)
     );
     CREATE TABLE movies(
       id SERIAL PRIMARY KEY,
