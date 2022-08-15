@@ -7,7 +7,7 @@ function requireUser(req, res, next) {
         status: 401,
       });
     }
-  
+  // if(req.user.name === 'Hunter Norris' || req.user.name === 'Darius Robinson' || req.user.name === 'Hunter Norris' || req.user.name === 'Hunter Norris')
     next();
   }
   
