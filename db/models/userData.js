@@ -1,4 +1,5 @@
 const client = require("../client");
+const {getUserById} = require("./user")
 
 
 const addAddress = async ({userId, address}) => {
@@ -13,18 +14,19 @@ const addAddress = async ({userId, address}) => {
        return userAddress
     } catch (error) {
         console.error('error in addAdrress function')
+        throw error
     }
 }
 
 const getAllUserData = async ({userId}) =>{
 try {
-    const {rows: [userData]} = await client.query(`
-       SELECT userData.*, users.name, users.email
+    const {rows: userAddresses} = await client.query(`
+       SELECT userData.address, userData.id
        FROM userData
-       JOIN users ON userData."userId"=users.id
        WHERE userData."userId"=$1;
        `, [userId])
-
+    const userData = await getUserById(userId)
+    userData.address = userAddresses
 
        return userData
 } catch (error) {
@@ -33,11 +35,45 @@ try {
 }
 }
 
+const updateAddress = async ({id, address}) =>{
+    try {
+       const {rows: [newAddress]} = await client.query(`
+       UPDATE userData
+       SET address=$1
+       WHERE id=$2
+       RETURNING *; 
+       `, [address, id])
+        
+        return newAddress
+    } catch (error) {
+        console.error('Error in update address function')
+        throw error
+    }
+}
+
+const deleteAddress = async ({id}) =>{
+    try {
+        const {rows: [deletedAddress]} = await client.query(`
+        DELETE FROM userData
+        WHERE id=$1
+        RETURNING *;
+        `,[id])
+
+        return deletedAddress
+
+    } catch (error) {
+        console.error('error in delete address')
+        throw error
+    }
+}
+
 
 
 
 
 module.exports = {
     addAddress,
-    getAllUserData
+    getAllUserData,
+    updateAddress,
+    deleteAddress
   };

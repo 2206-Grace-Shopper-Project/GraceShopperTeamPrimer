@@ -2,17 +2,17 @@ const client = require("../client");
 
 const createMovie = async (movieIn) => {
   const {
-  title,
-  genre,
-  year,
-  rated,
-  actors,
-  directors,
-  plot,
-  price,
-  poster,
-  inventory,
-} = movieIn
+    title,
+    genre,
+    year,
+    rated,
+    actors,
+    directors,
+    plot,
+    price,
+    poster,
+    inventory,
+  } = movieIn;
   try {
     // console.log('I love movies!!!!!!!!!!!????????????')
     // console.log(movieIn, title, genre, 'we made it!!!!!!$$$$')
@@ -38,7 +38,7 @@ const createMovie = async (movieIn) => {
       ]
     );
     // console.log(movie, 'the tables they are empty*******')
-    return movie
+    return movie;
   } catch (error) {
     console.error;
     throw error;
@@ -59,6 +59,35 @@ const getAllMovies = async () => {
   }
 };
 
+const getANumberOfMoviesBySearchCategory = async ({
+  searchMethod,
+  searchFlow,
+  limitNumber,
+  offsetNumber,
+}) => {
+  try {
+    console.log(searchMethod, searchFlow, limitNumber, offsetNumber, "!!!!!");
+
+    // const query = `SELECT *
+    // FROM movies
+    // ORDER BY ${searchMethod} ${searchFlow}
+    // LIMIT ${limitNumber} OFFSET ${offsetNumber};`
+
+    // console.log(query)
+    const { rows: movies } = await client.query(`
+    SELECT *
+    FROM movies
+    ORDER BY ${searchMethod} ${searchFlow}
+    LIMIT ${limitNumber} OFFSET ${offsetNumber};`);
+
+    // console.log(movies, "??????");
+    return movies;
+  } catch (error) {
+    console.error("error in getNumber of movies function");
+    throw error;
+  }
+};
+
 const getMovieById = async (id) => {
   try {
     const {
@@ -67,7 +96,7 @@ const getMovieById = async (id) => {
       `
         SELECT *
         FROM movies
-        WHERE id=$1
+        WHERE id=$1;
         `,
       [id]
     );
@@ -86,7 +115,7 @@ const getMovieInventory = async (id) => {
       `
         SELECT inventory
         FROM movies
-        WHERE id=$1
+        WHERE id=$1;
         `,
       [id]
     );
@@ -107,6 +136,7 @@ const deleteMovie = async (id) => {
         DELETE *
         FROM movies
         WHERE id=$1
+        RETURNING *;
         `,
       [id]
     );
@@ -141,11 +171,30 @@ const updateMovie = async ({ id, ...fields }) => {
   }
 };
 
-const attachMoviesToCarts = async () => {
+const attachMoviesToCarts = async (carts) => {
+  const cartsToReturn = [...carts];
+  const setString = carts.map((element, index) => `$${index + 1}`).join(", ");
+  const cartIds = carts.map((cart) => cart.id);
+  if (!cartIds?.length) return [];
   try {
-    return null;
+    const { rows: movies } = await client.query(
+      `
+      SELECT movies.*, cart_movies.quantity, cart_movies.id AS "cartMoviesId", cart_movies."cartId"
+      FROM movies 
+      JOIN cart_movies ON cart_movies."movieId" = movies.id
+      WHERE cart_movies."cartId" IN (${setString});
+    `,
+      cartIds
+    );
+
+    for (const cart of cartsToReturn) {
+      const moviesToAdd = movies.filter((movie) => movie.cartId === cart.id);
+      cart.movies = moviesToAdd;
+    }
+    return cartsToReturn;
   } catch (error) {
     console.error;
+    throw error;
   }
 };
 
@@ -156,4 +205,6 @@ module.exports = {
   getMovieInventory,
   deleteMovie,
   updateMovie,
+  attachMoviesToCarts,
+  getANumberOfMoviesBySearchCategory,
 };
