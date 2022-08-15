@@ -6,7 +6,7 @@ const {
   addMovietoCart,
   updateQuantity,
   getCartMovieById,
-  deleteMovie,
+  removeMovieFromCart,
 } = require("../db/models/cart-movies");
 
 //add movie to cart
@@ -74,7 +74,7 @@ router.delete("/:id", async (req, res, next) => {
     const canDelete = await getCartMovieById(id);
 
     if (canDelete) {
-      const response = await deleteMovie(id);
+      const response = await removeMovieFromCart(id);
       res.send(response);
     }
   } catch (error) {

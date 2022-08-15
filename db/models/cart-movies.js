@@ -65,7 +65,7 @@ async function updateQuantity({ id, ...fields }) {
   }
 }
 
-async function deleteMovie(id) {
+async function removeMovieFromCart(id) {
   try {
     const {
       rows: [deletedMovie],
@@ -88,5 +88,5 @@ module.exports = {
   addMovietoCart,
   updateQuantity,
   getCartMovieById,
-  deleteMovie,
+  removeMovieFromCart,
 };
