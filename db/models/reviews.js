@@ -57,7 +57,7 @@ async function getReviewsByUserId({ userId }) {
   try {
     const { rows: user_reviews } = await client.query(
       `
-        SELECT reviews.*
+        SELECT reviews.*, movies.title
         FROM reviews
         JOIN users ON reviews."userId"=users.id
         JOIN movies ON reviews."movieId"=movies.id
@@ -76,7 +76,7 @@ async function getReviewsByMovieId({ movieId }) {
   try {
     const { rows: user_reviews } = await client.query(
       `
-        SELECT reviews.*
+        SELECT reviews.*, users.name
         FROM reviews
         JOIN users ON reviews."userId"=users.id
         JOIN movies ON reviews."movieId"=movies.id
