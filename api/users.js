@@ -119,16 +119,15 @@ router.patch("/:userId", async (req, res, next) => {
   }
 });
 
-// POST - address
+// POST - Add Address
 router.post("/address/:userId", async (req, res, next) => {
   const { userId } = req.params;
   const { address } = req.body;
   const userData = {};
   try {
-    userData.userId = req.user.id;
+    userData.userId = userId;
     userData.address = address;
     const newAddress = await addAddress(userData);
-    console.log(newAddress);
 
     res.send(newAddress);
   } catch ({ name, message, error }) {
