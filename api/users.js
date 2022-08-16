@@ -13,7 +13,8 @@ const {
   getAllUsers,
   addAddress,
   updateAddress,
-  deleteAddress
+  deleteAddress,
+  getAllUserData
 } = require("../db");
 const { requireUser } = require("./utils");
 
@@ -175,6 +176,16 @@ router.get("/", async (req, res, next) => {
   try {
     const allUsers = await getAllUsers();
     res.send(allUsers);
+  } catch (error) {
+    next();
+  }
+});
+
+router.get("/:id", async (req, res, next) => {
+  try {
+    const {id} = req.params
+    const user = await getAllUserData({id});
+    res.send(user);
   } catch (error) {
     next();
   }
