@@ -35,18 +35,26 @@ const Register = ({ setIsLoggedIn }) => {
   
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("i am submitting");
+    let name = event.target.name.value
+    let password = event.target.password.value;
+    let email = event.target.email.value;
     const registerInfo = await createUser(name, email, password);
-    console.log(registerInfo);
     if (registerInfo && registerInfo.message) {
       alert(registerInfo.message);
     }
+    const userData = {}
+    userData.id = registerInfo.user.id
+    userData.name = registerInfo.user.name
+    userData.email = registerInfo.user.email
+    setToken(registerInfo.token)
+    storeToken(registerInfo.token)
+    storeUserData(userData)
 
-    localStorage.setItem("token", registerInfo.token);
-    localStorage.setItem()
-    setIsLoggedIn(true);
-    setUsername("");
+    // setIsLoggedIn(true);
+    setName("");
+    setEmail("");
     setPassword("");
+
   };
 
 // Here's the return that shows up on the site
@@ -56,29 +64,21 @@ const Register = ({ setIsLoggedIn }) => {
       <form onSubmit={handleSubmit}>
         <div>
           <label>
-            NAME
+            Name
             <input
               name="name"
               type="text"
-              value={name}
-              onChange={(event) => {
-                setName(event.target.value);
-                console.log(name);
-              }}
+              required 
             />
           </label>
         </div>
         <div>
           <label>
-            EMAIL
+            Email
             <input
               name="email"
               type="text"
-              value={email}
-              onChange={(event) => {
-                setEmail(event.target.value);
-                console.log(email);
-              }}
+              required
             />
           </label>
         </div>
@@ -88,11 +88,7 @@ const Register = ({ setIsLoggedIn }) => {
             <input
               name="password"
               type="text"
-              value={password}
-              onChange={(event) => {
-                console.log(event.target.value);
-                setPassword(event.target.value);
-              }}
+              required
             />
           </label>
         </div>
