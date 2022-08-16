@@ -10,7 +10,14 @@ const App = () => {
     <>
     <Routes>
       <Route path='/' />
-      <Route path='/orders' element={<Orders setToken={setToken}/>}/>
+      <Route path='/orders' element={<Orders setToken={setToken} token={token}/>}/>
+      <Route path='/users' element={<UserForm setToken={setToken} token={token}/>}/>
+      <Route path='/movies' element={<Movies setToken={setToken} token={token}/>}/>
+      <Route path='/carts' element={<Carts setToken={setToken} token={token}/>}/>
+      <Route path='/header' element={<Header setToken={setToken} token={token}/>}/>
+
+
+
     </Routes>
     </>
   );
