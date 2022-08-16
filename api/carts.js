@@ -16,8 +16,6 @@ router.post("/", async (req, res, next) => {
     //ableToCreate is checking to see if there is already a cart with unpurchased items then it will send that cart insted of creating one.
     const ableToCreate = await getCartByUser(userId);
 
-    console.log(ableToCreate.isPurchased, "is this purchased");
-
     if (ableToCreate.isPurchased === false) {
       res.send(ableToCreate);
     } else {
