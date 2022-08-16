@@ -97,4 +97,5 @@ const Register = ({ setIsLoggedIn }) => {
     </div>
   );
 };
+
 export default Register;
