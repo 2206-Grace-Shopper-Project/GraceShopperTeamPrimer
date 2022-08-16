@@ -55,8 +55,7 @@ router.post("/register", async (req, res, next) => {
 // POST - Login
 router.post("/login", async (req, res, next) => {
   const { email, password } = req.body;
-  console.log(req.body, "this is the body");
-  console.log(email, password, "here's some more stuff");
+
   if (!email || !password) {
     next({
       message: "Please supply both an email and password",
