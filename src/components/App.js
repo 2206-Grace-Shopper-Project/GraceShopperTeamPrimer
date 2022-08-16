@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {  Routes, Route } from 'react-router-dom';
 import { grabToken } from '../auth';
-import {Orders} from './'
+import {Orders, UserForm, Movies, Carts, Header} from './'
 
 const App = () => {
   const [token, setToken] = useState(grabToken()) 
