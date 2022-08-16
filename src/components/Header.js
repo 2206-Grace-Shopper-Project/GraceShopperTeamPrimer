@@ -9,8 +9,7 @@ const Header = ({setToken}) =>{
       <NavLink to="/"><img id="logo" className="navlinks" src="https://i.imgur.com/7edncCx.png"/></NavLink>
           {/* {  currentUser ?  <NavLink className="navlinks" to="/profile">Profile</NavLink>  :  <></>} */}
         <NavLink className="navlinks" to="/">Home</NavLink>
-        <NavLink className="navlinks" to="/routines">Routines</NavLink>
-        <NavLink className="navlinks" to="/activities">Activities</NavLink>
+        <NavLink className="navlinks" to="/carts"> <img id="cartLogo" className="navlinks" src="https://www.freepnglogos.com/uploads/shopping-cart-png/shopping-cart-svg-png-icon-download-28.png"/> </NavLink>
       {/* {  currentUser ? <Logout setToken={setToken} setCurrentUser={setCurrentUser}/>  :  <></>} */}
         </header>
       <br/>
