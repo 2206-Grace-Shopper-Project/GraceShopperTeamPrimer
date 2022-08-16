@@ -13,6 +13,7 @@
   
   html {
     touch-action: manipulation;
+    /* background-color: blue; */
   }
   
   body {
@@ -36,12 +37,26 @@
     color: var(--green);
     padding: 1rem;
   }
+.mainHeader{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.mainHeader:last-of-type{
+ margin-right: 25px;
+}
+.mainHeader:first-of-type{
+  margin-left: 15px;
+ }
 
-  #logo{ 
+#logo{ 
     border: none; 
-    width: 150px; 
+    width: 85px; 
   }
-  #logo:hover{ 
-    background-color: #bfc3c9
+
+#cartLogo{
+    border: none; 
+    width: 15px; 
   }
+ 
   
