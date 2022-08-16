@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { storeToken } from "../auth";
+import { storeToken, storeUserData } from "../auth";
 // import { loginUser } from "../api";
 
 const Login = ({ setIsLoggedIn, setToken, token }) => {
@@ -44,11 +44,11 @@ const Login = ({ setIsLoggedIn, setToken, token }) => {
     userData.email = loginInfo.user.email
     setToken(loginInfo.token)
     storeToken(loginInfo.token)
-    // storeUserData(userData)
+    storeUserData(userData)
     console.log(loginInfo);
 
     // setIsLoggedIn(true);
-    setUsername("");
+    setEmail("");
     setPassword("");
   };
 
