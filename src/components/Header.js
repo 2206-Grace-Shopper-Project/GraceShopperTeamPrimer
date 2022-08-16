@@ -1,9 +1,21 @@
 import React from "react";
+import { NavLink, Outlet } from "react-router-dom";
 
 
-const Header = () =>{
+const Header = ({setToken}) =>{
     return(
-        <h1>Hello</h1>
+      <>
+      <header className="mainHeader">
+      <NavLink to="/"><img id="logo" className="navlinks" src="https://i.imgur.com/7edncCx.png"/></NavLink>
+          {/* {  currentUser ?  <NavLink className="navlinks" to="/profile">Profile</NavLink>  :  <></>} */}
+        <NavLink className="navlinks" to="/">Home</NavLink>
+        <NavLink className="navlinks" to="/routines">Routines</NavLink>
+        <NavLink className="navlinks" to="/activities">Activities</NavLink>
+      {/* {  currentUser ? <Logout setToken={setToken} setCurrentUser={setCurrentUser}/>  :  <></>} */}
+        </header>
+      <br/>
+      <Outlet/>
+      </>
     )
 }
 
