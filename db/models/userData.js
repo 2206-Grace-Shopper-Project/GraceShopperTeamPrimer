@@ -25,9 +25,8 @@ try {
        FROM userData
        WHERE userData."userId"=$1;
        `, [id])
-    const userData = await getUserById(userId)
+    const userData = await getUserById(id)
     userData.address = userAddresses
-
        return userData
 } catch (error) {
     console.error('error in getAllUserData function')
