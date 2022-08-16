@@ -35,33 +35,3 @@ const Orders = () =>{
 
 export default Orders
 
-
-
-export async function getUserOrders(userId, token) {
-    try {
-        const response = await fetch(`${BASE}/orders/${userId}`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
-            },
-        })
-        const result = await response.json()
-            console.log(result, 'result from getUserOrders')
-        return result
-    } catch (error) {
-        throw error
-    }
-}
-
-
-export const getUser = async(id, token) => {
-    const response = await fetch(`${BASE}/users/${id}`, {
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        }, 
-    })
-    const result = await response.json()
-        console.log(result, 'result from getUser')
-    return result
-}
