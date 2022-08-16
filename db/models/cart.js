@@ -22,7 +22,7 @@ try {
 
 async function getCartById (id) {
     try {
-        const { rows: [cart] } = await client.query(`
+        const { rows: cart } = await client.query(`
         SELECT * 
         FROM cart
         WHERE id=$1;
@@ -39,7 +39,7 @@ async function getCartByUser (userId) {
   try {   
     console.log(userId,"userID from db")
 
-    const { rows: [cart] } = await client.query(`
+    const { rows: cart } = await client.query(`
     SELECT cart.*, users.name
     FROM cart
     JOIN users on cart."userId"=users.id

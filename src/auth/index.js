@@ -9,7 +9,7 @@ export async function storeToken(token){
 
 
 export const grabUser = () => {
-    const stringifyObj = localStorage.getItem('username')
+    const stringifyObj = localStorage.getItem('userData')
      return JSON.parse(stringifyObj)
  } 
 

@@ -57,6 +57,7 @@ export async function loginUser(email, password) {
 // CART FUNCTIONS
 export const createNewCart = async (userId) => {
   try {
+    console.log(userId,"this is user id in api")
     const response = await fetch(`${BASE}/carts`, {
       method: "POST",
       headers: {
@@ -66,6 +67,7 @@ export const createNewCart = async (userId) => {
         userId,
       }),
     });
+    console.log(response)
     const result = await response.json();
     console.log(result, "this is result from api create cart");
     return result;
