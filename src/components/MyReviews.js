@@ -5,13 +5,11 @@ const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
 
 async function getMyReviews(userId, token){
     try {
-        const userId = currentUserData.id
-        const response = await fetch(`${BASE}/reviews/user/:userId`, {
+        const response = await fetch(`${BASE}/reviews/user/${userId}`, {
             headers: {
               "Content-Type": "application/json",
               "Authorization": `Bearer ${token}`
             },
-        
           });
           const result = await response.json();
           return result;
@@ -20,15 +18,18 @@ async function getMyReviews(userId, token){
     }
 }
 
-    useEffect(() => {
-        getMyReviews()
-    }, [])
+
 
 
 // end of "Will Need to go in API index after Merge"
 
-const MyReviews = ({token}) => {
+const MyReviews = () => {
     const [currentUserData, setCurrentUserData] = useState(grabUser());
+
+    useEffect(() => {
+        const userId = currentUserData.id
+        getMyReviews(userId)
+    }, [])
 
     return (
         <div>
