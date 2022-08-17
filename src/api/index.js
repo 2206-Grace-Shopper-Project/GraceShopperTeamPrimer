@@ -119,6 +119,7 @@ export const hideCart = async () => {
 // ORDERS FUNCTIONS
 
 export async function getUserOrders(userId, token) {
+    console.log(token)
   try {
     const response = await fetch(`${BASE}/orders/${userId}`, {
       headers: {
