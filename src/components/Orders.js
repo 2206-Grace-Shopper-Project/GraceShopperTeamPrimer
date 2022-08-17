@@ -10,6 +10,7 @@ export async function getUserOrders(userId) {
         "Content-Type": "application/json"
       }
     });
+    console.log(response)
     const result = await response.json();
     console.log(result, "result from getUserOrders line 16");
     return result;
@@ -39,7 +40,8 @@ const Orders = () =>{
             <h1>Order History</h1>
             {orders.map((order, index) => {
                 <div key={index}>
-                    <p>{new Date(order.date)}</p>
+                    {/* <p>{new Date(order.date)}</p> */}
+                    <p>{order.date}</p>
                     <p>{order.quantity}</p>
                     <p>{order.price}</p>
                     <p>{order.address}</p>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 // import { getAllOrders } from "../api";
 
 export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
@@ -33,7 +34,7 @@ export async function getAllOrders() {
   }
 
 
-const Admin = ({token}) =>{
+const Admin = () =>{
     const [orders, setOrders] = useState([])
     const [users, setUsers] = useState([])
 
@@ -55,6 +56,8 @@ const Admin = ({token}) =>{
 
     return(
         <div>
+            <NavLink to='all-orders'>Orders</NavLink>
+            <NavLink to='all-users'>Users</NavLink>
             <div id="all-orders">
                 <h1>All Orders</h1>
                 {orders.map((order, index) => {
@@ -62,7 +65,8 @@ const Admin = ({token}) =>{
                     let readableDate = new Date(order.date)
                     return (
                         <div key={index}>
-                            <p>Date Purchased: {readableDate}</p>
+                            <p>Name: {order.name}</p>
+                            <p>Date Purchased: {order.date}</p>
                             <p>Sent To: {order.address}</p>
                             <p>Email: {order.email}</p>
                             <p>Quantity: {order.quantity}</p>
@@ -71,6 +75,7 @@ const Admin = ({token}) =>{
                     )
                 })}
             </div>
+            
             <div id="all-users">
                 <h1>All Users</h1>
                 {users.map((user, index)=> {
