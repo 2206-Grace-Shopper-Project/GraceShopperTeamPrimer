@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { createNewCart, getEachCartByUser } from "../api";
 import { storeUserData, grabUser } from "../auth";
+import DeleteCarts from "./DeleteCarts";
 
 const Carts = (userId) => {
   const [allCarts, setAllCarts] = useState([]);
@@ -37,6 +38,8 @@ const Carts = (userId) => {
             <p>{}</p>
           </div>;
         })}
+
+        <><DeleteCarts/></>
       </div>
     </>
   );
