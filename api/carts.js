@@ -53,4 +53,16 @@ router.patch("/:id", async (req, res, next) =>{
     }
 })
 
+router.get("/:id", async (req, res, next) => {
+  try {
+      const {id} = req.params
+          console.log(id, 'cart id')
+      const response = await getCartById(id)
+          console.log(response)
+      res.send(response)
+  } catch  (error){
+      next (error)
+  }
+})
+
 module.exports = router;

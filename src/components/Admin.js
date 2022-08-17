@@ -44,7 +44,6 @@ const Admin = () =>{
     }
     const getAllUserOrders = async() => {
         const ordersList = await getAllOrders()
-        console.log(ordersList, 'here')
         setOrders(ordersList)
     }
     console.log(orders)
@@ -61,16 +60,26 @@ const Admin = () =>{
             <div id="all-orders">
                 <h1>All Orders</h1>
                 {orders.map((order, index) => {
-                    console.log(order,'line 47')
-                    let readableDate = new Date(order.date)
+                    console.log(order.date, 'hello')
+                    let orderDate = (order.date)
+                    let dateObj = new Date(order.date)
+                    console.log(dateObj)
+                    let date = dateObj.getDate();
+                    let month = dateObj.getMonth() + 1;
+                    let year = dateObj.getFullYear();
+                    let hours = dateObj.getHours();
+                    let minutes = dateObj.getMinutes();
+                
+                    let newDateString = `${month<10?`0${month}`:`${month}`}-${date}-${year} ${hours + ':' + minutes}`
                     return (
                         <div key={index}>
                             <p>Name: {order.name}</p>
-                            <p>Date Purchased: {order.date}</p>
-                            <p>Sent To: {order.address}</p>
-                            <p>Email: {order.email}</p>
+                            {/* <p>Date Purchased: {order.date}</p> */}
+                            <p>Date Purchased: {newDateString}</p>
                             <p>Quantity: {order.quantity}</p>
                             <p>Price: ${order.price}</p>
+                            <p>Sent To: {order.address}</p>
+                            <p>Email: {order.email}</p>
                         </div>
                     )
                 })}
