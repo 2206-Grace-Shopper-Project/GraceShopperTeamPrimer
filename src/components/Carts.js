@@ -4,7 +4,7 @@ import { storeUserData, grabUser } from "../auth";
 import DeleteCarts from "./DeleteCarts";
 
 const Carts = (userId) => {
-  const [allCarts, setAllCarts] = useState([]);
+  const [userCart, setUserCart] = useState({});
   let userData = localStorage.getItem("userData");
 
   //onClick for create a new cart
@@ -13,14 +13,16 @@ const Carts = (userId) => {
     let data = grabUser(userData);
     let userId = data.id;
     const canCreate = await getEachCartByUser(userId);
-    
-    console.log(canCreate)
 
-    if (canCreate.isPurchased === false) {
-      return canCreate;
-    } else if (canCreate.isPurchased === true){
+    console.log(canCreate);
+    console.log(canCreate.length);
+
+    if (!canCreate.length) {
       const response = await createNewCart(userId);
-      return response
+
+      return response;
+    } else {
+      setUserCart(canCreate[0]);
     }
     //end of create cart function
   };
@@ -29,7 +31,7 @@ const Carts = (userId) => {
     <>
       <button onClick={handleOnClick}>Create Cart</button>
       <div>
-        <h2>Your cart</h2>
+        {/* <h2>Your cart</h2>
         {allCarts.map((cart, index) => {
           <div key={index}>
             <p>{}</p>
@@ -37,9 +39,11 @@ const Carts = (userId) => {
             <p>{}</p>
             <p>{}</p>
           </div>;
-        })}
+        })} */}
 
-        <><DeleteCarts/></>
+        <>
+          <DeleteCarts />
+        </>
       </div>
     </>
   );

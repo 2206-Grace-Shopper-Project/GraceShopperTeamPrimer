@@ -112,6 +112,7 @@ export const getEachCartByUser = async (userId) => {
       },
     });
     const result = await response.json();
+    console.log(result, 'this is rsult from api')
     return result;
   } catch (error) {
     console.error(error);
@@ -120,7 +121,7 @@ export const getEachCartByUser = async (userId) => {
 
 export const hideCart = async (id) => {
   try { console.log(id, 'id from ')
-    const response = await fetch(`${BASE}/cart/${id}`, {
+    const response = await fetch(`${BASE}/carts/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -133,23 +134,6 @@ export const hideCart = async (id) => {
 };
 
 // ORDERS FUNCTIONS
-
-// export async function getUserOrders(userId, token) {
-//     console.log(token)
-//   try {
-//     const response = await fetch(`${BASE}/orders/${userId}`, {
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${token}`,
-//       },
-//     });
-//     const result = await response.json();
-//     console.log(result, "result from getUserOrders");
-//     return result;
-//   } catch (error) {
-//     throw error;
-//   }
-// }
 
 export async function getAllOrders() {
   try {
@@ -174,7 +158,7 @@ export async function getUserOrders(userId) {
     });
     console.log(response)
     const result = await response.json();
-    console.log(result, "result from getUserOrders line 16");
+    console.log(result, "result from getUserOrders");
     return result;
   } catch (error) {
     throw error;
