@@ -32,19 +32,3 @@ const Admin = () =>{
 
 
 export default Admin
-
-// admin function 
-export async function getAllOrders(token) {
-    try {
-        const response = await fetch(`${BASE}/orders`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
-            },
-        })
-        const result = await response.json()
-            console.log(result, 'result from getAllOrders')
-    } catch (error) {
-        throw error
-    }
-}
