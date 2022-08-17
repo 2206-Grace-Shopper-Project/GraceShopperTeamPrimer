@@ -22,7 +22,7 @@ async function getOrdersByUserId(userId) {
         FROM orders
         JOIN cart ON orders."cartId" = cart.id
         WHERE "isPurchased" = true 
-        AND cart."userId" = $1
+        AND cart."userId" = $1;
         `, [userId])
 
         return orders

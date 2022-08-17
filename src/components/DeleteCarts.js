@@ -1,5 +1,5 @@
 import React, { useState } from "react";
- FrontEndCartBranch
+
 import { createNewCart, getEachCartByUser, hideCart } from "../api";
 
 import { storeUserData, grabUser } from "../auth";
