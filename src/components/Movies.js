@@ -3,10 +3,11 @@ import { NavLink} from "react-router-dom";
 import { createNewCart } from "../api";
 
 
-const Movies = ({allMovies, token}) =>{
+const Movies = ({allMovies, token, userDataObj}) =>{
     const [cssActive, setCSSActive] = useState(null)
     const [activeCart, setActiveCart] = useState(null)
     const cartId = 1
+    console.log(userDataObj.id, token)
     let dateObj = new Date(1660157462019)
     let date = dateObj.getDate();
     let month = dateObj.getMonth() + 1;
@@ -42,8 +43,8 @@ const Movies = ({allMovies, token}) =>{
             
             return(
             <div key={id} className="movieContainer" >
-            <div className="topRowContainer">asdasdasda
-            <img className="moviePoster" src={movie.poster}/>sdasd
+            <div className="topRowContainer">
+            <img className="moviePoster" src={movie.poster}/>
               <div className="textContainer">
                 <div className="priceText movieText">
                     <span>${price}.99</span>

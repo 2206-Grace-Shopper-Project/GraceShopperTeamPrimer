@@ -1,35 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import {  Routes, Route } from 'react-router-dom';
-import { grabToken } from '../auth';
-import {Orders, UserForm, Movies, Carts, Header, Register, Login, Admin} from './'
+import { getAllMovies } from '../api';
+import { grabToken, grabUser } from '../auth';
+import {Orders, UserForm, Movies, Carts, Header, Register, Login, Admin, MyReviews} from './'
 
 
-export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
-
-export async function getAllMovies() {
-    try {
-        const response = await fetch(`${BASE}/movies`, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        const result = await response.json()
-        console.log(result, '!!!!!!!!')
-        return result
-    } catch (error) {
-        
-    }
-
-}
 
 const App = () => {
   const [token, setToken] = useState(grabToken()) 
   const [allMovies, setAllMovies] = useState([])
-
+  const [userDataObj, setUserDataObj] = useState(grabUser())
   const fetchMovies = async ()=>{
     const movieList = await getAllMovies()
     setAllMovies(movieList)
-}
+  } 
 useEffect(()=>{
    fetchMovies()
 
@@ -39,14 +23,16 @@ useEffect(()=>{
     <>
     <Routes>
       <Route path='/' />
-      <Route path='/orders' element={<Orders setToken={setToken} token={token}/>}/>
-      <Route path='/users' element={<UserForm setToken={setToken} token={token}/>}/>
-      <Route path='/movies' element={<Movies setToken={setToken} token={token} allMovies={allMovies}/>}/>
-      <Route path='/carts' element={<Carts setToken={setToken} token={token}/>}/>
-      <Route path='/header' element={<Header setToken={setToken} token={token}/>}/>
-      <Route path='/login' element={<Login setToken={setToken} token={token}/>}/>
-      <Route path='/register' element={<Register setToken={setToken} token={token}/>}/>
-      <Route path='/admin' element={<Admin setToken={setToken} token={token}/>}/>
+      <Route path='/orders' element={<Orders setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
+      <Route path='/users' element={<UserForm setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
+      <Route path='/movies' element={<Movies setToken={setToken} token={token} allMovies={allMovies} userDataObj={userDataObj}/>} />
+      <Route path='/carts' element={<Carts setToken={setToken} token={token} userDataObj={userDataObj}/> }/>
+      <Route path='/header' element={<Header setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
+      <Route path='/login' element={<Login setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
+      <Route path='/register' element={<Register setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
+      <Route path='/admin' element={<Admin setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
+      <Route path='/myreviews' element={<MyReviews setToken={setToken} userDataObj={userDataObj}/>}/>
+
 
 
 
