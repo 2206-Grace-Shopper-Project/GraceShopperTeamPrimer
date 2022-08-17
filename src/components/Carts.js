@@ -12,12 +12,13 @@ const Carts = (userId) => {
     let data = grabUser(userData);
     let userId = data.id;
     const canCreate = await getEachCartByUser(userId);
-    const response = await createNewCart(userId);
+    
     console.log(canCreate)
 
     if (canCreate.isPurchased === false) {
       return canCreate;
-    } else {
+    } else if (canCreate.isPurchased === true){
+      const response = await createNewCart(userId);
       return response
     }
     //end of create cart function
