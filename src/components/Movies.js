@@ -7,8 +7,10 @@ const Movies = ({allMovies, token}) =>{
     const [cssActive, setCSSActive] = useState(null)
     const [activeCart, setActiveCart] = useState(null)
     const cartId = 1
-    console.log(token, 'is it await')
-
+    let dateObj = new Date(1660157462019)
+    let newDateString = dateObj.getDay()
+    console.log(dateObj)
+    console.log(newDateString)
 const handleOnclick = (event) =>{
     event.preventDefault()
     console.log(event.target)
@@ -32,10 +34,11 @@ const handleOnclick = (event) =>{
             if(cssActive === movie.id){
                 className = 'activeSeeMore'
             }
-
+            
             return(
             <div key={id} className="movieContainer" >
-            <img className="moviePoster" src={movie.poster}/>
+            <div className="topRowContainer">asdasdasda
+            <img className="moviePoster" src={movie.poster}/>sdasd
               <div className="textContainer">
                 <div className="priceText movieText">
                     <span>${price}.99</span>
@@ -49,6 +52,7 @@ const handleOnclick = (event) =>{
                         }
                         }}><span>Add to Cart</span></button>
                     </div>
+              </div>
               </div>
               <div className="movieInfoContainer"> <NavLink style={{color: 'black'}} to={`/movies/${title}`}>{title}  ({year})</NavLink>
               <div className={`${className} movieInfo`}>{genre}  
