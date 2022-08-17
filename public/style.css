@@ -21,6 +21,8 @@
     padding: 0;
     height: 100vh;
     width: 100vw;
+    padding: 12px;
+    margin: 25px;
   }
   
 
@@ -59,4 +61,144 @@
     width: 15px; 
   }
  
+
+
+#movieComponent{
+  border: 2px solid orange;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  padding: 12px;
+  margin: 25px;
+}
+#movieHeader{
+  display: block;
+}
+
   
+
+
+
+.movieContainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 400px;
+  border: 2px solid red;
+  margin: 5px;
+  padding: 5px;
+  font-family: 'IBM Plex Sans';
+}
+.moviePoster{
+  display: flex;
+  height: 280px;
+  width: 180px;
+  margin-left: 11%;
+  border: 2px solid black;
+}
+.priceText{
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  margin-left: 70%;
+  margin-top: 100%;
+  border: 2px solid yellow;
+  font-family: 'Roboto';
+  font-weight: bold;
+}
+.textContainer{
+  font-family: 'IBM Plex Sans';
+  /* border: solid blue 2px; */
+  position: absolute;
+  margin-left: 10%;
+}
+.movieInfoContainer{
+  border: solid 2px gray;
+  height: 40%;
+  width: 100%;
+}
+div.movieInfoContainer{
+  margin:0;
+  padding:0;
+  font-size:25px;
+  display: block;
+  line-height: 1;
+}
+.movieInfo{
+  margin:0;
+  padding:0;
+  font-size:18px;
+  display: block;
+  max-height: 50%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  border: 2px yellow solid;
+  position: relative;
+}
+.seeMoreTag{
+  border: 2px solid green;
+  display: inline-flex;
+  margin-left: 78%;
+  margin-top: 0%;
+  font-size: 15px;
+  color: black;
+}
+.furtherMovieInfo{
+  font-size:14px;
+  font-family: Dosis;
+
+}
+.activeSeeMore{
+  max-height: 90%;
+  overflow-y: scroll;
+  overflow-wrap: break-word;
+
+}
+
+.addToCart{
+  align-items: center;
+  appearance: none;
+  background-color: #3EB2FD;
+  background-image: linear-gradient(1deg, #4F58FD, #149BF3 99%);
+  background-size: calc(100% + 20px) calc(100% + 20px);
+  border-radius: 100px;
+  border-width: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: CircularStd,sans-serif;
+  font-size: 1rem;
+  height: auto;
+  justify-content: center;
+  line-height: 1.5;
+  padding: 6px 20px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color .2s,background-position .2s;
+  user-select: none;
+  touch-action: manipulation;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+
+.addToCart:hover {
+  background-position: -20px -20px;
+}
+.almostOutOfStock{
+  font-style: italic;
+  color: red;
+}
+a{
+  text-decoration: none;
+
+}
+a:hover{
+  text-decoration: underline;
+}
+
+
