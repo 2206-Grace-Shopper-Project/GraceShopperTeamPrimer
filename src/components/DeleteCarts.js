@@ -13,16 +13,10 @@ const handleOnClick = async (event) => {
     let data = grabUser(userData);
     let userId = data.id;
     const canCreate = await getEachCartByUser(userId);
- FrontEndCartBranch
-    console.log(canCreate)
-    if (canCreate.length){canCreate.map(async(cart)=>{
-     const id  = cart.id
-         console.log(id,'this is cartId')
-        const response = await hideCart(id)
-        console.log(response, 'this is your response')
-        return response
-    })}
-  
+    const id = canCreate[0].id
+    const response = await hideCart(id) 
+
+console.log(response, ' response from delete')
 
 }
 
