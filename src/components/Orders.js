@@ -1,30 +1,29 @@
 import React, { useState, useEffect } from "react";
 // import { getUserOrders } from "../api";
-import { grabUser } from "../auth";
+// import { grabUser } from "../auth";
 
 export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
 export async function getUserOrders(userId) {
   try {
     const response = await fetch(`${BASE}/orders/${userId}`, {
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       }
     });
     console.log(response)
-    const result = await response.json();
-    console.log(result, "result from getUserOrders line 16");
+    const result = await response.json()
+    console.log(result, "result from getUserOrders line 15");
     return result;
   } catch (error) {
     throw error;
   }
 }
 
-const Orders = () =>{
+const Orders = ({userDataObj}) =>{
     const [orders, setOrder] = useState([])
-    let userData = localStorage.getItem("userData");
 
     const getUserOrderInfo = async () => {
-        let user = grabUser(userData)
+        let user = userDataObj
         let userId = user.id 
             console.log(userId,"userId in getuserorderinfo")
         const userOrders = await getUserOrders(userId)

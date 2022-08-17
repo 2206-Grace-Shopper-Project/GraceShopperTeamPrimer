@@ -17,7 +17,7 @@ async function createOrder({ cartId, address, email, quantity, date, price }) {
 
 async function getOrdersByUserId(userId) {
     try {
-        const {rows: [orders]} = await client.query(`
+        const {rows: orders} = await client.query(`
         SELECT orders.*, cart.*
         FROM orders
         JOIN cart ON orders."cartId" = cart.id
