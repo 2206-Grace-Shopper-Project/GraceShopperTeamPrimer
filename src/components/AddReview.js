@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import Movies from "./Movies";
+import React, { useState } from "react";
+import { grabUser } from "../auth";
 
 // NEED TO IMPORT FUNCTIONS HERE:
 // import { } from "../api";
@@ -8,53 +8,53 @@ import Movies from "./Movies";
 // Will Need to Go into API index after Merge
 const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
 
-async function createReview(movieId, userId, review){
+async function createReview(token, movieId, userId, review){
     try {
-        console.log(movieId, userId, review)
-        const response = await fetch(`${BASE}`)
+        const response = await fetch(`${BASE}/reviews`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({
+              movieId,
+              userId,
+              review
+            }),
+          });
+          const result = await response.json();
+          return result;
     } catch (error) {
-        console.log(error)
+        console.error;
     }
-
 }
 
 
+/// end of "Will Need to Go into API index after Merge"
 
-/// end of Will Need to Go into API index after Merge 
-const AddReview = ({ setIsShown }) => {
-  console.log(movieData.id, "Here's a movieId");
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
-  
+
+const AddReview = ({ setIsShown, token }) => {
+    const [currentUserData, setCurrentUserData] = useState(grabUser());
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const routineId = routineData.id;
-    const activityId = Number(selectedActivity);
-    const count = event.target.count.value;
-    const duration = event.target.duration.value;
+    const movieId = ;
+    const userId = currentUserData.id;
+    const review = event.target.review.value;
 
-    await attachActivityToRoutine(routineId, activityId, count, duration);
+    await createReview(token, movieId, userId, review);
 
     window.location.reload(true);
   };
 
-  useEffect(() => {
-    async function helpGetAllActivities() {
-      const activities = await getAllActivities();
-      setAllActivities(activities);
-    }
-    helpGetAllActivities();
-  }, []);
 
-  console.log(selectedActivity, "hello hello");
 
-  return (
+return (
     <div>
       <form onSubmit={handleSubmit}>
         <label>Review</label>
-        <input className="ReviewForm" name="review" placeholder="Tell everyone what you thought of the film"></input>
+        <input className="ReviewForm" name="review" placeholder="Tell the nice folks out there what you thought of the film"></input>
         <div>
           <button type="submit">Review it!</button>
           <button
