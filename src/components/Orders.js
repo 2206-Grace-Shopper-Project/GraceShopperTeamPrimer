@@ -1,20 +1,36 @@
 import React, { useState, useEffect } from "react";
-import { getUserOrders } from "../api";
+// import { getUserOrders } from "../api";
 import { grabUser } from "../auth";
 
-const Orders = ( {token} ) =>{
+export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
+export async function getUserOrders(userId) {
+  try {
+    const response = await fetch(`${BASE}/orders/${userId}`, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    console.log(response)
+    const result = await response.json();
+    console.log(result, "result from getUserOrders line 16");
+    return result;
+  } catch (error) {
+    throw error;
+  }
+}
+
+const Orders = () =>{
     const [orders, setOrder] = useState([])
     let userData = localStorage.getItem("userData");
-    console.log(token, 'line 8 token')
-    
+
     const getUserOrderInfo = async () => {
         let user = grabUser(userData)
         let userId = user.id 
             console.log(userId,"userId in getuserorderinfo")
-            console.log(token, 'token in orders')
-        const userOrders = await getUserOrders(userId, token)
+        const userOrders = await getUserOrders(userId)
         setOrder(userOrders)
     }
+    console.log(orders, 'orders')
     useEffect(() => {
         getUserOrderInfo()
     }, [])
@@ -22,14 +38,15 @@ const Orders = ( {token} ) =>{
     return(
         <div>
             <h1>Order History</h1>
-            {/* {orders.map((order, index) => {
+            {orders.map((order, index) => {
                 <div key={index}>
-                    <p>{new Date(order.date)}</p>
+                    {/* <p>{new Date(order.date)}</p> */}
+                    <p>{order.date}</p>
                     <p>{order.quantity}</p>
                     <p>{order.price}</p>
                     <p>{order.address}</p>
                 </div>
-            })} */}
+            })}
         </div>
     )
 }
