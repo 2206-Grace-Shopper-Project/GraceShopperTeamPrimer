@@ -103,7 +103,7 @@ export const getEachCartByUser = async (userId) => {
   }
 };
 
-export const hideCart = async () => {
+export const hideCart = async (id) => {
   try {
     const response = await fetch(`${BASE}/cart/${id}`, {
       method: "PATCH",

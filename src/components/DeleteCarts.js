@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { createNewCart, getEachCartByUser } from "../api";
+ FrontEndCartBranch
+import { createNewCart, getEachCartByUser, hideCart } from "../api";
+
 import { storeUserData, grabUser } from "../auth";
 
 const DeleteCarts = () => {
@@ -11,8 +13,17 @@ const handleOnClick = async (event) => {
     let data = grabUser(userData);
     let userId = data.id;
     const canCreate = await getEachCartByUser(userId);
-    const id = canCreate.id
-   return console.log(canCreate.id)
+ FrontEndCartBranch
+    console.log(canCreate)
+    if (canCreate.length){canCreate.map(async(cart)=>{
+     const id  = cart.id
+         console.log(id,'this is cartId')
+        const response = await hideCart(id)
+        console.log(response, 'this is your response')
+        return response
+    })}
+  
+
 }
 
 
