@@ -11,7 +11,6 @@ const Register = ({ setIsLoggedIn }) => {
   // This function will go to the api / index when necessary
   async function createUser(name, email, password){
     try{ 
-      console.log(email, name, password)
       const response = await 
           fetch(`${BASE}/users/register`, {
           method: "POST",
