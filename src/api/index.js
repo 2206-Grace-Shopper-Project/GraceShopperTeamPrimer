@@ -1,6 +1,7 @@
 export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
 
 // USER FUNCTIONS
+
 export async function createUser(name, email, password) {
   try {
     console.log(email, name, password);
@@ -22,6 +23,7 @@ export async function createUser(name, email, password) {
   }
 }
 
+
 export const getUser = async (id, token) => {
   const response = await fetch(`${BASE}/users/${id}`, {
     headers: {
@@ -33,6 +35,7 @@ export const getUser = async (id, token) => {
   console.log(result, "result from getUser");
   return result;
 };
+
 
 export async function loginUser(email, password) {
   try {
@@ -54,7 +57,14 @@ export async function loginUser(email, password) {
 }
 // MOVIE FUNCTIONS
 
+
+
+
+
+
+
 // CART FUNCTIONS
+
 export const createNewCart = async (userId) => {
   try {
     console.log(userId,"this is user id in api")
@@ -76,6 +86,7 @@ export const createNewCart = async (userId) => {
   }
 };
 
+
 export const getEachCartByUser = async (userId) => {
   try {
     const response = await fetch(`${BASE}/carts/${userId}`, {
@@ -89,6 +100,24 @@ export const getEachCartByUser = async (userId) => {
     console.error(error);
   }
 };
+
+export const hideCart = async () => {
+    try {
+        const response = await fetch(`${BASE}/cart/${id}`, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          const result = await response.json();
+          return result
+    } catch (error) {
+        
+    }
+}
+
+
+
 
 // ORDERS FUNCTIONS
 
