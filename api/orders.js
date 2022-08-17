@@ -30,8 +30,8 @@ router.get('/:userId', async (req, res, next) => {
 // GET all orders (admin)
 router.get('/', async (req, res, next) => {
     try {
-        const allUsers = await getAllOrders()
-        res.send(allUsers)
+        const allOrders = await getAllOrders()
+        res.send(allOrders)
     } catch (error) {
         console.error("error getting all orders")
         next(error)

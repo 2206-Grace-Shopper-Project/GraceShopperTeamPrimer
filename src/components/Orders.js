@@ -1,15 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { getUserOrders } from "../api";
 import { grabUser } from "../auth";
 
-const Orders = () =>{
+const Orders = ( {token} ) =>{
     const [orders, setOrder] = useState([])
+    let userData = localStorage.getItem("userData");
 
     const getUserOrderInfo = async () => {
-        // const user = await getUser(id, token)
-        //     console.log(user, 'user in getUserOrderInfo')
         let user = grabUser(userData)
-            console.log(user.id, "userid in orders component")
         let userId = user.id 
             console.log(userId,"userId in getuserorderinfo")
         const userOrders = await getUserOrders(userId, token)

@@ -23,7 +23,6 @@ export async function createUser(name, email, password) {
   }
 }
 
-
 export const getUser = async (id, token) => {
   const response = await fetch(`${BASE}/users/${id}`, {
     headers: {
@@ -35,7 +34,6 @@ export const getUser = async (id, token) => {
   console.log(result, "result from getUser");
   return result;
 };
-
 
 export async function loginUser(email, password) {
   try {
@@ -57,17 +55,23 @@ export async function loginUser(email, password) {
 }
 // MOVIE FUNCTIONS
 
+export async function getAllMovies() {
+  try {
+    const response = await fetch(`${BASE}/movies`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const result = await response.json();
 
-
-
-
-
+    return result;
+  } catch (error) {}
+}
 
 // CART FUNCTIONS
 
 export const createNewCart = async (userId) => {
   try {
-    console.log(userId,"this is user id in api")
     const response = await fetch(`${BASE}/carts`, {
       method: "POST",
       headers: {
@@ -77,15 +81,13 @@ export const createNewCart = async (userId) => {
         userId,
       }),
     });
-    console.log(response)
+    console.log(response);
     const result = await response.json();
-    console.log(result, "this is result from api create cart");
     return result;
   } catch (error) {
     console.error(error);
   }
 };
-
 
 export const getEachCartByUser = async (userId) => {
   try {
@@ -102,26 +104,22 @@ export const getEachCartByUser = async (userId) => {
 };
 
 export const hideCart = async () => {
-    try {
-        const response = await fetch(`${BASE}/cart/${id}`, {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
-          const result = await response.json();
-          return result
-    } catch (error) {
-        
-    }
-}
-
-
-
+  try {
+    const response = await fetch(`${BASE}/cart/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {}
+};
 
 // ORDERS FUNCTIONS
 
 export async function getUserOrders(userId, token) {
+    console.log(token)
   try {
     const response = await fetch(`${BASE}/orders/${userId}`, {
       headers: {
