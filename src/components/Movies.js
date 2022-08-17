@@ -3,10 +3,11 @@ import { NavLink} from "react-router-dom";
 import { createNewCart } from "../api";
 
 
-const Movies = ({allMovies}) =>{
+const Movies = ({allMovies, token}) =>{
     const [cssActive, setCSSActive] = useState(null)
     const [activeCart, setActiveCart] = useState(null)
     const cartId = 1
+    console.log(token, 'is it await')
 
 const handleOnclick = (event) =>{
     event.preventDefault()

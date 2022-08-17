@@ -106,6 +106,7 @@
   border: 2px solid yellow;
   font-family: 'Roboto';
   font-weight: bold;
+  position: absolute;
 }
 .textContainer{
   font-family: 'IBM Plex Sans';
