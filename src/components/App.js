@@ -31,7 +31,7 @@ useEffect(()=>{
       <Route path='/login' element={<Login setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
       <Route path='/register' element={<Register setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
       <Route path='/admin' element={<Admin setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
-      <Route path='/myreviews' element={<MyReviews setToken={setToken} userDataObj={userDataObj}/>}/>
+      <Route path='/myreviews' element={<MyReviews setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
 
 
 

@@ -1,39 +1,51 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { getMyReviews } from "../api";
+import {EditReview } from "./"
 
-// Will Need to Go to the API Index after the Merge
-const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
 
-async function getMyReviews(userId, token){
-    try {
-        const response = await fetch(`${BASE}/reviews/user/${userId}`, {
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${token}`
-            },
-          });
-          const result = await response.json();
-          return result;
-    } catch (error) {
-        console.error;
+const MyReviews = ({userDataObj, token}) => {
+    const[myReviews, setMyReviews] = useState([]);
+    const[isShown, setIsShown] = useState(false);
+    const[reviewId, setReviewId] = useState(null);
+    
+    const reviewArray= async() =>{
+        const userId = userDataObj.id
+        setMyReviews(await getMyReviews(userId))
     }
-}
-
-
-
-
-// end of "Will Need to go in API index after Merge"
-
-const MyReviews = () => {
-    const [currentUserData, setCurrentUserData] = useState(grabUser());
 
     useEffect(() => {
-        const userId = currentUserData.id
-        getMyReviews(userId)
+        reviewArray()
     }, [])
+
+    const MappedReviews =
+        myReviews.length > 0
+        ? myReviews.map((review, index) => {
+            let reviewId = review.id
+            return(
+                <div key={index}>
+                    <div><b>Film: </b>{review.title}</div>
+                    <div><b>Your Review: </b>{review.review}</div>
+                      <button onClick={(event) => {
+                 setIsShown(true)
+                 }}
+                      >Edit This Review</button>
+                      <div>
+                      <div>
+                {isShown ?
+                <EditReview setIsShown={setIsShown} reviewId={reviewId} token={token}/> :null}
+              </div>
+                      </div>
+                </div>
+              
+            )
+            })
+        :null;
+        
 
     return (
         <div>
             <p>My Reviews Page</p>
+            <div>{myReviews.length > 0 ? MappedReviews : null}</div>
 
         </div>
     )
