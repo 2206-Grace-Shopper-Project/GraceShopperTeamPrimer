@@ -1,36 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { NavLink} from "react-router-dom";
-// export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
+import { createNewCart } from "../api";
 
-// export async function getAllMovies() {
-//     try {
-//         const response = await fetch(`${BASE}/movies`, {
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//         })
-//         const result = await response.json()
-//         console.log(result, '!!!!!!!!')
-//         return result
-//     } catch (error) {
-        
-//     }
-
-// }
 
 const Movies = ({allMovies}) =>{
-    // const [allMovies, setAllMovies] = useState([])
     const [cssActive, setCSSActive] = useState(null)
     const [activeCart, setActiveCart] = useState(null)
-    // const fetchMovies = async ()=>{
-    //     const movieList = await getAllMovies()
-    //     setAllMovies(movieList)
-    // }
-    // useEffect(()=>{
-    //    fetchMovies()
-    
-    // }, [])
-// console.log(allMovies, '###')
+    const cartId = 1
 
 const handleOnclick = (event) =>{
     event.preventDefault()
@@ -40,6 +16,7 @@ const handleOnclick = (event) =>{
     return(
         <>
         <h1 id="movieHeader">Welcome, Find a Movie!</h1>
+
         <div id="movieComponent">
 
         {allMovies && allMovies.length ? allMovies.map((movie, index)=>{
@@ -64,7 +41,12 @@ const handleOnclick = (event) =>{
                     <br></br>
                     {inventory < 10 && inventory > 0  ? <><span className="almostOutOfStock">Only {inventory} left in stock</span><br></br></> : <br></br>}
                     {inventory === 0 ? <><span className="outOfStock">Out of stock</span><br></br></> : <br></br>}
-                    <button value={index} className="addToCart" onClick={handleOnclick}><span>Add to Cart</span></button>
+                    <button value={index} className="addToCart" onClick={()=>{
+                        console.log(index)
+                        if(activeCart){
+                            addMovieToCart(id, cartId )
+                        }
+                        }}><span>Add to Cart</span></button>
                     </div>
               </div>
               <div className="movieInfoContainer"> <NavLink style={{color: 'black'}} to={`/movies/${title}`}>{title}  ({year})</NavLink>

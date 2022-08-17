@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {  Routes, Route } from 'react-router-dom';
 import { grabToken } from '../auth';
-import {Orders, UserForm, Movies, Carts, Header, Register, Login} from './'
+import {Orders, UserForm, Movies, Carts, Header, Register, Login, Admin} from './'
 
 
 export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
@@ -46,6 +46,8 @@ useEffect(()=>{
       <Route path='/header' element={<Header setToken={setToken} token={token}/>}/>
       <Route path='/login' element={<Login setToken={setToken} token={token}/>}/>
       <Route path='/register' element={<Register setToken={setToken} token={token}/>}/>
+      <Route path='/admin' element={<Admin setToken={setToken} token={token}/>}/>
+
 
 
 
