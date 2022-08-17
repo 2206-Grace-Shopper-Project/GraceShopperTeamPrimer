@@ -110,13 +110,15 @@
 .priceText{
   text-align: center;
   float: right;
-  /* width: 100%;
-  height: 100%; */
+  /* width: 100%; */
+  /* height: 100%; */
   /* margin-left: 70%; */
   /* margin-top: 100%; */
+  margin-bottom: 100%;
   border: 2px solid yellow;
   font-family: 'Roboto';
   font-weight: bold;
+
   /* position: relative; */
 
 }
