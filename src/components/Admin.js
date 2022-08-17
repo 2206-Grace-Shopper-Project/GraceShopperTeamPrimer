@@ -17,19 +17,20 @@ export async function getAllUsers(){
     }
 }
 
-// export async function getAllOrders() {
-//     try {
-//       const response = await fetch(`${BASE}/orders`, {
-//         headers: {
-//           "Content-Type": "application/json"
-//         },
-//       });
-//       const result = await response.json();
-//       console.log(result, "result from getAllOrders");
-//     } catch (error) {
-//       throw error;
-//     }
-//   }
+export async function getAllOrders() {
+    try {
+      const response = await fetch(`${BASE}/orders`, {
+        headers: {
+          "Content-Type": "application/json"
+        },
+      });
+      const result = await response.json();
+      console.log(result, "result from getAllOrders");
+      return result
+    } catch (error) {
+      throw error;
+    }
+  }
 
 
 const Admin = ({token}) =>{
@@ -56,23 +57,28 @@ const Admin = ({token}) =>{
         <div>
             <div id="all-orders">
                 <h1>All Orders</h1>
-                {/* {orders.map((order, index) => {
+                {orders.map((order, index) => {
                     console.log(order,'line 47')
+                    let readableDate = new Date(order.date)
                     return (
                         <div key={index}>
-                            <p>{order}</p>
+                            <p>Date Purchased: {readableDate}</p>
+                            <p>Sent To: {order.address}</p>
+                            <p>Email: {order.email}</p>
+                            <p>Quantity: {order.quantity}</p>
+                            <p>Price: ${order.price}</p>
                         </div>
                     )
-                })} */}
+                })}
             </div>
             <div id="all-users">
                 <h1>All Users</h1>
                 {users.map((user, index)=> {
                     return (
                         <div key={index}>
-                            <p>{user.id}</p>
-                            <p>{user.name}</p>
-                            <p>{user.email}</p>
+                            <p>Id: {user.id}</p>
+                            <p>Name: {user.name}</p>
+                            <p>Email: {user.email}</p>
                         </div>
                     )
                 })}

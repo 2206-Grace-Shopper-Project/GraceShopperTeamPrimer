@@ -35,8 +35,10 @@ async function getOrdersByUserId(userId) {
 async function getAllOrders() {
     try {
         const {rows: orders} = await client.query(`
-        SELECT * 
-        FROM orders;
+        SELECT orders.*, users.name
+        FROM orders
+        JOIN cart ON orders."cartId" = cart.id
+        JOIN users ON cart."userId" = users.id;
         `)
         return orders
     } catch (error) {
