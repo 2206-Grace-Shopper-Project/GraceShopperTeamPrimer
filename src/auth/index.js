@@ -1,9 +1,9 @@
-export async function grabToken (){
+export const grabToken = () => {
     const token = localStorage.getItem('token')
     return token
 }
 
-export async function storeToken(token){
+export const storeToken = (token) => {
     localStorage.setItem('token', token)
 }
 
