@@ -183,12 +183,11 @@ export async function getUserOrders(userId) {
 
 //Reviews Functions 
 
-export async function getMyReviews(userId, token){
+export async function getMyReviews(userId){
   try {
       const response = await fetch(`${BASE}/reviews/user/${userId}`, {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
           },
         });
         const result = await response.json();

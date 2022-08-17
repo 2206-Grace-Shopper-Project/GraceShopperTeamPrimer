@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import { grabUser } from "../auth";
+import React from "react";
 
-// NEED TO IMPORT FUNCTIONS HERE:
-// import { } from "../api";
+
 
 
 // Will Need to Go into API index after Merge
@@ -33,14 +31,13 @@ async function createReview(token, movieId, userId, review){
 /// end of "Will Need to Go into API index after Merge"
 
 
-const AddReview = ({ setIsShown, token }) => {
-    const [currentUserData, setCurrentUserData] = useState(grabUser());
+const AddReview = ({ userDataObj, setIsShown, token }) => {
+  
 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const movieId = ;
-    const userId = currentUserData.id;
+    const userId = userDataObj.id;
     const review = event.target.review.value;
 
     await createReview(token, movieId, userId, review);
