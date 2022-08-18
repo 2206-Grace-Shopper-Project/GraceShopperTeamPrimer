@@ -1,12 +1,12 @@
 import React from "react";
-
+import { addMovieToCart, removeMovieFromACart, updateMovieQuantity, getCartMoviesById } from "../api";
 
 const CartMovies = () => {
 
 
     const handleOnClick = async (event) => {
         event.preventDefault();
-        
+
 
     }
     
@@ -16,7 +16,7 @@ const CartMovies = () => {
 
     return(
      <>
-     <button onClick={handleOnClick}></button>
+     <button onClick={handleOnClick}>Add Movie to cart</button>
     </>
     )
 }

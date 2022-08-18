@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { createNewCart, getEachCartByUser } from "../api";
 import { storeUserData, grabUser } from "../auth";
+import CartMovies from "./CartMovies";
 import DeleteCarts from "./DeleteCarts";
 
 const Carts = (userId) => {
@@ -35,6 +36,8 @@ const Carts = (userId) => {
         <>
           <DeleteCarts />
         </>
+
+        <><CartMovies/></>
       </div>
     </>
   );
