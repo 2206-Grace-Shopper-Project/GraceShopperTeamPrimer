@@ -104,7 +104,7 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
     useEffect(()=>{
         getCurrentPageMovies(pageNumber)
     },[searchMethod, searchFlow])
-
+console.log(allMovies, 'this should refresh each time')
 
     return(
         <>
