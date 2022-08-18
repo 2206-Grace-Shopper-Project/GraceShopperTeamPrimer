@@ -8,11 +8,13 @@ import {
 } from "../api";
 
 const CartMovies = ({ userDataObj, purchaseAmount, id, realPrice, title }) => {
-  const [userId, setUserId] = useState(null)
+  
 
+
+  let userId = null
 
   if(userDataObj){
-    setUserId(userDataObj.id)
+    userId= userDataObj.id
   }
 
 
