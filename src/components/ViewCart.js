@@ -22,13 +22,13 @@ useEffect(()=>{
       {myCart.map((item, index) => { 
         console.log(item, 'item.....')
         return( 
-        <div key={index}>
+        <div  key={index}>
           <h3>{item.name}'s picks</h3>
           {item.movies ? (
             item.movies.map((movie, index) => {
                 return(
               <div className="singleCart" key={index}>
-                <p>Movie Title: {movie.title}</p>
+                <p>Movie Title: {movie.title}</p><img className="" src={movie.poster}/>
                 <p>Rating: {movie.rated}</p>
                 <p>Qty: {movie.quantity}</p>
                 <p>${movie.price}</p>
