@@ -104,7 +104,81 @@ export async function getAllMovies() {
     const result = await response.json();
 
     return result;
-  } catch (error) {}
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export async function createMovie(movieObj) {
+  try {
+    const response = await fetch(`${BASE}/movies`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(
+          movieObj
+        ),
+    });
+    const result = await response.json();
+
+    return result;
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+
+export async function editMovieAPI(movieObj) {
+  const id = movieObj.id
+  try {
+    const response = await fetch(`${BASE}/movies/${id}`, {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(
+          movieObj
+        ),
+    });
+    const result = await response.json();
+
+    return result;
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+
+export async function deleteMovieAPI(id) {
+  try {
+    const response = await fetch(`${BASE}/movies/${id}`, {
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const result = await response.json();
+
+    return result;
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export async function specificMovieList(searchMethod, searchFlow, limitNumber, offsetNumber) {
+  try {
+    const response = await fetch(`${BASE}/movies/${searchMethod}/${searchFlow}/${limitNumber}/${offsetNumber}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const result = await response.json();
+
+    return result;
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 // CART FUNCTIONS
