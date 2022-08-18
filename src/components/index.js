@@ -14,6 +14,13 @@ export { default as DeleteCarts} from './DeleteCarts'
 export { default as CartMovies } from './CartMovies';
 export { default as MoviePage } from './MoviePage';
 export { default as AddReview } from './AddReview';
+export { default as WrongPage } from './WrongPage';
+export { default as FilterMovies} from './FilterMovies'
+export { default as FeaturedMovies} from './FeaturedMovies'
+
+
+
+
 
 
 
