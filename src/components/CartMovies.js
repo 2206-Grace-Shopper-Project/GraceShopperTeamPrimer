@@ -8,7 +8,10 @@ const userId = userDataObj.id
         event.preventDefault();
         const currentCart = await getEachCartByUser(userId) 
         const cartId = currentCart[0].id
-
+        const movieId = id
+        const quantity = purchaseAmount
+        const response = await addMovieToCart(cartId, movieId, quantity,)
+        console.log(response,'this is response from adding movie to cart')
     }
     
       
@@ -17,7 +20,8 @@ const userId = userDataObj.id
 
     return(
      <>
-     <button className="addToCart" onClick={handleOnClick}>Add Movie to cart</button>
+     <button  className="addToCart priceText textContainer topRowContainer movieContainer" onClick={handleOnClick}>Add to Cart</button>
+     
     </>
     )
 }
