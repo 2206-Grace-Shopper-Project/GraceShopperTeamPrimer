@@ -69,30 +69,67 @@ export async function specificMovieList(searchMethod, searchFlow, limitNumber, o
     } catch (error) {}
 }
 
-const Movies = ({allMovies, token, userDataObj}) =>{
+const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMovieList}) =>{
     const [cssActive, setCSSActive] = useState(null)
     const [purchaseAmount, setPurchaseAmount] = useState(0)
-    const [filteredMovieList, setFilteredMovieList] = useState([])
     const [pageNumber, setPageNumber] = useState(1)
+    const [searchMethod, setSearchMethod] = useState('id')
+    const [searchFlow, setSearchFlow] = useState('asc')
+    const [limitNumber, setLimitNumber] = useState(50)
+    const [offsetNumber, setOffsetNumber] = useState(0)
 
-
-    const handleFilter = (event) =>{
-    event.preventDefault()
-    console.log(event.target)
-
+    const getCurrentPageMovies = async (passedInPage)=>{
+        const offsetNumber = (passedInPage - 1) * 50
+        const moviesToDisplay = await specificMovieList(searchMethod, searchFlow, limitNumber, offsetNumber)
+        console.log(moviesToDisplay, '!')
+        setFilteredMovieList(moviesToDisplay)
     }
+
+    const handlePaginationPrev = (event) =>{
+    event.preventDefault()
+    setPageNumber(pageNumber - 1)
+    getCurrentPageMovies(Number(event.target.value))
+    }
+
+    const handlePaginationNext = (event) =>{
+        event.preventDefault()
+    setPageNumber(pageNumber + 1)
+    getCurrentPageMovies(Number(event.target.value))
+    }
+    const handlePageClick = (event) =>{
+        event.preventDefault()
+        setPageNumber(Number(event.target.id))
+        getCurrentPageMovies(Number(event.target.id))
+    }
+    useEffect(()=>{
+        getCurrentPageMovies(pageNumber)
+    },[searchMethod, searchFlow])
+
 
     return(
         <>
         <h1 id="movieHeader">Welcome, Find a Movie!</h1>
-        <FeaturedMovies/>
+        <FeaturedMovies allMovies={allMovies}/>
 
         <SearchMovie allMovies={allMovies} filteredMovieList={filteredMovieList} setFilteredMovieList={setFilteredMovieList}/>
         <FilterMovies/>
+        <div className="paginationContainer">
+                {pageNumber !== 1 ? <button id="paginationPrev" className="paginationButton" value={pageNumber - 1} onClick={handlePaginationPrev}>Prev</button> : <></>}
+                 <a href="#" className="pagination" id={1} onClick={handlePageClick}>1</a>
+                 <a href="#" className="pagination" id={2} onClick={handlePageClick}>2</a>
+                 <a href="#" className="pagination" id={3} onClick={handlePageClick}>3</a>
+                 <a href="#" className="pagination" id={4} onClick={handlePageClick}>4</a>
+                 <a href="#" className="pagination" id={5} onClick={handlePageClick}>5</a>
+                 <a href="#" className="pagination" id={6} onClick={handlePageClick}>6</a>
+
+                 {pageNumber !== 6 ? <button id="paginationNext" className="paginationButton" value={pageNumber + 1} onClick={handlePaginationNext}>Next</button>: <></>}
+
+            </div>
         <div id="movieComponent">
 
-        {allMovies && allMovies.length ? allMovies.map((movie, index)=>{
+        {filteredMovieList && filteredMovieList.length ? filteredMovieList.map((movie, index)=>{
             let title = movie.title
+            let linkTitle = movie.title.replace(/\s+/g, '+')
             let genre = movie.genre
             let year = movie.year
             let plot = movie.plot
@@ -129,7 +166,7 @@ const Movies = ({allMovies, token, userDataObj}) =>{
                     </div>
               </div>
               </div>
-              <div className="movieInfoContainer"> <NavLink style={{color: 'black'}} to={`/movies/${title}`}>{title}  ({year})</NavLink>
+              <div className="movieInfoContainer"> <NavLink style={{color: 'black'}} to={`/movies/${linkTitle}`}>{title}  ({year})</NavLink>
               <div className={`${className} movieInfo`}>{genre}  
               <br></br> 
               <br></br> 
@@ -155,6 +192,18 @@ const Movies = ({allMovies, token, userDataObj}) =>{
             </div>
             )
         }) : <>Something Broke</>}
+            <div className="paginationContainer">
+                {pageNumber !== 1 ? <button id="paginationPrev" className="paginationButton" value={pageNumber - 1} onClick={handlePaginationPrev}>Prev</button> : <></>}
+                 <a href="#" className="pagination" id={1} onClick={handlePageClick}>1</a>
+                 <a href="#" className="pagination" id={2} onClick={handlePageClick}>2</a>
+                 <a href="#" className="pagination" id={3} onClick={handlePageClick}>3</a>
+                 <a href="#" className="pagination" id={4} onClick={handlePageClick}>4</a>
+                 <a href="#" className="pagination" id={5} onClick={handlePageClick}>5</a>
+                 <a href="#" className="pagination" id={6} onClick={handlePageClick}>6</a>
+
+                 {pageNumber !== 6 ? <button id="paginationNext" className="paginationButton" value={pageNumber + 1} onClick={handlePaginationNext}>Next</button>: <></>}
+
+            </div>
         </div>
         </>
     )
