@@ -17,6 +17,10 @@ export { default as AddReview } from './AddReview';
 export { default as WrongPage } from './WrongPage';
 export { default as FilterMovies} from './FilterMovies'
 export { default as FeaturedMovies} from './FeaturedMovies'
+export { default as AllOrders} from './AllOrders'
+export { default as AllUsers} from './AllUsers'
+
+
 
 
 
