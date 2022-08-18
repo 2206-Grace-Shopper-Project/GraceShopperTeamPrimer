@@ -477,16 +477,3 @@ export async function createReview(token, movieId, userId, review) {
   }
 }
 
-export async function getMovieReviews(movieId) {
-  try {
-    const response = await fetch(`${BASE}/reviews/movie/${movieId}`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const result = await response.json();
-    return result;
-  } catch (error) {
-    console.error;
-  }
-}
