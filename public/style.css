@@ -317,3 +317,7 @@ a.pagination{
 .singleCart{
   border: solid black;
 }
+
+.dropdown-path {
+  display: block;
+}
