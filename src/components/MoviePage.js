@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, NavLink, useNavigate } from "react-router-dom";
 import CartMovies from "./CartMovies";
+import ReviewsByMovie from './ReviewsByMovie'
 
 const MoviePage = ({userDataObj, allMovies}) =>{
     const [movieObj, setMovieObj] = useState({})
@@ -65,6 +66,7 @@ const MoviePage = ({userDataObj, allMovies}) =>{
               </div>
               
             </div>
+            <ReviewsByMovie movieId={movieObj.id}/>
         </>
     )
 }
