@@ -5,9 +5,6 @@ import React from "react"
 const BASE = `https://radiant-citadel-20620.herokuapp.com/api`
 
 async function editReview (token, id, review){
-    console.log(token)
-    console.log(id, "matthew lillard")
-    console.log(review, "fischer stevens as THe Plague")
     try {
     const response = await fetch(`${BASE}/reviews/${id}`, {
         method: "PATCH",

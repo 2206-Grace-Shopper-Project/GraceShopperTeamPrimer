@@ -24,13 +24,14 @@ const ReviewsByMovie = ({movieId}) => {
   const [isShown, setIsShown] = useState(false);
 
   const reviewArray = async () => {
+    console.log(movieId, "marc anthony is in it too")
     const movieSpecificReview = await getMovieReviews(movieId)
     setMovieReviews(movieSpecificReview);
   };
 
   useEffect(() => {
     reviewArray();
-  }, []);
+  }, [movieId]);
 
   const MappedReviews =
     movieReviews.length > 0
@@ -39,10 +40,6 @@ const ReviewsByMovie = ({movieId}) => {
           console.log(review, "here's the review object")
           return (
             <div key={index}>
-              <div>
-                <b>Film: </b>
-                {review.title}
-              </div>
               <div>
                 <b>User:</b> 
                 {review.name}
