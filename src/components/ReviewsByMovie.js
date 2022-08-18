@@ -24,7 +24,6 @@ const ReviewsByMovie = ({movieId}) => {
   const [isShown, setIsShown] = useState(false);
 
   const reviewArray = async () => {
-    console.log(movieId, "marc anthony is in it too")
     const movieSpecificReview = await getMovieReviews(movieId)
     setMovieReviews(movieSpecificReview);
   };
@@ -37,7 +36,6 @@ const ReviewsByMovie = ({movieId}) => {
     movieReviews.length > 0
       ? movieReviews.map((review, index) => {
           let reviewId = review.id;
-          console.log(review, "here's the review object")
           return (
             <div key={index}>
               <div>
