@@ -54,7 +54,7 @@ doesCartExist();
       <div>
         <button onClick={(event)=>{
           event.preventDefault();
-          return <ViewCart userDataObj={userDataObj}/> 
+          <ViewCart userDataObj={userDataObj}/> 
         }}>View Cart</button>
         
       </div>

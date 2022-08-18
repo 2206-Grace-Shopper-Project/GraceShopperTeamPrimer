@@ -133,7 +133,7 @@ async function populateInitialData() {
 
 
     const moviesToCreate = [
-      { title:"Feeling vs Felt", genre:"Comedy", year:2022 , rated:"R", actors:"Josie Rodriguez", directors:"Hunter Norris", plot:"A hand puppet appears from the blue to shake Edie out of her funk. Sometimes you just have to be polite and let ethereal puppets complete their mission, even if it's kinda low on your to do list. They're on your hand, after all.", price:20 , poster:"img", inventory:1 }
+      { title:"Give Up The Ghost", genre:"Comedy", year:2021 , rated:"PG", actors:"Isa Arciniegas, Julie Mitre", directors:"Hunter Norris", plot:"Erika visits a psychic to git rid of the nagging ghosts of her past.", price:20 , poster:`https://static.wixstatic.com/media/b1dc41_2c20545f71264caabec0e6e4b43c74a3~mv2.png/v1/fill/w_331,h_503,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Give_Up_the_Ghost_Poster_v3--no_border_p.png`, inventory:1 }
     ]
     const movies = await Promise.all(moviesToCreate.map(createMovie))
     console.log(movies)
