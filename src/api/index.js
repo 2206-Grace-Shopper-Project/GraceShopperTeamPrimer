@@ -2,6 +2,42 @@ export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
 
 // USER FUNCTIONS
 
+export async function getMyAddresses(id){
+  try {
+      const response = await fetch(`${BASE}/users/${id}`, {
+          headers: {
+              "Content-Type": "application/json",
+          },
+      });
+      const result = await response.json();
+      return result;
+  } catch (error) {
+      console.error
+  }
+
+}
+
+export async function NewAddress(token, userId, address) {
+  
+  try {
+      const response = await fetch (`${BASE}/users/address/${userId}`, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
+          },
+          body: JSON.stringify({
+              address
+          })
+      });
+      const result = await response.json();
+      console.log(result, "and wendell pierce as agent richard gill")
+      return result;
+  } catch (error) {
+      console.error
+  }
+}
+
 export async function createUser(name, email, password) {
   try {
     console.log(email, name, password);
@@ -77,6 +113,48 @@ export async function editReview(token, id, review) {
 }
 
 //Admin Level Function
+
+export async function addNewMovie(event, token){
+  const title = event.target.title.value
+  const genre = event.target.genre.value
+  const year = event.target.year.value
+  const rated = event.target.rated.value
+  const actors = event.target.actors.value
+  const directors = event.target.directors.value
+  const plot = event.target.plot.value
+  const price = event.target.price.value
+  const poster = event.target.poster.value
+  const inventory = event.target.inventory.value
+  try {
+      const response = await fetch(`${BASE}/movies`,
+      {
+          method: "POST",
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+              title,
+              genre,
+              year,
+              rated,
+              actors,
+              directors,
+              plot,
+              price,
+              poster,
+              inventory
+          }),
+     })
+      const result = await response.json()
+      console.log(result, 'result ')
+      return result
+  } catch(error) {
+      throw error
+  }
+}
+
+
 export async function getAllUsers() {
   try {
     const response = await fetch(`${BASE}/users`, {
@@ -372,6 +450,39 @@ export async function createReview(token, movieId, userId, review) {
         userId,
         review,
       }),
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error;
+  }
+}
+
+ export async function editReview (token, id, review){
+  try {
+  const response = await fetch(`${BASE}/reviews/${id}`, {
+      method: "PATCH",
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}` 
+      },
+      body: JSON.stringify({
+          review
+      }),
+  });
+  const result = await response.json();
+  return result;
+  } catch (error) {
+      console.error;
+  }
+}
+
+export async function getMovieReviews(movieId) {
+  try {
+    const response = await fetch(`${BASE}/reviews/movie/${movieId}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
     const result = await response.json();
     return result;
