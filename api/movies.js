@@ -70,7 +70,7 @@ router.get('/:searchMethod/:searchFlow/:limitNumber/:offsetNumber', async(req, r
     offsetNumber = Number(offsetNumber)
 
     try {
-        if(!searchMethod === 'title' || !searchMethod === 'price'){
+        if(!searchMethod === 'title' || !searchMethod === 'price' || !searchMethod === 'id'){
             next({
                 searchmessage: 'Not a valid search parameter',
                 error: 'InvalidSearch!'

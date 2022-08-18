@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { NavLink} from "react-router-dom";
 import { createNewCart } from "../api";
 import CartMovies from  './CartMovies'
+import FeaturedMovies from "./FeaturedMovies";
+import FilterMovies from "./FilterMovies";
+import SearchMovie from "./SearchMovie";
 
 export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
 export async function createMovie(movieObj) {
@@ -68,31 +71,24 @@ export async function specificMovieList(searchMethod, searchFlow, limitNumber, o
 
 const Movies = ({allMovies, token, userDataObj}) =>{
     const [cssActive, setCSSActive] = useState(null)
-    const [activeCart, setActiveCart] = useState(null)
     const [purchaseAmount, setPurchaseAmount] = useState(0)
-    const cartId = 1
+    const [filteredMovieList, setFilteredMovieList] = useState([])
+    const [pageNumber, setPageNumber] = useState(1)
+
 
     const handleFilter = (event) =>{
     event.preventDefault()
     console.log(event.target)
 
     }
-    const handleSubmit = (event) =>{
-        event.preventDefault()
-        console.log(event.target)
-        event.target.reset()
-        }
+
     return(
         <>
         <h1 id="movieHeader">Welcome, Find a Movie!</h1>
-        <div>
-            <form onSubmit={handleSubmit}>
-            <input type="search" id="movieSearch" placeholder="Search Movies" name="movieSearchBar"></input>
+        <FeaturedMovies/>
 
-            {/* <button type="submit">Search</button> */}
-            </form>
-
-        </div>
+        <SearchMovie allMovies={allMovies} filteredMovieList={filteredMovieList} setFilteredMovieList={setFilteredMovieList}/>
+        <FilterMovies/>
         <div id="movieComponent">
 
         {allMovies && allMovies.length ? allMovies.map((movie, index)=>{
