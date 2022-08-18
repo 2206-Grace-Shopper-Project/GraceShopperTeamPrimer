@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   addMovieToCart,
   removeMovieFromACart,
@@ -8,7 +8,13 @@ import {
 } from "../api";
 
 const CartMovies = ({ userDataObj, purchaseAmount, id, realPrice, title }) => {
-  const userId = userDataObj.id;
+  const [userId, setUserId] = useState(null)
+
+
+  if(userDataObj){
+    setUserId(userDataObj.id)
+  }
+
 
   const handleOnClick = async (event) => {
     event.preventDefault();
