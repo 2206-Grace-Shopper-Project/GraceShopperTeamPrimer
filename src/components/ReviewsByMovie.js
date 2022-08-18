@@ -19,12 +19,13 @@ async function getMovieReviews(movieId) {
 
 // End of AP Index
 
-const ReviewsByMovie = () => {
+const ReviewsByMovie = ({movieId}) => {
   const [movieReviews, setMovieReviews] = useState([]);
   const [isShown, setIsShown] = useState(false);
 
   const reviewArray = async () => {
-    setMyReviews(await getMovieReviews(movieId));
+    const movieSpecificReview = await getMovieReviews(movieId)
+    setMovieReviews(movieSpecificReview);
   };
 
   useEffect(() => {
