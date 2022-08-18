@@ -109,7 +109,7 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
     return(
         <>
         <h1 id="movieHeader">Welcome, Find a Movie!</h1>
-        <FeaturedMovies allMovies={allMovies}/>
+        {/* <FeaturedMovies allMovies={allMovies}/> */}
 
         <SearchMovie allMovies={allMovies} filteredMovieList={filteredMovieList} setFilteredMovieList={setFilteredMovieList}/>
         <FilterMovies/>
