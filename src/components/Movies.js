@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink} from "react-router-dom";
 import { createNewCart } from "../api";
+import CartMovies from  './CartMovies'
 
 export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
 export async function createMovie(movieObj) {
@@ -100,6 +101,7 @@ const Movies = ({allMovies, token, userDataObj}) =>{
             let year = movie.year
             let plot = movie.plot
             let displayPrice = movie.price
+            let realPrice = movie.price + .99
             let id = movie.id
             let inventory = movie.inventory
             let className = null
@@ -126,13 +128,8 @@ const Movies = ({allMovies, token, userDataObj}) =>{
                             setPurchaseAmount(1)
                             event.target.value = 1
                         }}} ></input>
-                    <button value={index} className="addToCart" onClick={()=>{
-                        console.log(id, 'movie id')
-                        console.log(purchaseAmount, 'how many we buying')
-                        if(activeCart){
-                            addMovieToCart(id, cartId )
-                        }
-                        }}><span><CartMovies id={id} purchaseAmount={purchaseAmount}/></span></button>
+                   
+                        <span><CartMovies userDataObj={userDataObj} id={id} purchaseAmount={purchaseAmount} realPrice={realPrice} title={title}/></span>
                     </div>
               </div>
               </div>
