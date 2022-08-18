@@ -19,17 +19,19 @@ async function getMovieReviews(movieId) {
 
 // End of AP Index
 
-const ReviewsByMovie = () => {
+const ReviewsByMovie = ({movieId}) => {
   const [movieReviews, setMovieReviews] = useState([]);
   const [isShown, setIsShown] = useState(false);
 
   const reviewArray = async () => {
-    setMyReviews(await getMovieReviews(movieId));
+    console.log(movieId, "marc anthony is in it too")
+    const movieSpecificReview = await getMovieReviews(movieId)
+    setMovieReviews(movieSpecificReview);
   };
 
   useEffect(() => {
     reviewArray();
-  }, []);
+  }, [movieId]);
 
   const MappedReviews =
     movieReviews.length > 0
@@ -38,10 +40,6 @@ const ReviewsByMovie = () => {
           console.log(review, "here's the review object")
           return (
             <div key={index}>
-              <div>
-                <b>Film: </b>
-                {review.title}
-              </div>
               <div>
                 <b>User:</b> 
                 {review.name}
