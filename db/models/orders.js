@@ -38,7 +38,8 @@ async function getAllOrders() {
         SELECT orders.*, users.name
         FROM orders
         JOIN cart ON orders."cartId" = cart.id
-        JOIN users ON cart."userId" = users.id;
+        JOIN users ON cart."userId" = users.id
+        WHERE "isPurchased" = true;
         `)
         return orders
     } catch (error) {

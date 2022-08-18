@@ -38,13 +38,17 @@ const Orders = ({userDataObj}) =>{
         <div>
             <h1>Order History</h1>
             {orders.map((order, index) => {
+                 let orderDate = Number(order.date)
+                 let dateObj = new Date(orderDate)
+                 let finalDateFormat = dateObj.toLocaleString()     
+                return (
                 <div key={index}>
-                    {/* <p>{new Date(order.date)}</p> */}
-                    <p>{order.date}</p>
-                    <p>{order.quantity}</p>
-                    <p>{order.price}</p>
-                    <p>{order.address}</p>
+                    <p>Order Date: {finalDateFormat}</p>
+                    <p>Quantity:{order.quantity}</p>
+                    <p>Price: {order.price}</p>
+                    <p>Sent To:{order.address}</p>
                 </div>
+                )
             })}
         </div>
     )
