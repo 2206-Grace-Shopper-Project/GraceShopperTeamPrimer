@@ -39,7 +39,7 @@ useEffect(()=>{
     <>
     <Routes>
       <Route exact path='/' element={<Header setToken={setToken} token={token} userDataObj={userDataObj}/>}>
-      <Route index element={<Movies setToken={setToken} token={token} allMovies={allMovies} userDataObj={userDataObj} filteredMovieList={filteredMovieList} setFilteredMovieList={setFilteredMovieList}/>} />
+      <Route index element={<Movies setToken={setToken} token={token} allMovies={allMovies} userDataObj={userDataObj} filteredMovieList={filteredMovieList} setFilteredMovieList={setFilteredMovieList} setAllMovies={setAllMovies}/>} />
 
       <Route path="/movies/:movieTitle" element={ <MoviePage userDataObj={userDataObj} token={token} allMovies={allMovies}/> } />
       <Route path='/orders' element={<Orders setToken={setToken} token={token} userDataObj={userDataObj}/>}/>

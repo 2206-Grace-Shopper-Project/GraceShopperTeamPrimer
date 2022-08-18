@@ -69,7 +69,7 @@ export async function specificMovieList(searchMethod, searchFlow, limitNumber, o
     } catch (error) {}
 }
 
-const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMovieList}) =>{
+const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMovieList, setAllMovies}) =>{
     const [cssActive, setCSSActive] = useState(null)
     const [purchaseAmount, setPurchaseAmount] = useState(0)
     const [pageNumber, setPageNumber] = useState(1)
@@ -104,12 +104,11 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
     useEffect(()=>{
         getCurrentPageMovies(pageNumber)
     },[searchMethod, searchFlow])
-console.log(allMovies, 'this should refresh each time')
 
     return(
         <>
         <h1 id="movieHeader">Welcome, Find a Movie!</h1>
-        {/* <FeaturedMovies allMovies={allMovies}/> */}
+        <FeaturedMovies allMovies={allMovies} setAllMovies={setAllMovies}/>
 
         <SearchMovie allMovies={allMovies} filteredMovieList={filteredMovieList} setFilteredMovieList={setFilteredMovieList}/>
         <FilterMovies/>
