@@ -1,105 +1,79 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-// import { getAllOrders } from "../api";
 
 export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
-export async function getAllUsers(){
+export async function addNewMovie(event, token){
+    const title = event.target.title.value
+    const genre = event.target.genre.value
+    const year = event.target.year.value
+    const rated = event.target.rated.value
+    const actors = event.target.actors.value
+    const directors = event.target.directors.value
+    const plot = event.target.plot.value
+    const price = event.target.price.value
+    const poster = event.target.poster.value
+    const inventory = event.target.inventory.value
     try {
-        const response = await fetch(`${BASE}/users`, {
+        const response = await fetch(`${BASE}/movies`,
+        {
+            method: "POST",
             headers: {
-                "Content-Type": "application/json"
-              },
-        })
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                title,
+                genre,
+                year,
+                rated,
+                actors,
+                directors,
+                plot,
+                price,
+                poster,
+                inventory
+            }),
+       })
         const result = await response.json()
-        console.log(result, 'result from getAllUsers')
+        console.log(result, 'result ')
         return result
-    } catch(error){
+    } catch(error) {
         throw error
     }
 }
 
-export async function getAllOrders() {
-    try {
-      const response = await fetch(`${BASE}/orders`, {
-        headers: {
-          "Content-Type": "application/json"
-        },
-      });
-      const result = await response.json();
-      console.log(result, "result from getAllOrders");
-      return result
-    } catch (error) {
-      throw error;
+const Admin = ({token}) =>{
+
+    const handleSubmit = async(event) => {
+        event.preventDefault()
+        await addNewMovie(event, token)
     }
-  }
-
-
-const Admin = () =>{
-    const [orders, setOrders] = useState([])
-    const [users, setUsers] = useState([])
-
-    const getUsers = async() => {
-        const usersList = await getAllUsers()
-        setUsers(usersList)
-    }
-    const getAllUserOrders = async() => {
-        const ordersList = await getAllOrders()
-        setOrders(ordersList)
-    }
-    console.log(orders)
-    useEffect(() => {
-        getAllUserOrders();
-        getUsers();
-    }, [])
-
 
     return(
         <div>
-            <NavLink to='all-orders'>Orders</NavLink>
-            <NavLink to='all-users'>Users</NavLink>
-            <div id="all-orders">
-                <h1>All Orders</h1>
-                {orders.map((order, index) => {
-                    console.log(order.date, 'hello')
-                    let orderDate = (order.date)
-                    let dateObj = new Date(order.date)
-                    console.log(dateObj)
-                    let date = dateObj.getDate();
-                    let month = dateObj.getMonth() + 1;
-                    let year = dateObj.getFullYear();
-                    let hours = dateObj.getHours();
-                    let minutes = dateObj.getMinutes();
-                
-                    let newDateString = `${month<10?`0${month}`:`${month}`}-${date}-${year} ${hours + ':' + minutes}`
-                    return (
-                        <div key={index}>
-                            <p>Name: {order.name}</p>
-                            {/* <p>Date Purchased: {order.date}</p> */}
-                            <p>Date Purchased: {newDateString}</p>
-                            <p>Quantity: {order.quantity}</p>
-                            <p>Price: ${order.price}</p>
-                            <p>Sent To: {order.address}</p>
-                            <p>Email: {order.email}</p>
-                        </div>
-                    )
-                })}
-            </div>
-            
-            <div id="all-users">
-                <h1>All Users</h1>
-                {users.map((user, index)=> {
-                    return (
-                        <div key={index}>
-                            <p>Id: {user.id}</p>
-                            <p>Name: {user.name}</p>
-                            <p>Email: {user.email}</p>
-                        </div>
-                    )
-                })}
+            <NavLink to='/all-orders'>Orders</NavLink>
+            <NavLink to='/all-users'>Users</NavLink>
+
+            <h1>admin page</h1>
+
+            <div className='movieForm'>
+                <label>Add New Movie</label>
+            <form onSubmit={handleSubmit} id="newMovieForm">
+                <input name="title" placeholder='title'></input>
+                <input name="genre" placeholder='genre'></input>
+                <input name="year" placeholder='year'></input>
+                <input name="rated" placeholder='rated'></input>
+                <input name="actors" placeholder='actors'></input>
+                <input name="directors" placeholder='directors'></input>
+                <input name="plot" placeholder='plot'></input>
+                <input name="price" placeholder='price'></input>
+                <input name="poster" placeholder='poster'></input>
+                <input name="inventory" placeholder='inventory'></input>
+                <button type="Submit" onClick={() => {}}>Add New Movie</button>
+            </form>
             </div>
         </div>
     )
 }
-
 
 export default Admin
