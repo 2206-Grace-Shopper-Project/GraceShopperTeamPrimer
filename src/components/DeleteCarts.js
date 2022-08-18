@@ -25,7 +25,7 @@ console.log(response, ' response from delete')
     return(
 
         <>
-        <button onClick={handleOnClick}>Delete carts</button>
+        <button onClick={handleOnClick}>Purchase</button>
         </>
 
     )
