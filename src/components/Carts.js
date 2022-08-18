@@ -31,16 +31,7 @@ const Carts = (userId) => {
     <>
       <button onClick={handleOnClick}>Create Cart</button>
       <div>
-        {/* <h2>Your cart</h2>
-        {allCarts.map((cart, index) => {
-          <div key={index}>
-            <p>{}</p>
-            <p>{}</p>
-            <p>{}</p>
-            <p>{}</p>
-          </div>;
-        })} */}
-
+      
         <>
           <DeleteCarts />
         </>

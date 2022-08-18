@@ -53,6 +53,30 @@ export async function loginUser(email, password) {
     console.error;
   }
 }
+
+export async function editReview (token, id, review){
+  console.log(token)
+  console.log(id, "matthew lillard")
+  console.log(review, "fischer stevens as THe Plague")
+  try {
+  const response = await fetch(`${BASE}/reviews/${id}`, {
+      method: "PATCH",
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}` 
+      },
+      body: JSON.stringify({
+          review
+      }),
+  });
+  const result = await response.json();
+  return result;
+  } catch (error) {
+      console.error;
+  }
+}
+
+
 //Admin Level Function
 export async function getAllUsers(){
   try {
@@ -130,8 +154,85 @@ export const hideCart = async (id) => {
     const result = await response.json();
     
     return result;
-  } catch (error) {}
+  } catch (error) {
+  console.error(error)
+  }
 };
+
+//CartMovie Functions
+
+export const addMovieToCart = async (cartId, movieId, quantity) => {
+try {
+  const response = await fetch(`${BASE}/cart_movies`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      cartId, 
+      movieId, 
+      quantity
+    }),
+  });
+ 
+  const result = await response.json();
+  return result;
+} catch (error) {
+  console.error(error)
+}
+}
+
+export const getCartMoviesById = async (id) => {
+  try {
+    const response = await fetch(`${BASE}/cart_movies/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const result = await response.json();
+    
+    return result;
+  } catch (error) {
+    console.error(error)
+  }
+} 
+
+export const updateMovieQuantity = async (cartId, movieId, quantity, id) => {
+  try {
+    const response = await fetch(`${BASE}/cart_movies/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },body: JSON.stringify({
+        cartId, 
+        movieId, 
+        quantity
+      }),
+    });
+    const result = await response.json();
+    
+    return result;
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+
+export const removeMovieFromACart = async (id) => {
+  try {
+    const response = await fetch(`${BASE}/cart_movies/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const result = await response.json();
+    
+    return result;
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 // ORDERS FUNCTIONS
 
