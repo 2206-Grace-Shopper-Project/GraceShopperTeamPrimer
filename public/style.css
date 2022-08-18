@@ -91,11 +91,13 @@
   font-family: 'IBM Plex Sans';
 }
 .topRowContainer{
-  border: 15px, solid, purple;
-  background-color: black;
+  border: 2px solid purple;
+  background-color: skyblue;
+  padding: 10px;
   width: 100%;
   height: 325px;
-  display: block;
+  display: flex;
+  /* margin-top: 25px; */
 
 }
 .moviePoster{
@@ -103,7 +105,7 @@
   height: 280px;
   width: 180px;
   margin-left: 11%;
-  margin-right: 89%;
+  /* margin-right: 89%; */
   border: 2px solid black;
   float: left;
 }
@@ -112,9 +114,9 @@
   float: right;
   /* width: 100%; */
   /* height: 100%; */
-  /* margin-left: 70%; */
-  /* margin-top: 100%; */
-  margin-bottom: 100%;
+  margin-left: 10%;
+  margin-top: 50%;
+  /* margin-bottom: 100%; */
   border: 2px solid yellow;
   font-family: 'Roboto';
   font-weight: bold;
