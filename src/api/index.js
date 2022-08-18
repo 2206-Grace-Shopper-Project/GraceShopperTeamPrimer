@@ -120,7 +120,7 @@ export const createNewCart = async (userId) => {
         userId,
       }),
     });
-    console.log(response);
+  
     const result = await response.json();
     return result;
   } catch (error) {

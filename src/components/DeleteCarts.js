@@ -4,7 +4,7 @@ import { createNewCart, getEachCartByUser, hideCart } from "../api";
 
 import { storeUserData, grabUser } from "../auth";
 
-const DeleteCarts = () => {
+const DeleteCarts = ({setUserCart}) => {
 
 
 const handleOnClick = async (event) => {
@@ -15,7 +15,7 @@ const handleOnClick = async (event) => {
     const canCreate = await getEachCartByUser(userId);
     const id = canCreate[0].id
     const response = await hideCart(id) 
-
+    setUserCart(null)
 console.log(response, ' response from delete')
 
 }

@@ -1,13 +1,14 @@
 import React from "react";
-import { addMovieToCart, removeMovieFromACart, updateMovieQuantity, getCartMoviesById } from "../api";
+import { addMovieToCart, removeMovieFromACart, updateMovieQuantity, getCartMoviesById, getEachCartByUser} from "../api";
 
-const CartMovies = () => {
-
+const CartMovies = ({userDataObj}) => {
+const userId = userDataObj.id
 
     const handleOnClick = async (event) => {
         event.preventDefault();
-
-
+        const currentCart = await getEachCartByUser(userId) 
+        const cartId = currentCart[0].id
+        
     }
     
       
