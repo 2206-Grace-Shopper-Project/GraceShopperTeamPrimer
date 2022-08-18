@@ -20,7 +20,7 @@ export { default as FeaturedMovies} from './FeaturedMovies'
 export { default as AllOrders} from './AllOrders'
 export { default as AllUsers} from './AllUsers'
 export {default as Logout} from './Logout'
-// export {default as AddAddress} from './AddAddress'
+export {default as AddAddress} from './AddAddress'
 
 
 
