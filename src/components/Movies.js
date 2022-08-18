@@ -109,7 +109,7 @@ console.log(allMovies, 'this should refresh each time')
     return(
         <>
         <h1 id="movieHeader">Welcome, Find a Movie!</h1>
-        <FeaturedMovies allMovies={allMovies}/>
+        {/* <FeaturedMovies allMovies={allMovies}/> */}
 
         <SearchMovie allMovies={allMovies} filteredMovieList={filteredMovieList} setFilteredMovieList={setFilteredMovieList}/>
         <FilterMovies/>
