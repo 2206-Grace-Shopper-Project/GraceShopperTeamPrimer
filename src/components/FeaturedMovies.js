@@ -10,7 +10,7 @@ const FeaturedMovies = ({allMovies})=>{
 
     const getRandomMovies = () =>{
         const returnArray = []
-        for(i = 0; i <5; i++){
+        for(let i = 0; i <5; i++){
             let randomNumber = Math.floor(Math.random() * 251)
             returnArray.push(allMovies[randomNumber])
         }

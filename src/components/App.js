@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {  Routes, Route } from 'react-router-dom';
 import { getAllMovies } from '../api';
 import { grabToken, grabUser } from '../auth';
-import {Orders, UserForm, Movies, Carts, Header, Register, Login, Admin, MyReviews, WrongPage, MoviePage} from './'
+import {Orders, UserForm, Movies, Carts, Header, Register, Login, Admin, MyReviews, WrongPage, MoviePage, AllOrders, AllUsers} from './'
 import { specificMovieList } from './Movies';
 
 
@@ -44,6 +44,9 @@ useEffect(()=>{
       <Route path='/orders' element={<Orders setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
 
       <Route path='/users' element={<UserForm setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
+
+      <Route path='/all-orders' element={<AllOrders setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
+      <Route path='/all-users' element={<AllUsers setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
 
       
 
