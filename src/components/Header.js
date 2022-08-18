@@ -10,7 +10,7 @@ const Header = ({setToken, userDataObj}) =>{
           {  userDataObj?.name ?   <NavLink className="navlinks" to="/profile">Profile</NavLink>  :  <></>}
         <NavLink className="navlinks" to="/">Home</NavLink>
         <NavLink className="navlinks" to="/carts"> <img id="cartLogo" className="navlinks" src="https://www.freepnglogos.com/uploads/shopping-cart-png/shopping-cart-svg-png-icon-download-28.png"/> </NavLink>
-      {  userDataObj.name ? "This will be the LogOut"  :  <></>}
+      {  userDataObj?.name ? "This will be the LogOut"  :  <></>}
         </header>
       <br/>
       <Outlet/>
