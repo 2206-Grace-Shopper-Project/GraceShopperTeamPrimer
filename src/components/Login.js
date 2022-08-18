@@ -50,6 +50,7 @@ const Login = ({ setIsLoggedIn, setToken, token }) => {
     // setIsLoggedIn(true);
     setEmail("");
     setPassword("");
+    window.location.assign("/");
   };
 
 

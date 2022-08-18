@@ -53,7 +53,7 @@ const Register = ({ setIsLoggedIn }) => {
     setName("");
     setEmail("");
     setPassword("");
-
+    window.location.assign("/");
   };
 
 // Here's the return that shows up on the site

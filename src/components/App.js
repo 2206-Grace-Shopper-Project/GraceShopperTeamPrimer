@@ -53,9 +53,11 @@ useEffect(()=>{
 
       <Route path='/carts' element={<Carts setToken={setToken} token={token} userDataObj={userDataObj}/> }/>
 
-      <Route path='/login' element={<Login setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
+      <Route path='/login-register' element={<div><Login setToken={setToken} token={token} userDataObj={userDataObj}/><Register setToken={setToken} token={token} userDataObj={userDataObj}/></div>}/>
 
-      <Route path='/register' element={<Register setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
+      {/* <Route path='/login' element={<Login setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
+
+      <Route path='/register' element={<Register setToken={setToken} token={token} userDataObj={userDataObj}/>}/> */}
 
       <Route path='/admin' element={<Admin setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
 
