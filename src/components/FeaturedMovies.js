@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 const FeaturedMovies = ({allMovies})=>{
     const [movieArrayToDisplay, setMovieArrayToDisplay] = useState([])
+    const [movieList, setMovieList] = useState(allMovies)
 
     const getRandomMovies = () =>{
         console.log(allMovies)

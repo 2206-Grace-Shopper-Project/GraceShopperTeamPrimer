@@ -18,6 +18,7 @@ const MoviePage = ({userDataObj, allMovies}) =>{
         }
     })};
 
+
     useEffect(()=>{
         getMovieData()
     },[])
