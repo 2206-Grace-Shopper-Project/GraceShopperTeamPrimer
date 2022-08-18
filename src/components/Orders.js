@@ -3,6 +3,32 @@ import React, { useState, useEffect } from "react";
 // import { grabUser } from "../auth";
 
 export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
+
+export async function createNewOrder(cartId, address, email, quantity, date, price){
+    try {
+        const response = await fetch(`${BASE}/orders`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                cartId, 
+                address, 
+                email, 
+                quantity, 
+                date, 
+                price
+            }),
+        })
+        const result = await response.json()
+        console.log(result, 'result from createNewOrder')
+        return result
+    } catch (error) {
+        throw error
+    }
+}
+
+
 export async function getUserOrders(userId) {
   try {
     const response = await fetch(`${BASE}/orders/${userId}`, {
@@ -34,8 +60,16 @@ const Orders = ({userDataObj}) =>{
         getUserOrderInfo()
     }, [])
 
+    const addNewOrder = async() => {
+        console.log('here')
+        let cartId = response.id 
+        let email = data.email
+        await createNewOrder(cartId, address, email, quantity, date, price)
+    }
+
     return(
         <div>
+            <button onClick={addNewOrder}>add new order</button>
             <h1>Order History</h1>
             {orders.map((order, index) => {
                  let orderDate = Number(order.date)
@@ -45,7 +79,7 @@ const Orders = ({userDataObj}) =>{
                 <div key={index}>
                     <p>Order Date: {finalDateFormat}</p>
                     <p>Quantity:{order.quantity}</p>
-                    <p>Price: {order.price}</p>
+                    <p>Price: ${order.price}</p>
                     <p>Sent To:{order.address}</p>
                 </div>
                 )
