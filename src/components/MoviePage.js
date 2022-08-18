@@ -3,7 +3,7 @@ import { useParams, NavLink, useNavigate } from "react-router-dom";
 import CartMovies from "./CartMovies";
 import ReviewsByMovie from './ReviewsByMovie'
 
-const MoviePage = ({userDataObj, allMovies}) =>{
+const MoviePage = ({userDataObj}) =>{
     const [movieObj, setMovieObj] = useState({})
     const [purchaseAmount, setPurchaseAmount] = useState(0)
 
@@ -17,8 +17,15 @@ const MoviePage = ({userDataObj, allMovies}) =>{
             return
         }
     })};
+    const fetchMovies = async ()=>{
+        const movieList = await getAllMovies()
+        console.log('main all fetch')
+        console.log(movieList, 'what happened')
+        setAllMovies(movieList)
+      } 
 
     useEffect(()=>{
+        fetchMovies()
         getMovieData()
     },[])
 
