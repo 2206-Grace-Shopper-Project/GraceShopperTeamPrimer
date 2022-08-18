@@ -4,7 +4,7 @@ import { createNewCart, getEachCartByUser, hideCart } from "../api";
 
 import { storeUserData, grabUser } from "../auth";
 
-const DeleteCarts = ({setUserCart}) => {
+const PurchaseItems = ({setUserCart}) => {
 
 
 const handleOnClick = async (event) => {
@@ -25,7 +25,7 @@ console.log(response, ' response from delete')
     return(
 
         <>
-        <button onClick={handleOnClick}>Delete carts</button>
+        <button onClick={handleOnClick}>Purchase</button>
         </>
 
     )
@@ -38,4 +38,4 @@ console.log(response, ' response from delete')
 
 
 
-export default DeleteCarts;
+export default PurchaseItems;

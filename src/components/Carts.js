@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createNewCart, getEachCartByUser } from "../api";
 import { storeUserData, grabUser } from "../auth";
-import DeleteCarts from "./DeleteCarts";
+import PurchaseItems from "./PurchaseItems";
 import RemoveMovie from "./RemoveMovie";
 import ViewCart from "./ViewCart";
 
@@ -40,7 +40,7 @@ doesCartExist();
       <div>
         
         <div>
-          <DeleteCarts
+          <PurchaseItems
             userCart={userCart}
             setUserCart={setUserCart}
             userDataObj={userDataObj}
@@ -52,11 +52,7 @@ doesCartExist();
         </>
 
       <div>
-        <button onClick={(event)=>{
-          event.preventDefault();
           <ViewCart userDataObj={userDataObj}/> 
-        }}>View Cart</button>
-        
       </div>
       </div>
     </>
