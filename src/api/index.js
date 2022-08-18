@@ -458,22 +458,16 @@ export async function createReview(token, movieId, userId, review) {
   }
 }
 
- export async function editReview (token, id, review){
+export async function getMovieReviews(movieId) {
   try {
-  const response = await fetch(`${BASE}/reviews/${id}`, {
-      method: "PATCH",
+    const response = await fetch(`${BASE}/reviews/movie/${movieId}`, {
       headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}` 
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-          review
-      }),
-  });
-  const result = await response.json();
-  return result;
+    });
+    const result = await response.json();
+    return result;
   } catch (error) {
-      console.error;
+    console.error;
   }
 }
-
