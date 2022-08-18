@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { createNewCart, getEachCartByUser } from "../api";
 import { storeUserData, grabUser } from "../auth";
-import CartMovies from "./CartMovies";
 import DeleteCarts from "./DeleteCarts";
+import RemoveMovie from "./RemoveMovie";
+import ViewCart from "./ViewCart";
 
 const Carts = ({ userDataObj }) => {
   let userId = userDataObj.id;
@@ -37,6 +38,7 @@ doesCartExist();
     <>
       <button onClick={handleOnClick}>Create Cart</button>
       <div>
+        
         <div>
           <DeleteCarts
             userCart={userCart}
@@ -46,8 +48,16 @@ doesCartExist();
         </div>
 
         <>
-          
+        <RemoveMovie userDataObj={userDataObj} />
         </>
+
+      <div>
+        <button onClick={(event)=>{
+          event.preventDefault();
+          return <ViewCart userDataObj={userDataObj}/> 
+        }}>View Cart</button>
+        
+      </div>
       </div>
     </>
   );
