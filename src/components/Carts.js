@@ -1,29 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createNewCart, getEachCartByUser } from "../api";
 import { storeUserData, grabUser } from "../auth";
+import CartMovies from "./CartMovies";
 import DeleteCarts from "./DeleteCarts";
 
-const Carts = (userId) => {
-  const [userCart, setUserCart] = useState({});
-  let userData = localStorage.getItem("userData");
-
+const Carts = ({ userDataObj }) => {
+  let userId = userDataObj.id;
+  const [userCart, setUserCart] = useState(null);
+    
+useEffect(()=>{
+doesCartExist();
+},[])
   //onClick for create a new cart
-  const handleOnClick = async (event) => {
-    event.preventDefault();
-    let data = grabUser(userData);
-    let userId = data.id;
+
+  async function doesCartExist(){
     const canCreate = await getEachCartByUser(userId);
-
-    console.log(canCreate);
-    console.log(canCreate.length);
-
     if (!canCreate.length) {
-      const response = await createNewCart(userId);
-
-      return response;
+      setUserCart(null);
     } else {
       setUserCart(canCreate[0]);
     }
+  };
+
+  const handleOnClick = async (event) => {
+    event.preventDefault();
+    if (userCart === null) {
+      const response = await createNewCart(userId);
+      console.log(response, 'this is the response from create')
+    }
+   
+
     //end of create cart function
   };
 
@@ -31,18 +37,16 @@ const Carts = (userId) => {
     <>
       <button onClick={handleOnClick}>Create Cart</button>
       <div>
-        {/* <h2>Your cart</h2>
-        {allCarts.map((cart, index) => {
-          <div key={index}>
-            <p>{}</p>
-            <p>{}</p>
-            <p>{}</p>
-            <p>{}</p>
-          </div>;
-        })} */}
+        <div>
+          <DeleteCarts
+            userCart={userCart}
+            setUserCart={setUserCart}
+            userDataObj={userDataObj}
+          />
+        </div>
 
         <>
-          <DeleteCarts />
+          <CartMovies userDataObj={userDataObj} />
         </>
       </div>
     </>
