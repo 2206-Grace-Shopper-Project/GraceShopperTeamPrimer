@@ -3,7 +3,8 @@ import React from "react";
 // for the API index
 const BASE = `https://radiant-citadel-20620.herokuapp.com/api`
 
-async function AddAddress(token, userId, address)) {
+async function NewAddress(token, userId, address) {
+    console.log(token, "Lorraine Bracco")
     try {
         const response = await fetch (`${BASE}/users/address/${userId}`, {
             method: "POST",
@@ -11,8 +12,12 @@ async function AddAddress(token, userId, address)) {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
             },
+            body: JSON.stringify({
+                address
+            })
         });
         const result = await response.json();
+        console.log(result, "and wendell pierce as agent richard gill")
         return result;
     } catch (error) {
         console.error
@@ -22,20 +27,22 @@ async function AddAddress(token, userId, address)) {
 
 // END OF "for the API index"
 
-const Address =({token, useruserDataObj})=>{
+const AddAddress =({token, userDataObj, setShowAddAddress})=>{
     
 
     const handleSubmit = async (event) => {
+        console.log(token, "Angelina Jolie")
         event.preventDefault();
         const userId = userDataObj.id
         const address = event.target.address.value;
 
-        await AddAddress(token, userId, address);
+        await NewAddress(token, userId, address);
+        setShowAddAddress(false)
     }
 
     return (
         <div>
-            <div>Address Page</div>
+ 
             <div>Add Address Below</div>
             <form onSubmit={handleSubmit}>
                 <label>Address?</label>
@@ -48,4 +55,4 @@ const Address =({token, useruserDataObj})=>{
 
 }
 
-export default Address;
+export default AddAddress;
