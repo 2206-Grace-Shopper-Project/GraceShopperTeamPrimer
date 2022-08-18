@@ -19,7 +19,7 @@ export async function getAllOrders() {
 }
 
 export async function getCartById(id) {
-    console.log(id, 'does this work')
+    console.log(id, 'hello')
     try {
         const response = await fetch (`${BASE}/carts/${id}`, {
             headers: {
@@ -34,13 +34,6 @@ export async function getCartById(id) {
     }
 }
 
-export async function addNewMovie(){
-    try {
-
-    } catch(error) {
-        
-    }
-}
 
 
 const AllOrders = () =>{
@@ -51,11 +44,11 @@ const AllOrders = () =>{
     const getAllUserOrders = async() => {
         const ordersList = await getAllOrders()
         setOrders(ordersList)
-        {orders.map(async(order) => {
-            let id = order.cartId
-            const carts = await getCartById(id)
-            setOrderCarts(carts)
-        })}
+        // {orders.map(async(order) => {
+        //     let id = order.cartId
+        //     const carts = await getCartById(id)
+        //     setOrderCarts(carts)
+        // })}
     }
 
     useEffect(() => {
@@ -73,6 +66,7 @@ const AllOrders = () =>{
 
         <h1>All Orders</h1>
         {orders.map((order, index) => {
+            console.log(orders, 'orders')
             let orderDate = Number(order.date)
             let dateObj = new Date(orderDate)
             let finalDateFormat = dateObj.toLocaleString()
@@ -80,26 +74,14 @@ const AllOrders = () =>{
             return (
                 <div key={index} id="all-orders">
                     
-                    {orderCarts.map((cart, idx)  => {
-                        console.log(cart, "inside a map in a ahhhh")
+                    {/* {orderCarts.map((cart, idx)  => {
+                        console.log(cart.isPurchased, "line 77")
                         return (
                             <div key={idx}>
                                 <p>Movies Purchased:{cart.movies}</p>
                             </div>
                         )
-                        // if (cart.isPurchased) {
-                        //     return (
-                        // <div key={idx} >
-                        //     <p>Movies Purchased: {cart.movies}</p>
-                        // </div> 
-                        // )}
-                        // if (!cart.isPurchased){
-                        //     return (
-                        // <div key={idx}>
-                        //     <p>cart not purchased</p>
-                        // </div>
-                        // )}
-                    })}
+                    })} */}
                     <p>Customer Name: {order.name}</p>
                     <p>Date Purchased: {finalDateFormat}</p>
                     <p>Quantity: {order.quantity}</p>
