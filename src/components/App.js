@@ -3,10 +3,12 @@ import {  Routes, Route } from 'react-router-dom';
 import { getAllMovies } from '../api';
 import { grabToken, grabUser } from '../auth';
 import {Orders, UserForm, Movies, Carts, Header, Register, Login, Admin, MyReviews} from './'
+import { specificMovieList } from './Movies';
 
 
 
 const App = () => {
+  
   const [token, setToken] = useState(grabToken()) 
   const [allMovies, setAllMovies] = useState([])
   const [userDataObj, setUserDataObj] = useState(grabUser())
@@ -14,6 +16,9 @@ const App = () => {
     const movieList = await getAllMovies()
     setAllMovies(movieList)
   } 
+  const fetchMoviesToShowDefault = async ()=>{
+    const defaultList = await specificMovieList()
+  }
 useEffect(()=>{
    fetchMovies()
 
