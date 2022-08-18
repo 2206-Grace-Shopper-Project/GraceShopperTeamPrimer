@@ -17,6 +17,7 @@ const App = () => {
   const fetchMovies = async ()=>{
     const movieList = await getAllMovies()
     console.log('main all fetch')
+    console.log(movieList, 'what happened')
     setAllMovies(movieList)
   } 
   const fetchMoviesToShowDefault = async ()=>{

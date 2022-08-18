@@ -309,3 +309,7 @@ a.pagination{
   font-size: 18px;
   margin: 10px 15px;
 }
+
+.movieFeature{
+  height: 25px;
+}

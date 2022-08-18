@@ -9,11 +9,13 @@ const FeaturedMovies = ({allMovies})=>{
     const [movieArrayToDisplay, setMovieArrayToDisplay] = useState([])
 
     const getRandomMovies = () =>{
+        console.log(allMovies)
         const returnArray = []
         for(let i = 0; i <5; i++){
             let randomNumber = Math.floor(Math.random() * 251)
             returnArray.push(allMovies[randomNumber])
         }
+        console.log('made it here', returnArray)
        setMovieArrayToDisplay(returnArray)
     }
     useEffect(()=>{
@@ -22,8 +24,18 @@ const FeaturedMovies = ({allMovies})=>{
 
 
     return(
+        <div>
+        {movieArrayToDisplay.map((movie)=>{
+            console.log(movie)
+            let poster = movie.poster
+            let linkTitle = movie.title.replace(/\s+/g, '+')
 
-        <aside className="test"><Link to='#' className="anchor" onClick={()=>{console.log('work')}}> Filter↓</Link></aside>
+            return(
+                <Link to={linkTitle}><img className="movieFeature" src={poster}/></Link>
+            )
+
+        })}
+        </div>
     )
 }
 
