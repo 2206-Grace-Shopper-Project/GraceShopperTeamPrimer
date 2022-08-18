@@ -54,42 +54,41 @@ export async function loginUser(email, password) {
   }
 }
 
-export async function editReview (token, id, review){
-  console.log(token)
-  console.log(id, "matthew lillard")
-  console.log(review, "fischer stevens as THe Plague")
+export async function editReview(token, id, review) {
+  console.log(token);
+  console.log(id, "matthew lillard");
+  console.log(review, "fischer stevens as THe Plague");
   try {
-  const response = await fetch(`${BASE}/reviews/${id}`, {
+    const response = await fetch(`${BASE}/reviews/${id}`, {
       method: "PATCH",
       headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}` 
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-          review
+        review,
       }),
-  });
-  const result = await response.json();
-  return result;
+    });
+    const result = await response.json();
+    return result;
   } catch (error) {
-      console.error;
+    console.error;
   }
 }
 
-
 //Admin Level Function
-export async function getAllUsers(){
+export async function getAllUsers() {
   try {
-      const response = await fetch(`${BASE}/users`, {
-          headers: {
-              "Content-Type": "application/json"
-            },
-      })
-      const result = await response.json()
-      console.log(result, 'result from getAllUsers')
-      return result
-  } catch(error){
-      throw error
+    const response = await fetch(`${BASE}/users`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const result = await response.json();
+    console.log(result, "result from getAllUsers");
+    return result;
+  } catch (error) {
+    throw error;
   }
 }
 // MOVIE FUNCTIONS
@@ -105,55 +104,49 @@ export async function getAllMovies() {
 
     return result;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 }
 
 export async function createMovie(movieObj) {
   try {
     const response = await fetch(`${BASE}/movies`, {
-      method: 'POST',
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(
-          movieObj
-        ),
+      body: JSON.stringify(movieObj),
     });
     const result = await response.json();
 
     return result;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 }
-
 
 export async function editMovieAPI(movieObj) {
-  const id = movieObj.id
+  const id = movieObj.id;
   try {
     const response = await fetch(`${BASE}/movies/${id}`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(
-          movieObj
-        ),
+      body: JSON.stringify(movieObj),
     });
     const result = await response.json();
 
     return result;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 }
-
 
 export async function deleteMovieAPI(id) {
   try {
     const response = await fetch(`${BASE}/movies/${id}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
@@ -162,22 +155,30 @@ export async function deleteMovieAPI(id) {
 
     return result;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 }
 
-export async function specificMovieList(searchMethod, searchFlow, limitNumber, offsetNumber) {
+export async function specificMovieList(
+  searchMethod,
+  searchFlow,
+  limitNumber,
+  offsetNumber
+) {
   try {
-    const response = await fetch(`${BASE}/movies/${searchMethod}/${searchFlow}/${limitNumber}/${offsetNumber}`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${BASE}/movies/${searchMethod}/${searchFlow}/${limitNumber}/${offsetNumber}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     const result = await response.json();
 
     return result;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 }
 
@@ -194,7 +195,7 @@ export const createNewCart = async (userId) => {
         userId,
       }),
     });
-  
+
     const result = await response.json();
     return result;
   } catch (error) {
@@ -203,14 +204,14 @@ export const createNewCart = async (userId) => {
 };
 
 export const getEachCartByUser = async (userId) => {
-  try {console.log(userId,'userid in fetch')
+  try {
     const response = await fetch(`${BASE}/carts/${userId}`, {
       headers: {
         "Content-Type": "application/json",
       },
     });
     const result = await response.json();
-    console.log(result, 'this is rsult from api')
+    console.log(result, "this is rsult from api");
     return result;
   } catch (error) {
     console.error(error);
@@ -218,7 +219,8 @@ export const getEachCartByUser = async (userId) => {
 };
 
 export const hideCart = async (id) => {
-  try { console.log(id, 'id from ')
+  try {
+    console.log(id, "id from ");
     const response = await fetch(`${BASE}/carts/${id}`, {
       method: "PATCH",
       headers: {
@@ -226,35 +228,35 @@ export const hideCart = async (id) => {
       },
     });
     const result = await response.json();
-    
+
     return result;
   } catch (error) {
-  console.error(error)
+    console.error(error);
   }
 };
 
 //CartMovie Functions
 
 export const addMovieToCart = async (cartId, movieId, quantity) => {
-try {
-  const response = await fetch(`${BASE}/cart_movies`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      cartId, 
-      movieId, 
-      quantity
-    }),
-  });
- 
-  const result = await response.json();
-  return result;
-} catch (error) {
-  console.error(error)
-}
-}
+  try {
+    const response = await fetch(`${BASE}/cart_movies`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        cartId,
+        movieId,
+        quantity,
+      }),
+    });
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export const getCartMoviesById = async (id) => {
   try {
@@ -264,12 +266,12 @@ export const getCartMoviesById = async (id) => {
       },
     });
     const result = await response.json();
-    
+
     return result;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-} 
+};
 
 export const updateMovieQuantity = async (cartId, movieId, quantity, id) => {
   try {
@@ -277,20 +279,20 @@ export const updateMovieQuantity = async (cartId, movieId, quantity, id) => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-      },body: JSON.stringify({
-        cartId, 
-        movieId, 
-        quantity
+      },
+      body: JSON.stringify({
+        cartId,
+        movieId,
+        quantity,
       }),
     });
     const result = await response.json();
-    
+
     return result;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-}
-
+};
 
 export const removeMovieFromACart = async (id) => {
   try {
@@ -301,12 +303,12 @@ export const removeMovieFromACart = async (id) => {
       },
     });
     const result = await response.json();
-    
+
     return result;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-}
+};
 
 // ORDERS FUNCTIONS
 
@@ -314,12 +316,12 @@ export async function getAllOrders() {
   try {
     const response = await fetch(`${BASE}/orders`, {
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
     });
     const result = await response.json();
     console.log(result, "result from getAllOrders");
-    return result
+    return result;
   } catch (error) {
     throw error;
   }
@@ -328,10 +330,10 @@ export async function getUserOrders(userId) {
   try {
     const response = await fetch(`${BASE}/orders/${userId}`, {
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     });
-    console.log(response)
+    console.log(response);
     const result = await response.json();
     console.log(result, "result from getUserOrders");
     return result;
@@ -340,40 +342,40 @@ export async function getUserOrders(userId) {
   }
 }
 
-//Reviews Functions 
+//Reviews Functions
 
-export async function getMyReviews(userId, token){
+export async function getMyReviews(userId, token) {
   try {
-      const response = await fetch(`${BASE}/reviews/user/${userId}`, {
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-          },
-        });
-        const result = await response.json();
-        return result;
+    const response = await fetch(`${BASE}/reviews/user/${userId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    return result;
   } catch (error) {
-      console.error;
+    console.error;
   }
 }
 
-export async function createReview(token, movieId, userId, review){
+export async function createReview(token, movieId, userId, review) {
   try {
-      const response = await fetch(`${BASE}/reviews`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-          },
-          body: JSON.stringify({
-            movieId,
-            userId,
-            review
-          }),
-        });
-        const result = await response.json();
-        return result;
+    const response = await fetch(`${BASE}/reviews`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        movieId,
+        userId,
+        review,
+      }),
+    });
+    const result = await response.json();
+    return result;
   } catch (error) {
-      console.error;
+    console.error;
   }
 }
