@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getEachCartByUser } from "../api";
-
+import RemoveMovie from "./RemoveMovie";
 const ViewCart = ({ userDataObj }) => {
   const userId = userDataObj.id;
   const [myCart, setMyCart] = useState([]);
@@ -32,6 +32,7 @@ useEffect(()=>{
                 <p>Rating: {movie.rated}</p>
                 <p>Qty: {movie.quantity}</p>
                 <p>${movie.price}</p>
+                <RemoveMovie userDataObj={userDataObj}/>
               </div>
             )})
           ) : (
