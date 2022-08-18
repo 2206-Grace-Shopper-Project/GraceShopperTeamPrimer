@@ -6,7 +6,7 @@ import {EditReview } from "./"
 const MyReviews = ({userDataObj, token}) => {
     const[myReviews, setMyReviews] = useState([]);
     const[isShown, setIsShown] = useState(false);
-    const[reviewId, setReviewId] = useState(null);
+
     
     const reviewArray= async() =>{
         const userId = userDataObj.id
