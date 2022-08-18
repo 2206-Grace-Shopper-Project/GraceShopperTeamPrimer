@@ -46,7 +46,7 @@ doesCartExist();
         </div>
 
         <>
-          <CartMovies userDataObj={userDataObj} />
+          
         </>
       </div>
     </>
