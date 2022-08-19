@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { createNewCart, getEachCartByUser, hideCart } from "../api";
+import { createNewCart, getCartMoviesById, getEachCartByUser, hideCart } from "../api";
+import { getCartById } from "./AllOrders";
 // import { storeUserData, grabUser } from "../auth";
 
 export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
@@ -43,10 +44,10 @@ export async function getMyAddresses(id){
     }
   }
 
-const PurchaseItems = ({setUserCart, userDataObj}) => {
+const PurchaseItems = ({setUserCart, userCart, userDataObj}) => {
     const [cartsInfo, setCartsInfo] = useState([])
     const [addressOnOrder, setAddressOnOrder] = useState([])
-    const [confirmForm, setConfirmForm] = useState(false)
+    const [purchaseCart, setPurchaseCart] = useState(false)
 
     const getCartInfo = async () => {
         let userId = userDataObj.id;
@@ -56,33 +57,46 @@ const PurchaseItems = ({setUserCart, userDataObj}) => {
         const cartData = await getEachCartByUser(userId);
         setCartsInfo(cartData)
     }
+    console.log(cartsInfo, 'cartsInfo')
 
     const handleOnClick = async (event) => {
         event.preventDefault();
         const id = cartsInfo[0].id
         const response = await hideCart(id)
+        console.log(event, 'EVENT')
 
-        {cartsInfo.map((cart, index)=>{
-            return (
-                <div key={index}>
-                {cart.movies ? (
-                cart.movies.map(async (movie) => {
-                    let quantity = movie.quantity            
-                    let price = movie.price
-                    let cartId = response.id
-                    let email  = userDataObj.email
-                    let date = new Date().getTime()
-                    let addressArr = addressOnOrder.address.map((address)=>{
-                        return address.address
-                    })
-                    let address = addressArr.toString()
-                    console.log( cartId, address, email, quantity, date, price )
-                    await createNewOrder(cartId, address, email, quantity, date, price)
-                })
-                ) : null }
-                </div>
-            )
-        })}
+        let cartId = response.id
+        let email = userDataObj.email
+        let date = new Date().getTime()
+        let addressArr = addressOnOrder.address.map((address)=>{
+            return address.address
+        })
+        let address = addressArr.toString()
+        
+        console.log(cartId, email, date, address)
+
+        await createNewOrder(cartId, address, email, quantity, date, price)
+        // {cartsInfo.map((cart, index)=>{
+        //     return (
+        //         <div key={index}>
+        //         {cart.movies ? (
+        //         cart.movies.map(async (movie) => {
+        //             let quantity = movie.quantity            
+        //             let price = movie.price
+        //             let cartId = response.id
+        //             let email  = userDataObj.email
+        //             let date = new Date().getTime()
+        //             let addressArr = addressOnOrder.address.map((address)=>{
+        //                 return address.address
+        //             })
+        //             let address = addressArr.toString()
+        //             console.log( cartId, address, email, quantity, date, price )
+        //             await createNewOrder(cartId, address, email, quantity, date, price)
+        //         })
+        //         ) : null }
+        //         </div>
+        //     )
+        // })}
         setUserCart(null)
     }
 
@@ -96,27 +110,45 @@ const PurchaseItems = ({setUserCart, userDataObj}) => {
         <div>
             {/* <h1>Confirm Purchase</h1> */}
             <button onClick={()=>{
-                setConfirmForm(true)
-            }}>Purchase</button>
-            {confirmForm ? (cartsInfo.map((cart, index)=>{
+                setPurchaseCart(true)
+            }}>Checkout</button>
+            {purchaseCart ? (cartsInfo.map((cart, index)=>{
+                console.log(cart, 'cart in map')
                 return (
                     <div key={index}>
-                    {cart.movies.map(async (movie) => {
+                    {cart.movies.map((movie, idx) => {
+                        console.log(movie, 'movie in cart')
+                        let cartMovieId = movie.cartMoviesId
                         let quantity = movie.quantity            
                         let price = movie.price
-                        let cartId = response.id
+                        let cartId = cart.id
                         let email  = userDataObj.email
                         let date = new Date().getTime()
                         let addressArr = addressOnOrder.address.map((address)=>{
                             return address.address
                         })
                         let address = addressArr.toString()
-                        console.log( cartId, address, email, quantity, date, price )
-                        await createNewOrder(cartId, address, email, quantity, date, price)
+                        console.log( cartId, address, email, quantity, date, price , 'HERE')
+
+                        const response = getCartMoviesById(cartMovieId)
+                        console.log(response, 'response')
+                        // const movieId = response.movieId 
+                        // const result = await getMovieId
+                        return (
+                            <div key={idx}>
+                                <p>CONFIRM PURCHASE</p>
+                                <p>Movie(s): {movie.title}</p>
+                                <p>Quantity: {quantity}</p>
+                                <p>Total: ${price}</p>
+                                <p>Address: {address}</p>
+                                <button onClick={handleOnClick}>purchase</button>
+                            </div>
+                        )
                     })}
                     </div>
                 )
             })) : null}
+
         </div>
         </div>
 

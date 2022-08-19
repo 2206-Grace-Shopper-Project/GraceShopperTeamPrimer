@@ -21,34 +21,23 @@ const Carts = ({ userDataObj }) => {
     }
   }
 
-  const handleOnClick = async (event) => {
-    event.preventDefault();
-    if (userCart === null) {
-      const response = await createNewCart(userId);
-      console.log(response, "CreateCart Response");
-    }
+  // const handleOnClick = async (event) => {
+  //   event.preventDefault();
+  //   if (userCart === null) {
+  //     const response = await createNewCart(userId);
+  //     console.log(response, "CreateCart Response");
+  //   }
 
     //end of create cart function
   };
 
   return (
     <>
-      <button onClick={handleOnClick}>Create Cart</button>
-      <div>
-        <div>
-          <PurchaseItems
-            userCart={userCart}
-            setUserCart={setUserCart}
-            userDataObj={userDataObj}
-          />
-        </div>
-
         <div>
           <ViewCart userDataObj={userDataObj} />
         </div>
-      </div>
     </>
-  );
+  )
 };
 
 export default Carts;
