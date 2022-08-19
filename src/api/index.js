@@ -91,9 +91,6 @@ export async function loginUser(email, password) {
 }
 
 export async function editReview(token, id, review) {
-  console.log(token);
-  console.log(id, "matthew lillard");
-  console.log(review, "fischer stevens as THe Plague");
   try {
     const response = await fetch(`${BASE}/reviews/${id}`, {
       method: "PATCH",
