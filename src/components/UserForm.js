@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from "react";
-import { NavLink } from "react-router-dom";
-import { MyReviews, AddAddress } from "./";
+import React, { useEffect, useState } from "react";
+import { AddAddress, UpdateName } from "./";
 
 // GOES INTO API INDEX
 const BASE = `https://radiant-citadel-20620.herokuapp.com/api`
@@ -26,7 +25,8 @@ async function getMyAddresses(id){
 
 const UserForm = ({userDataObj, token}) =>{
     const[showAddAddress, setShowAddAddress] = useState(false)
-    const[myAddresses, setMyAddresses] = useState([])
+    const[myAddresses, setMyAddresses] = useState([]);
+    const[showUpdateName, setShowUpdateName] = useState(false);
 
 const addressArray = async () => {
     const addyResponse = await getMyAddresses(userDataObj.id)
@@ -41,7 +41,6 @@ useEffect(()=>{
 const MappedAddresses = 
     myAddresses.length > 0
     ? myAddresses.map((address, index) => {
-        console.log(address, "here is address")
         return (
             <div key={index}>
                 {address.address}
@@ -55,6 +54,10 @@ const MappedAddresses =
         <div>
            <h1>Hello {userDataObj.name}</h1>
            <div>Change Password</div>
+           <div>Name: {userDataObj.name} <button onClick={(event)=> {setShowUpdateName(true)}}>update</button></div>
+           <div>
+            {showUpdateName ? <UpdateName setShowUpdateName={setShowUpdateName} userDataObj={userDataObj}/> :null}
+           </div>
            <div>Email: {userDataObj.email}</div>
            <div>Address:</div>
            <div><button
@@ -68,7 +71,6 @@ const MappedAddresses =
               <div>{MappedAddresses}</div>
 
            
-           <NavLink to="/myreviews">MyReviews</NavLink>
           
         </div>
         

@@ -45,9 +45,13 @@ const AddAddress =({token, userDataObj, setShowAddAddress})=>{
  
             <div>Add Address Below</div>
             <form onSubmit={handleSubmit}>
-                <label>Address?</label>
+                <label>Address? </label>
                 <input name="address" placeholder="what's the address?"></input>
                 <button type="submit">Add Address!</button>
+                <button
+                onClick={(event) => {
+                    setShowAddAddress(false);
+                  }}>nevermind! </button>
             </form>
         </div>
     )
