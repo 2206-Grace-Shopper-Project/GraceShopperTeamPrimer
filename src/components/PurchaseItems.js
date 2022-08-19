@@ -46,6 +46,7 @@ export async function getMyAddresses(id){
 const PurchaseItems = ({setUserCart, userDataObj}) => {
     const [cartsInfo, setCartsInfo] = useState([])
     const [addressOnOrder, setAddressOnOrder] = useState([])
+    const [confirmForm, setConfirmForm] = useState(false)
 
     const getCartInfo = async () => {
         let userId = userDataObj.id;
@@ -91,7 +92,32 @@ const PurchaseItems = ({setUserCart, userDataObj}) => {
 
     return(
         <div>
-        <button onClick={handleOnClick}>Purchase</button>
+        {/* <button onClick={handleOnClick}>Purchase</button> */}
+        <div>
+            {/* <h1>Confirm Purchase</h1> */}
+            <button onClick={()=>{
+                setConfirmForm(true)
+            }}>Purchase</button>
+            {confirmForm ? (cartsInfo.map((cart, index)=>{
+                return (
+                    <div key={index}>
+                    {cart.movies.map(async (movie) => {
+                        let quantity = movie.quantity            
+                        let price = movie.price
+                        let cartId = response.id
+                        let email  = userDataObj.email
+                        let date = new Date().getTime()
+                        let addressArr = addressOnOrder.address.map((address)=>{
+                            return address.address
+                        })
+                        let address = addressArr.toString()
+                        console.log( cartId, address, email, quantity, date, price )
+                        await createNewOrder(cartId, address, email, quantity, date, price)
+                    })}
+                    </div>
+                )
+            })) : null}
+        </div>
         </div>
 
     )
