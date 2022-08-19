@@ -26,14 +26,17 @@ useEffect(()=>{
           <h3>{item.name}'s picks</h3>
           {item.movies ? (
             item.movies.map((movie, index) => {
+              console.log(movie, "MOVIE")
+              let CMI = movie.cartMoviesId
                 return(
               <div className="singleCart" key={index}>
                 <p>Movie Title: {movie.title}</p><img className="" src={movie.poster}/>
                 <p>Rating: {movie.rated}</p>
                 <p>Qty: {movie.quantity}</p>
                 <p>${movie.price}</p>
-                <RemoveMovie userDataObj={userDataObj}/>
+                <RemoveMovie userDataObj={userDataObj} CMI={CMI}/> 
               </div>
+               
             )})
           ) : (
             <h4>oops... looks like theres nothing in your cart.</h4>
