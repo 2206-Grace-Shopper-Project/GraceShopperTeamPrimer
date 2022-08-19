@@ -42,6 +42,7 @@ const Login = ({ setIsLoggedIn, setToken, token }) => {
     userData.id = loginInfo.user.id
     userData.name = loginInfo.user.name
     userData.email = loginInfo.user.email
+    console.log(loginInfo.user.password)
     setToken(loginInfo.token)
     storeToken(loginInfo.token)
     storeUserData(userData)
@@ -50,7 +51,7 @@ const Login = ({ setIsLoggedIn, setToken, token }) => {
     // setIsLoggedIn(true);
     setEmail("");
     setPassword("");
-    window.location.assign("/");
+    // window.location.assign("/");
   };
 
 

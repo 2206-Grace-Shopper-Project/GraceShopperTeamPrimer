@@ -56,7 +56,7 @@ const MappedAddresses =
            <div>Change Password</div>
            <div>Name: {userDataObj.name} <button onClick={(event)=> {setShowUpdateName(true)}}>update</button></div>
            <div>
-            {showUpdateName ? <UpdateName setShowUpdateName={setShowUpdateName} userDataObj={userDataObj}/> :null}
+            {showUpdateName ? <UpdateName setShowUpdateName={setShowUpdateName} userDataObj={userDataObj} token ={token}/> :null}
            </div>
            <div>Email: {userDataObj.email}</div>
            <div>Address:</div>
