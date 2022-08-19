@@ -1,25 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { getAllOrders } from "../api";
 
 export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
 
-export async function getAllOrders() {
-    try {
-      const response = await fetch(`${BASE}/orders`, {
-        headers: {
-          "Content-Type": "application/json"
-        },
-      });
-      const result = await response.json();
-      console.log(result, "result from getAllOrders");
-      return result
-    } catch (error) {
-      throw error;
-    }
-}
-
 export async function getCartById(id) {
-    console.log(id, 'hello')
     try {
         const response = await fetch (`${BASE}/carts/${id}`, {
             headers: {
@@ -35,11 +19,9 @@ export async function getCartById(id) {
 }
 
 
-
 const AllOrders = () =>{
     const [orders, setOrders] = useState([])
     const [orderCarts, setOrderCarts] = useState([])
-    let navigate = useNavigate();
 
     const getAllUserOrders = async() => {
         const ordersList = await getAllOrders()
@@ -57,13 +39,6 @@ const AllOrders = () =>{
 
     return (
         <div>
-            <button
-            onClick={() => {
-                navigate("/admin");
-              }}
-            >back to admin page</button>
-        <div>
-
         <h1>All Orders</h1>
         {orders.map((order, index) => {
             console.log(orders, 'orders')
@@ -91,7 +66,6 @@ const AllOrders = () =>{
                 </div>
             )
         })}
-    </div>
     </div>
     )
 }

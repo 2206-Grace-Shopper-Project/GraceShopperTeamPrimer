@@ -77,7 +77,7 @@ body {
 .mainHeader {
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 .mainHeader:last-of-type {
   margin-right: 25px;
@@ -318,6 +318,17 @@ a.pagination{
   border: solid black;
 }
 
-.dropdown-path {
-  display: block;
+.dropdown-content {
+  display: none;
+  border: 2px solid black;
+}
+
+.show-dropdown,
+.dropdowndiv {
+  display:flex;
+  flex-direction: column;
+}
+
+#user-name:hover {
+  text-decoration: underline;
 }
