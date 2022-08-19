@@ -98,7 +98,6 @@ router.patch("/:userId", async (req, res, next) => {
         error: "error",
       });
     }
-
     const user = await getUserById(userId);
     updatedUserData.id = userId;
     updatedUserData.name = name;
