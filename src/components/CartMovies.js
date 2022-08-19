@@ -21,7 +21,7 @@ const CartMovies = ({ userDataObj, purchaseAmount, id, realPrice, title }) => {
   const handleOnClick = async (event) => {
     event.preventDefault();
     const currentCart = await getEachCartByUser(userId);
-    const cartId = currentCart[0].id;
+    const cartId = currentCart.id;
     const movieId = id;
     const quantity = purchaseAmount;
     const response = await addMovieToCart(cartId, movieId, quantity);

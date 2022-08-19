@@ -286,8 +286,9 @@ export const getEachCartByUser = async (userId) => {
       },
     });
     const result = await response.json();
-    console.log(result, "this is rsult from api");
-    return result;
+    const cart = result[0]
+    console.log(cart, "this is rsult from api");
+    return cart;
   } catch (error) {
     console.error(error);
   }
@@ -385,6 +386,33 @@ export const removeMovieFromACart = async (id) => {
 };
 
 // ORDERS FUNCTIONS
+
+export async function createNewOrder(cartId, address, email, quantity, date, price){
+  console.log( cartId, address, email, quantity, date, price )
+
+  try {
+      const response = await fetch(`${BASE}/orders`, {
+          method: "POST",
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              cartId, 
+              address, 
+              email, 
+              quantity, 
+              date, 
+              price
+          }),
+      })
+      const result = await response.json()
+      console.log(result, 'result from createNewOrder')
+      return result
+  } catch (error) {
+      throw error
+  }
+}
+
 
 export async function getAllOrders() {
   try {
