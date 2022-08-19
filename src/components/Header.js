@@ -2,37 +2,76 @@ import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { Logout } from "./";
 
-
-const Header = ({setToken, userDataObj}) =>{
-    return(
-      <>
+const Header = ({ setToken, userDataObj }) => {
+  return (
+    <>
       <header className="mainHeader">
-      <NavLink to="/"><img id="logo" className="navlinks" src="https://i.imgur.com/7edncCx.png"/></NavLink>
+        <NavLink to="/">
+          <img
+            id="logo"
+            className="navlinks"
+            src="https://i.imgur.com/7edncCx.png"
+          />
+        </NavLink>
 
-        { userDataObj?.name ?
-        <div>
-        {/* <NavLink className="navlinks" to="/profile">{userDataObj.name}</NavLink> */}
-            <a>{userDataObj.name}</a>
-            <div className='dropdowndiv'>
-                <NavLink className="dropdown-path" to="/users">View Profile</NavLink>
-                <NavLink className="dropdown-path" to="/myreviews">My Reviews</NavLink>  
-                <NavLink className="dropdown-path" to="/orders">Order History</NavLink>
-              </div>
-        </div>   
-        :  <></>}
+        {userDataObj?.name ? (
+          <div>
+            <p 
+              id = "user-name"
+              onClick={() => {
+                document
+                  .getElementById("user-dropdown")
+                  .classList.toggle("show-dropdown");
+              }}
+            >
+              {userDataObj.name} ▾
+            </p>
+            <div id="user-dropdown" className="dropdown-content">
+              <NavLink to="/users">View Profile</NavLink>
+              <NavLink to="/myreviews">My Reviews</NavLink>
+              <NavLink to="/orders">Order History</NavLink>
+              {userDataObj.id === 5 ||
+              userDataObj.id === 8 ||
+              userDataObj.id === 9 ||
+              userDataObj.id === 11 ? (
+                <div className="dropdowndiv">
+                  <NavLink to="/add-movie">Add New Movie</NavLink>
+                  <NavLink to="/all-orders">All Orders</NavLink>
+                  <NavLink to="/all-users">All Users</NavLink>
+                </div>
+              ) : (
+                <></>
+              )}
+              <Logout />
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
 
-        <NavLink className="navlinks" to="/">Home</NavLink>
-        {userDataObj?.name ? <Logout />  :  <NavLink to="/login-register" className="login-register-link">
-          Login/Register
-        </NavLink>}
-        <NavLink className="navlinks" to="/carts"> <img id="cartLogo" className="navlinks" src="https://www.freepnglogos.com/uploads/shopping-cart-png/shopping-cart-svg-png-icon-download-28.png"/> </NavLink>
-        </header>
-      <br/>
-      <Outlet/>
-      </>
-    )
-}
+        {/* <NavLink className="navlinks" to="/">
+          Home
+        </NavLink> */}
+        {userDataObj?.name ? (
+          null
+        ) : (
+          <NavLink to="/login-register" className="login-register-link">
+            Login/Register
+          </NavLink>
+        )}
+        <NavLink className="navlinks" to="/carts">
+          {" "}
+          <img
+            id="cartLogo"
+            className="navlinks"
+            src="https://www.freepnglogos.com/uploads/shopping-cart-png/shopping-cart-svg-png-icon-download-28.png"
+          />{" "}
+        </NavLink>
+      </header>
+      <br />
+      <Outlet />
+    </>
+  );
+};
 
-
-
-export default Header
+export default Header;
