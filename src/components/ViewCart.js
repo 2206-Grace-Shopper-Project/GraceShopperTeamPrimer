@@ -34,9 +34,9 @@ useEffect(()=>{
                 <p>Rating: {movie.rated}</p>
                 <p>Qty: {movie.quantity}</p>
                 <p>${movie.price}</p>
-                <RemoveMovie userDataObj={userDataObj} CMI={CMI}/> 
+                <RemoveMovie userDataObj={userDataObj} CMI={CMI}/>   
               </div>
-               
+              
             )})
           ) : (
             <h4>oops... looks like theres nothing in your cart.</h4>

@@ -9,14 +9,10 @@ const RemoveMovie = ({userDataObj, CMI}) => {
 
     async function handleOnClick (event) {
         event.preventDefault();
-       
         const userCart = await getEachCartByUser(userId) 
-        console.log(userCart) 
         const response = await removeMovieFromACart(id)
         setMovies(userCart)
-    console.log(movies,'this is movies')
-
-       
+    console.log(response,'this is movies') 
     }
 
 
