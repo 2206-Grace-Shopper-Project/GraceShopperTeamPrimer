@@ -361,6 +361,10 @@ a.pagination.active{
   flex-direction: column;
 }
 
+.user-name{
+  font-family: "IBM Plex Sans";
+}
+
 #user-name:hover {
   text-decoration: underline;
 }
@@ -369,6 +373,8 @@ a.pagination.active{
 .featured-movie-title {
   color: white;
   text-align: center;
+  font-family: "IBM Plex Sans";
+
 }
 
 .featured-movies {
@@ -398,6 +404,20 @@ a.pagination.active{
   border-radius: 5px;
   border: none;
   margin: 8px;
+}
+
+
+.websiteTitle{
+  color: white;
+  font-size: larger;
+  /* font-family: 'Bubblegum Sans', cursive; */
+  /* font-family: 'Carter One', cursive; */
+  /* font-family: 'Contrail One', cursive; */
+  font-family: 'Montserrat Alternates', sans-serif;
+  /* font-family: 'Rock Salt', cursive; */
+  /* font-family: 'RocknRoll One', sans-serif; */
+  /* font-family: 'Saira Stencil One', cursive; */
+
 }
 
 /* select, option {

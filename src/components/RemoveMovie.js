@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { removeMovieFromACart, getEachCartByUser } from "../api";
 
 const RemoveMovie = ({ userDataObj, CMI, myCart, setMyCart }) => {
@@ -6,33 +6,33 @@ const RemoveMovie = ({ userDataObj, CMI, myCart, setMyCart }) => {
   const userId = userDataObj.id;
   let id = CMI;
 
-  async function handleOnClick(event) {
-    event.preventDefault();
-
+  async function handleClick(event) {
     console.log(myCart, "this is MYCART!!!!");
     if (myCart) {
-      const userCart = await getEachCartByUser(userId);
+      const ourCart = await getEachCartByUser(userId);
       await removeMovieFromACart(id);
-      
-            console.log(myCart, "MMOVIESSSSSSSS")
+
       let deletedMovie = [...myCart.movies];
       deletedMovie.forEach((element, index) => {
-        if (element.id === CMI) {
-            console.log("element Id should be CMI",element.id)
-        //   deletedMovie.splice(index, 0);
-        }
-      });
-      console.log(deletedMovie,"this shoud not include the delted movie")
-    }
+        if (element.cartMoviesId === id) {
+          console.log(element.cartMoviesId, "CartMovieId");
+          deletedMovie.splice(index, 1);
+          console.log(deletedMovie, "what is this");
+          ourCart.movies = deletedMovie;
 
-    //     // const response = await removeMovieFromACart(id)
-    //     // setMovies(userCart)
-    // console.log(response,'this is movies')
+          //  myCart.movies = newMovie
+        }
+        setMyCart(ourCart);
+        console.log(myCart, "is this the new movies arrays");
+      });
+    }
   }
+
+  useEffect(() => {}, [movies]);
 
   return (
     <>
-      <button onClick={handleOnClick}>Remove Movie</button>
+      <button onClick={handleClick}>Remove Movie</button>
     </>
   );
 };
