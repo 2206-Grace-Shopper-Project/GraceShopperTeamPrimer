@@ -10,13 +10,13 @@ const MyReviews = ({userDataObj, token}) => {
     
     const reviewArray= async() =>{
         const userId = userDataObj.id
-        setMyReviews(await getMyReviews(userId))
+        setMyReviews(await getMyReviews(userId, token))
     }
 
     useEffect(() => {
         reviewArray()
     }, [])
-
+    console.log (myReviews, "sam jackson")
     const MappedReviews =
         myReviews.length > 0
         ? myReviews.map((review, index) => {
