@@ -348,7 +348,7 @@ export const getCartMoviesById = async (id) => {
   }
 };
 
-export const updateMovieQuantity = async (cartId, movieId, quantity, id) => {
+export const updateMovieQuantity = async (id,quantity) => {
   try {
     const response = await fetch(`${BASE}/cart_movies/${id}`, {
       method: "PATCH",
@@ -356,13 +356,11 @@ export const updateMovieQuantity = async (cartId, movieId, quantity, id) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        cartId,
-        movieId,
         quantity,
       }),
     });
     const result = await response.json();
-
+      console.log("this is result from Edit in API", result)
     return result;
   } catch (error) {
     console.error(error);
