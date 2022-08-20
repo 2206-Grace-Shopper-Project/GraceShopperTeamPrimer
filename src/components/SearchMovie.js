@@ -23,9 +23,9 @@ const SearchMovie = ({allMovies, filteredMovieList, setFilteredMovieList})=>{
         <form onSubmit={handleSubmit}>
             <input type="search" id="asd" required placeholder="Search Movies" name="movieSearchBar"></input>
         </form>
-        <div className="break"></div>
+        {/* <div className="break"></div> */}
             <form>
-                <select onChange={handleOnChange}>
+                <select onChange={handleOnChange} className='sortby-option'>
                 <option value={1}>Sort by: Ranking </option>
                 <option value={2}>Sort by: Title: A-Z </option>
                 <option value={3}>Sort by: Title: Z-A </option>

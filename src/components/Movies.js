@@ -107,7 +107,7 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
 
     return(
         <>
-        <h1 id="movieHeader">Welcome, Find a Movie!</h1>
+        {/* <h1 id="movieHeader">Welcome, Find a Movie!</h1> */}
         <FeaturedMovies allMovies={allMovies} setAllMovies={setAllMovies}/>
 
         <SearchMovie allMovies={allMovies} filteredMovieList={filteredMovieList} setFilteredMovieList={setFilteredMovieList}/>
@@ -145,9 +145,9 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
             <div key={id} className="movieContainer" >
             <div className="topRowContainer">
             <img className="moviePoster" src={movie.poster}/>
-              <div className="textContainer">
+              {/* <div className="textContainer"> */}
                 <div className="priceText movieText">
-                    <span>${displayPrice}.99</span>
+                    {/* <span>${displayPrice}.99</span>
                     <br></br>
                     {inventory < 10 && inventory > 0  ? <><span className="almostOutOfStock">Only {inventory} left in stock</span><br></br></> : <br></br>}
                     {inventory === 0 ? <><span className="outOfStock">Out of stock</span><br></br></> : <br></br>}
@@ -159,14 +159,17 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
                             alert('You cannot purchase more than what is in stock')
                             setPurchaseAmount(1)
                             event.target.value = 1
-                        }}} ></input>
+                        }}} ></input> */}
                    
                         <span><CartMovies userDataObj={userDataObj} id={id} purchaseAmount={purchaseAmount} realPrice={realPrice} title={title}/></span>
                     </div>
+              {/* </div> */}
               </div>
-              </div>
-              <div className="movieInfoContainer"> <NavLink style={{color: 'black'}} to={`/movies/${linkTitle}`}>{title}  ({year})</NavLink>
-              <div className={`${className} movieInfo`}>{genre}  
+              <div className="movieInfoContainer"> 
+              {/* <NavLink style={{color: 'black'}} to={`/movies/${linkTitle}`}>{title}  ({year})</NavLink> */}
+              <p>{title}  ({year})</p>
+              <p>${movie.price}.99</p>
+              {/* <div className={`${className} movieInfo`}>{genre}  
               <br></br> 
               <br></br> 
               <span className='furtherMovieInfo'>{plot} </span>
@@ -178,14 +181,15 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
               <span className='furtherMovieInfo'>Directors: {movie.directors} </span>
               <br></br> 
               <span className='furtherMovieInfo'>{movie.rated} </span>
-              </div>
-              <p className="seeMoreTag"><a className="seeMoreLink" href="#" onClick={
+              </div> */}
+              {/* <p className="seeMoreTag"><a className="seeMoreLink" href="#" onClick={
                 (event)=>{
                 event.preventDefault()
                 cssActive && cssActive === movie.id ? setCSSActive(null) : setCSSActive(movie.id) 
                 console.log(cssActive)}}>
                     { cssActive === movie.id ? '↑ See less' : '↓ See more' }</a>
-                </p>
+                </p> */}
+                <NavLink to={`/movies/${linkTitle}`}>get more info</NavLink> 
               </div>
               
             </div>

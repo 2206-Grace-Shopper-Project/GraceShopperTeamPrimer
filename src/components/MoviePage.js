@@ -37,7 +37,7 @@ const MoviePage = ({userDataObj, allMovies}) =>{
                     {movieObj.inventory < 10 && movieObj.inventory > 0  ? <><span className="almostOutOfStock">Only {movieObj.inventory} left in stock</span><br></br></> : <br></br>}
                     {movieObj.inventory === 0 ? <><span className="outOfStock">Out of stock</span><br></br></> : <br></br>}
                     <label htmlFor="quantity">Qty: </label>
-                    <input type="number" id={movieObj.id} name="quantity" min="1" max={movieObj.inventory} onBlur={(event)=>event.target.value = ''} onChange={(event)=>{
+                    <input type="number" id={movieObj.id} required name="quantity" min="1" max={movieObj.inventory} onBlur={(event)=>event.target.value = ''} onChange={(event)=>{
                         console.log(event.target.value)
                         setPurchaseAmount(Number(event.target.value))
                         if(event.target.value > inventory){

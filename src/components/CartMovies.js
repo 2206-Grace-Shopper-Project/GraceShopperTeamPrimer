@@ -21,11 +21,20 @@ const CartMovies = ({ userDataObj, purchaseAmount, id, realPrice, title }) => {
   const handleOnClick = async (event) => {
     event.preventDefault();
     const currentCart = await getEachCartByUser(userId);
-    const cartId = currentCart.id;
-    const movieId = id;
-    const quantity = purchaseAmount;
-    const response = await addMovieToCart(cartId, movieId, quantity);
-    console.log(response, "this is response from adding movie to cart");
+   
+    if (purchaseAmount === 0) {
+      let quantity = 1 
+      const cartId = currentCart.id;
+      const movieId = id;
+      const response = await addMovieToCart(cartId, movieId, quantity);
+      console.log(response, "this is response from adding movie to cart");
+    } else {
+      let quantity = purchaseAmount;
+      const cartId = currentCart.id;
+      const movieId = id;
+      const response = await addMovieToCart(cartId, movieId, quantity);
+      console.log(response, "this is response from adding movie to cart");
+    }
   };
 
   return (
@@ -34,7 +43,7 @@ const CartMovies = ({ userDataObj, purchaseAmount, id, realPrice, title }) => {
         className="addToCart priceText textContainer topRowContainer movieContainer"
         onClick={handleOnClick}
       >
-        Add to Cart
+        <span class="material-symbols-outlined" id='add-cart-icon'>add_shopping_cart</span>
       </button>
     </>
   );
