@@ -56,7 +56,7 @@ console.log(myCart, 'myCart')
           {myCart.movies ? myCart.movies.length ? (
            <div>
            {myCart.movies.map((movie, index) => {
-              console.log(movie, "MOVIE")
+              // console.log(movie, "MOVIE")
               let CMI = movie.cartMoviesId
               let movieId = movie.id
               let quantity = movie.quantity
@@ -65,13 +65,13 @@ console.log(myCart, 'myCart')
                 <p>Movie Title: {movie.title}</p><img className="" src={movie.poster}/>
                 <p>Rating: {movie.rated}</p>
                 <p>Qty: {quantity}</p>
-                <p>${movie.price}</p>
+                <p>${movie.price}.99 Each</p>
                  
                   <button onClick={()=>{
                     setCanEdit(true)
                   }}>Edit Cart</button>
              { canEdit === true ? <><EditCart userDataObj={userDataObj} CMI={CMI} movieId={movieId} quantity={quantity} setCanEdit={setCanEdit} />
-                 <RemoveMovie userDataObj={userDataObj} CMI={CMI}/>   </>: <></> } 
+                 <RemoveMovie myCart={myCart} setMyCart={setMyCart} userDataObj={userDataObj} CMI={CMI}/>   </>: <></> } 
               </div>
           
             )})} <div><p>CONFIRM PURCHASE</p>   <button onClick={handleOnClick}>purchase</button></div> </div>
