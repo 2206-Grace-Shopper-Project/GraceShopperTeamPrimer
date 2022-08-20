@@ -6,18 +6,19 @@ const Header = ({ setToken, userDataObj }) => {
   return (
     <>
       <header className="mainHeader">
-        <NavLink to="/">
-          <img
+        <NavLink className="websiteTitle" to="/">
+          {/* <img
             id="logo"
             className="navlinks"
             src="https://i.imgur.com/7edncCx.png"
-          />
+          /> */}
+          Cinema's Top 251
         </NavLink>
 
         {userDataObj?.name ? (
           <div>
             <p 
-              id = "user-name"
+              id = "user-name" className="user-name"
               onClick={() => {
                 document
                   .getElementById("user-dropdown")
