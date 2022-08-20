@@ -60,12 +60,15 @@ const Header = ({ setToken, userDataObj }) => {
           </NavLink>
         )}
         <NavLink className="navlinks" to="/carts">
-          {" "}
-          <img
+          {/* {" "} */}
+          <span class="material-symbols-outlined">
+          shopping_cart
+          </span>
+          {/* <img
             id="cartLogo"
             className="navlinks"
             src="https://www.freepnglogos.com/uploads/shopping-cart-png/shopping-cart-svg-png-icon-download-28.png"
-          />{" "}
+          />{" "} */}
         </NavLink>
       </header>
       <br />

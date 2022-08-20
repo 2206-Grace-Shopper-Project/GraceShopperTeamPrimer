@@ -2,6 +2,7 @@
 
 * {
   box-sizing: border-box;
+  margin: 0;
 }
 
 :root {
@@ -17,12 +18,13 @@ html {
 }
 
 body {
-  margin: 0;
+  /* margin: 0;
   padding: 0;
   height: 100vh;
   width: 100vw;
-  padding: 12px;
-  margin: 25px;
+  padding: 12px; */
+  margin: 0;
+  background-color: #3B3F44;
 }
 
 .app-container {
@@ -74,37 +76,41 @@ body {
     box-shadow: inset -3px 0px 0px transparent;
   }
 }
+
 .mainHeader {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-evenly;
+  background-color: #282B30;
+  color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
-.mainHeader:last-of-type {
+/* .mainHeader:last-of-type {
   margin-right: 25px;
 }
 .mainHeader:first-of-type {
   margin-left: 15px;
-}
+} */
 
 #logo {
   border: none;
   width: 85px;
 }
 
-#cartLogo {
+/* #cartLogo {
   border: none;
   width: 15px;
-}
+} */
 
 #movieComponent {
-  border: 2px solid orange;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: center;
-  padding: 12px;
-  margin: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 12px;
+    margin: 25px;
 }
+
 #movieHeader {
   display: block;
 }
@@ -113,45 +119,48 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 400px;
-  border: 2px solid red;
+  width: 350px;
+  background-color: #D9D9D9;
   margin: 5px;
   padding: 5px;
   font-family: "IBM Plex Sans";
 }
+
 .topRowContainer {
-  border: 2px solid purple;
-  background-color: skyblue;
+  /* border: 2px solid purple;
+  background-color: skyblue; */
   padding: 10px;
   width: 100%;
   height: 325px;
   display: flex;
+  justify-content: center;
   /* margin-top: 25px; */
 }
+
 .moviePoster {
   display: flex;
   height: 280px;
   width: 180px;
-  margin-left: 11%;
+  margin-left: 22%;
   /* margin-right: 89%; */
-  border: 2px solid black;
-  float: left;
+  /* border: 2px solid black;*/
+  float: center; 
 }
+
 .priceText {
   text-align: center;
-  float: right;
+  /* float: right; */
   /* width: 100%; */
   /* height: 100%; */
-  margin-left: 15%;
+  margin-left: 5%;
   padding-left: 5px;
-  margin-top: 50%;
+  /* margin-top: 50%; */
   /* margin-bottom: 100%; */
-  border: 2px solid yellow;
+  /* border: 2px solid yellow; */
   font-family: "Roboto";
   font-weight: bold;
-
-  /* position: relative; */
 }
+
 .textContainer {
   font-family: "IBM Plex Sans";
   /* border: solid blue 2px; */
@@ -160,10 +169,11 @@ body {
 }
 
 .movieInfoContainer {
-  border: solid 2px gray;
+  /* border: solid 2px gray; */
   height: 40%;
   width: 100%;
 }
+
 div.movieInfoContainer {
   margin: 0;
   padding: 0;
@@ -179,7 +189,7 @@ div.movieInfoContainer {
   max-height: 50%;
   overflow-y: hidden;
   overflow-x: hidden;
-  border: 2px yellow solid;
+  /* border: 2px yellow solid; */
   position: relative;
 }
 .seeMoreTag {
@@ -201,35 +211,34 @@ div.movieInfoContainer {
 }
 
 .addToCart {
-  align-items: center;
   appearance: none;
-  background-color: #3eb2fd;
-  background-image: linear-gradient(1deg, #4f58fd, #149bf3 99%);
-  background-size: calc(100% + 20px) calc(100% + 20px);
+  /* background-color: #282B30; */
+  /* background-image: linear-gradient(1deg, #4f58fd, #149bf3 99%); */
+  /* background-size: calc(100% + 20px) calc(100% + 20px); */
   border-radius: 100px;
   border-width: 0;
-  box-shadow: none;
-  box-sizing: border-box;
-  color: #ffffff;
+  /* box-shadow: none; */
+  /* box-sizing: border-box; */
+  /* color: #ffffff; */
   cursor: pointer;
   display: inline-flex;
-  font-family: CircularStd, sans-serif;
-  font-size: 1rem;
+  /* font-family: CircularStd, sans-serif; */
+  /* font-size: 1rem; */
   height: auto;
-  justify-content: center;
-  line-height: 1.5;
-  padding: 6px 20px;
-  padding-left: 12px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
+  justify-content: flex-end;
+  /* line-height: 1.5; */
+  /* padding: 6px 20px; */
+  /* padding-left: 12px; */
+  /* position: relative; */
+  /* text-align: center; */
+  /* text-decoration: none; */
   transition: background-color 0.2s, background-position 0.2s;
   user-select: none;
   touch-action: manipulation;
-  vertical-align: top;
-  white-space: nowrap;
-  margin-top: 25px;
-  margin-left: 25px;
+  /* vertical-align: top; */
+  /* white-space: nowrap; */
+  /* margin-top: 25px; */
+  /* margin-left: 25px;*/
 }
 
 .addToCart:hover {
@@ -246,6 +255,7 @@ input[type="number"] {
 a {
   text-decoration: none;
 }
+
 a:hover {
   text-decoration: underline;
 }
@@ -261,20 +271,17 @@ input[type="search"] {
 }
 
 .filterContainer{
-  border: 2px solid black;
-  display: flex;
-  margin: 0px 30px;
-  align-items: baseline;
-  justify-content: end;
-  width: 95%;
-  flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 95%;
 }
 .break {
   flex-basis: 100%;
   height: 0;
 }
 
-select {
+/* select {
   display: flex;
   position: relative;
   font-family: Arial;
@@ -282,33 +289,56 @@ select {
   font-size: 16px;
   font-family: "IBM Plex Sans";
   justify-content: right;
-}
+} */
+
 .test{
   display: flex;
   justify-content: right;
   margin-right: 55px;
   
 }
-a.anchor{
+
+/* a.anchor{
   text-decoration: none;
   text-decoration-color: black;
-}
+} */
 
 
 .paginationContainer{
   display: block;
   flex-grow: 1;
-  border: 2px pink solid;
   width: 100%;
   height: 10%;
   font-size: 18px;
   text-align: center;
-
 }
-a.pagination{
+
+.pagination {
   font-size: 18px;
   margin: 10px 15px;
+  color: white;
 }
+
+a.pagination:active {
+  text-decoration: underline;
+}
+
+a.pagination.active{
+  text-decoration: underline;
+  color: red;
+}
+
+.paginationButton {
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #282B30;
+  color: white;
+}
+
+/* a.pagination{
+  
+} */
 
 .movieFeature{
   height: 25px;
@@ -332,3 +362,42 @@ a.pagination{
 #user-name:hover {
   text-decoration: underline;
 }
+
+
+.featured-movie-title {
+  color: white;
+  text-align: center;
+}
+
+.featured-movies {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+.material-symbols-outlined {
+  color: white;
+}
+
+#add-cart-icon {
+  color: black;
+}
+
+#asd {
+  font-size: 15px;
+  border-radius: 5px;
+  border: none;
+  margin: 8px;
+}
+
+.sortby-option {
+  padding: 0;
+  font-size: 15px;
+  /* width: 80%; */
+  border-radius: 5px;
+  border: none;
+  margin: 8px;
+}
+
+/* select, option {
+  
+} */
