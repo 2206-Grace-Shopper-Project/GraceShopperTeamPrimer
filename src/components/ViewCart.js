@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { createNewCart, getEachCartByUser, getMyAddresses, hideCart, createNewOrder } from "../api";
+import { createNewCart, getEachCartByUser, getMyAddresses, hideCart } from "../api";
+import EditCart from "./EditCart";
 import RemoveMovie from "./RemoveMovie";
 
 const ViewCart = ({ userDataObj }) => {
@@ -7,6 +8,8 @@ const ViewCart = ({ userDataObj }) => {
   const [myCart, setMyCart] = useState([]);
   const [addressOnOrder, setAddressOnOrder] = useState([])
   const [userCart, setUserCart] = useState([]);
+  const [canEdit, setCanEdit] = useState(false)
+
 
   async function myCartToView() {
     const cartObj = await getEachCartByUser(userId);
@@ -25,7 +28,7 @@ useEffect(()=>{
 const handleOnClick = async (event) => {
   event.preventDefault();
   const cartId = myCart.id
-  const response = await hideCart(cartId)
+  await hideCart(cartId)
   // console.log(event, 'EVENT')
 
   // let userId = userDataObj.id
@@ -51,24 +54,32 @@ console.log(myCart, 'myCart')
         <div>
           <h3>{myCart.name}'s picks</h3>
           {myCart.movies ? myCart.movies.length ? (
-            myCart.movies.map((movie, index) => {
+           <div>
+           {myCart.movies.map((movie, index) => {
               console.log(movie, "MOVIE")
               let CMI = movie.cartMoviesId
+              let movieId = movie.id
+              let quantity = movie.quantity
                 return(
               <div className="singleCart" key={index}>
                 <p>Movie Title: {movie.title}</p><img className="" src={movie.poster}/>
                 <p>Rating: {movie.rated}</p>
-                <p>Qty: {movie.quantity}</p>
+                <p>Qty: {quantity}</p>
                 <p>${movie.price}</p>
-                <RemoveMovie userDataObj={userDataObj} CMI={CMI}/>   
+                 
+                  <button onClick={()=>{
+                    setCanEdit(true)
+                  }}>Edit Cart</button>
+             { canEdit === true ? <><EditCart userDataObj={userDataObj} CMI={CMI} movieId={movieId} quantity={quantity} setCanEdit={setCanEdit} />
+                 <RemoveMovie userDataObj={userDataObj} CMI={CMI}/>   </>: <></> } 
               </div>
-              
-            )})
-          ) : (
+          
+            )})} <div><p>CONFIRM PURCHASE</p>   <button onClick={handleOnClick}>purchase</button></div> </div>
+          )   : (
             <h4>oops... looks like theres nothing in your cart.</h4>
           ): <h4>loading your cart</h4>}
-          <p>CONFIRM PURCHASE</p>           
-          <button onClick={handleOnClick}>purchase</button>
+              {/* { myCart.movies.length ? () : <></>    }   */}
+       
         </div>
   </>
     : null}
