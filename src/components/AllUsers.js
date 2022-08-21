@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllUsers } from "../api";
 
-const AllUsers = () =>{
+const AllUsers = ({userDataObj}) =>{
     const [users, setUsers] = useState([])
     let navigate = useNavigate();
 
@@ -17,6 +17,7 @@ const AllUsers = () =>{
 
     return (
         <div>
+        {userDataObj.id === 5 || userDataObj.id === 8 || userDataObj.id === 9 || userDataObj.id === 11 ?
             <div className="all-users">
             <h1>All Users</h1>
                 {users.map((user, index)=> {
@@ -29,6 +30,7 @@ const AllUsers = () =>{
                     )
                 })}
             </div>
+            : <h1>nice try buddy</h1> }
         </div>
     )
 }

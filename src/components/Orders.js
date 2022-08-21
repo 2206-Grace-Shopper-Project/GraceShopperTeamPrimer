@@ -49,7 +49,7 @@ const Orders = ({userDataObj}) =>{
     }, [])
     
     return(
-        <div>
+        <div className='order-history'>
             <h1>Order History</h1>
             {orders.map((order, index) => {
                 let orderDate = Number(order.date)
@@ -59,7 +59,7 @@ const Orders = ({userDataObj}) =>{
                 console.log(order, 'inside orders.map')
             
                 return (
-                <div key={index}>
+                <div id='orders' key={index}>
                     {orderCarts.map((element)  => {
                         console.log(element, "line 64")
                         // return (

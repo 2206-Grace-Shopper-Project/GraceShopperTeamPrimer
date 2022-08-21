@@ -3,7 +3,7 @@ import { useParams, NavLink, useNavigate } from "react-router-dom";
 import CartMovies from "./CartMovies";
 import ReviewsByMovie from './ReviewsByMovie'
 
-const MoviePage = ({userDataObj, allMovies}) =>{
+const MoviePage = ({userDataObj, allMovies, setShowButton, showButton}) =>{
     const [movieObj, setMovieObj] = useState({})
     const [purchaseAmount, setPurchaseAmount] = useState(0)
 
@@ -26,16 +26,15 @@ const MoviePage = ({userDataObj, allMovies}) =>{
 
     return(
         <>
-        <h1>All about: {movieTitle}</h1>
-        <div key={movieObj.id} className="movieContainer" >
-            <div className="topRowContainer">
-            <img className="moviePoster" src={movieObj.poster}/>
-              <div className="textContainer">
-                <div className="priceText movieText">
-                    <span>${movieObj.price}.99</span>
-                    <br></br>
-                    {movieObj.inventory < 10 && movieObj.inventory > 0  ? <><span className="almostOutOfStock">Only {movieObj.inventory} left in stock</span><br></br></> : <br></br>}
-                    {movieObj.inventory === 0 ? <><span className="outOfStock">Out of stock</span><br></br></> : <br></br>}
+        {/* <h1>All about: {movieTitle}</h1> */}
+        <div key={movieObj.id} className="singleMovieContainer" >
+            <div className="singleTopRowContainer">
+            <img className="singleMoviePoster" src={movieObj.poster}/>
+              <div className="singleTextContainer">
+                <div className="singlePriceText singleMovieText">
+                    <p id='moviePrice'>${movieObj.price}.99</p>
+                    {/* <br></br> */}
+                    <span><CartMovies userDataObj={userDataObj} id={movieObj.id} purchaseAmount={purchaseAmount} realPrice={movieObj.price + .99} title={movieObj.title} setShowButton={setShowButton} showButton={showButton}/></span>
                     <label htmlFor="quantity">Qty: </label>
                     <input type="number" id={movieObj.id} required name="quantity" min="1" max={movieObj.inventory} onBlur={(event)=>event.target.value = ''} onChange={(event)=>{
                         console.log(event.target.value)
@@ -45,16 +44,20 @@ const MoviePage = ({userDataObj, allMovies}) =>{
                             setPurchaseAmount(1)
                             event.target.value = 1
                         }}} ></input>
+                    {movieObj.inventory < 10 && movieObj.inventory > 0  ? <><span className="almostOutOfStock">Only {movieObj.inventory} left in stock</span></> : <br></br>}
+                    {movieObj.inventory === 0 ? <><span className="outOfStock">Out of stock</span><br></br></> : <br></br>}
+                    
                    
-                        <span><CartMovies userDataObj={userDataObj} id={movieObj.id} purchaseAmount={purchaseAmount} realPrice={movieObj.price + .99} title={movieObj.title}/></span>
+                        
+                        {/* <button onClick={()=>{<CartMovies userDataObj={userDataObj} id={movieObj.id} purchaseAmount={purchaseAmount} realPrice={movieObj.price + .99} title={movieObj.title}/>}}>add to cart</button> */}
                     </div>
               </div>
               </div>
-              <div className="movieInfoContainer"> {movieObj.title}  ({movieObj.year})
-              <div className={`activeSeeMore movieInfo`}>{movieObj.genre}  
+              <div className="singleMovieInfoContainer"> {movieObj.title}
+              <div className={`activeSeeMore movieInfo`}>{movieObj.rated} | {movieObj.year} | {movieObj.genre}  
               <br></br> 
               <br></br> 
-              <span className='furtherMovieInfo'>{movieObj.plot} </span>
+              <p className='furtherMoviePlot'>{movieObj.plot} </p>
               <br></br> 
               <br></br> 
               <span className='furtherMovieInfo'>Starring: {movieObj.actors} </span>
@@ -62,7 +65,7 @@ const MoviePage = ({userDataObj, allMovies}) =>{
               <br></br> 
               <span className='furtherMovieInfo'>Directors: {movieObj.directors} </span>
               <br></br> 
-              <span className='furtherMovieInfo'>{movieObj.rated} </span>
+              {/* <span className='furtherMovieInfo'>{movieObj.rated} </span> */}
               </div>
               </div>
               
