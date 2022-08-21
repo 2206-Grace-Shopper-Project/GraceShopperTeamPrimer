@@ -45,6 +45,8 @@ const Register = ({ setIsLoggedIn }) => {
     userData.id = registerInfo.user.id
     userData.name = registerInfo.user.name
     userData.email = registerInfo.user.email
+    userData.addresses = []
+
     setToken(registerInfo.token)
     storeToken(registerInfo.token)
     storeUserData(userData)

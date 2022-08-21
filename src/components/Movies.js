@@ -1,75 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, NavLink} from "react-router-dom";
-import { createNewCart } from "../api";
+import { createMovie, createNewCart, deleteMovieAPI, editMovieAPI, specificMovieList } from "../api";
 import CartMovies from  './CartMovies'
 import FeaturedMovies from "./FeaturedMovies";
 import FilterMovies from "./FilterMovies";
 import SearchMovie from "./SearchMovie";
 
-export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
-export async function createMovie(movieObj) {
-    try {
-      const response = await fetch(`${BASE}/movies`, {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(
-            movieObj
-          ),
-      });
-      const result = await response.json();
-  
-      return result;
-    } catch (error) {}
-}
 
-
-export async function editMovieAPI(movieObj) {
-    const id = movieObj.id
-    try {
-      const response = await fetch(`${BASE}/movies/${id}`, {
-        method: 'PATCH',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(
-            movieObj
-          ),
-      });
-      const result = await response.json();
-  
-      return result;
-    } catch (error) {}
-}
-export async function deleteMovieAPI(id) {
-    try {
-      const response = await fetch(`${BASE}/movies/${id}`, {
-        method: 'DELETE',
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const result = await response.json();
-  
-      return result;
-    } catch (error) {}
-}
-
-export async function specificMovieList(searchMethod, searchFlow, limitNumber, offsetNumber) {
-    try {
-      const response = await fetch(`${BASE}/movies/${searchMethod}/${searchFlow}/${limitNumber}/${offsetNumber}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const result = await response.json();
-  
-      return result;
-    } catch (error) {}
-}
-
-const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMovieList, setAllMovies, setShowButton, showButton}) =>{
+const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMovieList, setAllMovies, setShowButton, showButton, guestUserObj}) =>{
     const [cssActive, setCSSActive] = useState(null)
     const [purchaseAmount, setPurchaseAmount] = useState(0)
     const [pageNumber, setPageNumber] = useState(1)
@@ -82,6 +20,7 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
 
     const getCurrentPageMovies = async (passedInPage)=>{
         const offsetNumber = (passedInPage - 1) * 50
+        setOffsetNumber(offsetNumber)
         const moviesToDisplay = await specificMovieList(searchMethod, searchFlow, limitNumber, offsetNumber)
         console.log(moviesToDisplay, '!')
         setFilteredMovieList(moviesToDisplay)
@@ -164,13 +103,13 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
                             event.target.value = 1
                         }}} ></input> */}
                    
-                        <span><CartMovies userDataObj={userDataObj} id={id} purchaseAmount={purchaseAmount} realPrice={realPrice} title={title} setShowButton={setShowButton} showButton={showButton}/></span>
+                        <span><CartMovies userDataObj={userDataObj} id={id} purchaseAmount={purchaseAmount} realPrice={realPrice} title={title} setShowButton={setShowButton} showButton={showButton} guestUserObj={guestUserObj}/></span>
                     </div>
               {/* </div> */}
               </div>
               <div className="movieInfoContainer"> 
               {/* <NavLink style={{color: 'black'}} to={`/movies/${linkTitle}`}>{title}  ({year})</NavLink> */}
-              <p class='movie-titles'>{title}  ({year})</p>
+              <p className='movie-titles'>{title}  ({year})</p>
               <p>${movie.price}.99</p>
               {/* <div className={`${className} movieInfo`}>{genre}  
               <br></br> 

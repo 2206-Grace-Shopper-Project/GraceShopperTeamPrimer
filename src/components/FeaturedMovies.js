@@ -39,12 +39,15 @@ const FeaturedMovies = ({allMovies, setAllMovies})=>{
         // <div style={{marginLeft:'10%' }}>
         <div className='featured-movie'>
             {/* <h3 style={{textAlign: 'center'}}> Featured Movies!</h3> */}
-            <h3 className='featured-movie-title'> Featured Movies!</h3>
 
+        {movieArrayToDisplay.length && movieArrayToDisplay ? 
+        <>
+        <h3 className='featured-movie-title'> Featured Movies!</h3>
         <div className='featured-movies'>
-        {movieArrayToDisplay.length && movieArrayToDisplay ? movieArrayToDisplay.map((movie)=>{
-            console.log(movie)
-            console.log(allMovies)
+        
+        {movieArrayToDisplay.map((movie)=>{
+            // console.log(movie)
+            // console.log(allMovies)
             let poster = movie.poster
             let linkTitle = movie.title.replace(/\s+/g, '+')
        
@@ -56,7 +59,7 @@ const FeaturedMovies = ({allMovies, setAllMovies})=>{
                 </>
             )
 
-        }) : <></>} </div>
+        })} </div></>: <></>} 
         </div>
     )
 }
