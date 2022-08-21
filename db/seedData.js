@@ -93,7 +93,7 @@ async function buildTables() {
       address varchar(255) NOT NULL,
       email varchar(255),
       date BIGINT NOT NULL,
-      price INTEGER NOT NULL
+      price DECIMAL(10,2) NOT NULL
     );
     `)
    
