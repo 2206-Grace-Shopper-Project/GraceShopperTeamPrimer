@@ -13,7 +13,7 @@ const ViewCart = ({ userDataObj }) => {
   const [myCart, setMyCart] = useState([]);
   const [addressOnOrder, setAddressOnOrder] = useState([]);
   const [userCart, setUserCart] = useState([]);
-  const [canEdit, setCanEdit] = useState(false);
+  const [canEdit, setCanEdit] = useState(null);
 
   async function myCartToView() {
     const cartObj = await getEachCartByUser(userId);
@@ -48,6 +48,13 @@ const ViewCart = ({ userDataObj }) => {
     // await createNewOrder(cartId, address, email, quantity, date, price)
     const newestCartEver = await createNewCart(userId);
     setUserCart(newestCartEver);
+
+console.log(newestCartEver, 'newest cart ever')
+
+
+
+
+
   };
   console.log(myCart, "myCart");
   
@@ -77,12 +84,12 @@ const ViewCart = ({ userDataObj }) => {
 
                         <button
                           onClick={() => {
-                            setCanEdit(true);
+                            setCanEdit(CMI);
                           }}
                         >
                           Edit Cart
                         </button>
-                        {canEdit === true && CMI === movie.cartMoviesId  ? (
+                        {canEdit === CMI? (
                           <>
                             <EditCart
                               userDataObj={userDataObj}
