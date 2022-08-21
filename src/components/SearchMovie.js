@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { specificMovieList } from "./Movies";
-
-
+import { specificMovieList } from "../api";
 
 
 const SearchMovie = ({allMovies, filteredMovieList, setFilteredMovieList})=>{

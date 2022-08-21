@@ -42,6 +42,7 @@ const Login = ({ setIsLoggedIn, setToken, token }) => {
     userData.id = loginInfo.user.id
     userData.name = loginInfo.user.name
     userData.email = loginInfo.user.email
+    userData.addresses = []
     console.log(loginInfo.user.password)
     setToken(loginInfo.token)
     storeToken(loginInfo.token)
