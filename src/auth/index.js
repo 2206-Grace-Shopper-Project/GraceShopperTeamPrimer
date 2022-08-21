@@ -8,6 +8,17 @@ export const storeToken = (token) => {
 }
 
 
+export const storeGuestUserData = (guestUser) => {
+    localStorage.setItem("guestUserData", JSON.stringify(guestUser))
+}
+
+export const grabGuestUser = () => {
+    const stringifyObj = localStorage.getItem('guestUserData')
+     return JSON.parse(stringifyObj)
+}
+
+
+
 export const grabUser = () => {
     const stringifyObj = localStorage.getItem('userData')
      return JSON.parse(stringifyObj)
