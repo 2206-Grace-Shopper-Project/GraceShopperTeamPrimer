@@ -14,6 +14,7 @@ const ViewCart = ({ userDataObj }) => {
   const [addressOnOrder, setAddressOnOrder] = useState([]);
   const [userCart, setUserCart] = useState([]);
   const [canEdit, setCanEdit] = useState(null);
+  let totalPrice = 0
 
   async function myCartToView() {
     const cartObj = await getEachCartByUser(userId);
@@ -44,7 +45,7 @@ const ViewCart = ({ userDataObj }) => {
     // let address = addressArr.toString()
 
     // // console.log( email, date, address)
-
+    console.log(totalPrice, 'totalprice')
     // await createNewOrder(cartId, address, email, quantity, date, price)
     const newestCartEver = await createNewCart(userId);
     setUserCart(newestCartEver);
@@ -75,6 +76,8 @@ console.log(newestCartEver, 'newest cart ever')
                     let CMI = movie.cartMoviesId;
                     let movieId = movie.id;
                     let quantity = movie.quantity;
+                    // setTotalPrice(totalPrice + (movie.price * quantity))
+                    totalPrice += (movie.price + .99) * quantity
                     return (
                       <div className="singleCart" key={index}>
                         <p>Movie Title: {movie.title}</p>
@@ -114,6 +117,7 @@ console.log(newestCartEver, 'newest cart ever')
                     );
                   })}{" "}
                   <div>
+                    <p>TOTAL: {totalPrice}</p>
                     <p>CONFIRM PURCHASE</p>{" "}
                     <button onClick={handleOnClick}>purchase</button>
                   </div>{" "}

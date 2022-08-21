@@ -92,7 +92,6 @@ async function buildTables() {
       "cartId" INTEGER REFERENCES cart(id),
       address varchar(255) NOT NULL,
       email varchar(255),
-      quantity INTEGER NOT NULL,
       date BIGINT NOT NULL,
       price INTEGER NOT NULL
     );
@@ -158,7 +157,7 @@ async function populateInitialData() {
     console.log(reviews)
 
     const ordersToCreate = [
-      { cartId:1, address:"1234 Albert Lane", email:"albert@hotmail.com", quantity:1 , date:1660157462019 , price:20 }
+      { cartId:1, address:"1234 Albert Lane", email:"albert@hotmail.com", date:1660157462019 , price:20 }
     ]
     const orders = await Promise.all(ordersToCreate.map(createOrder))
     console.log(orders)
