@@ -50,7 +50,7 @@ const ViewCart = ({ userDataObj }) => {
     setUserCart(newestCartEver);
   };
   console.log(myCart, "myCart");
-  console.log('is this the cmi', myCart.movies)
+  
   return (
     <>
       {" "}
@@ -82,7 +82,7 @@ const ViewCart = ({ userDataObj }) => {
                         >
                           Edit Cart
                         </button>
-                        {canEdit === true ? (
+                        {canEdit === true && CMI === movie.cartMoviesId  ? (
                           <>
                             <EditCart
                               userDataObj={userDataObj}
