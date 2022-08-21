@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 
-const AddMovie = ({token}) =>{
+const AddMovie = ({token, userDataObj}) =>{
 
     const handleSubmit = async(event) => {
         event.preventDefault()
@@ -11,6 +11,7 @@ const AddMovie = ({token}) =>{
 
     return(
         <div>
+        {userDataObj.id === 5 || userDataObj.id === 8 || userDataObj.id === 9 || userDataObj.id === 11 ?
             <div className='movieForm'>
                 <label>Add New Movie</label>
             <form onSubmit={handleSubmit} id="newMovieForm">
@@ -27,6 +28,7 @@ const AddMovie = ({token}) =>{
                 <button type="Submit" onClick={() => {}}>Add New Movie</button>
             </form>
             </div>
+            : <h1>nice try buddy</h1> }
         </div>
     )
 }

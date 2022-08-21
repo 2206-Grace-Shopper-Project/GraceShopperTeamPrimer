@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import { getAllOrders } from "../api";
 
 export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
@@ -19,7 +20,7 @@ export async function getCartById(id) {
 }
 
 
-const AllOrders = () =>{
+const AllOrders = ({userDataObj}) =>{
     const [orders, setOrders] = useState([])
     const [orderCarts, setOrderCarts] = useState([])
 
@@ -38,6 +39,8 @@ const AllOrders = () =>{
     }, [])
 
     return (
+        <div> 
+        {userDataObj.id === 5 || userDataObj.id === 8 || userDataObj.id === 9 || userDataObj.id === 11 ? 
         <div>
         <h1>All Orders</h1>
         {orders.map((order, index) => {
@@ -65,7 +68,9 @@ const AllOrders = () =>{
                     <p>Email: {order.email}</p>
                 </div>
             )
-        })}
+        })} </div>
+        : <h1>nice try buddy</h1> }
+        
     </div>
     )
 }

@@ -7,7 +7,7 @@ import {
   getEachCartByUser,
 } from "../api";
 
-const CartMovies = ({ userDataObj, purchaseAmount, id, realPrice, title }) => {
+const CartMovies = ({ userDataObj, purchaseAmount, id, realPrice, title, showButton }) => {
   
 
 
@@ -39,12 +39,20 @@ const CartMovies = ({ userDataObj, purchaseAmount, id, realPrice, title }) => {
 
   return (
     <>
-      <button
+     
+      {showButton ? <button
+        id = "add-to-cart"
+        // className="priceText textContainer topRowContainer movieContainer"
+        onClick={handleOnClick}
+      >
+       Add To Cart
+      </button> :  <button
         className="addToCart priceText textContainer topRowContainer movieContainer"
         onClick={handleOnClick}
       >
         <span class="material-symbols-outlined" id='add-cart-icon'>add_shopping_cart</span>
-      </button>
+      </button>}
+      
     </>
   );
 };

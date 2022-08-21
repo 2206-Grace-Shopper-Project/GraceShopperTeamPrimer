@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink} from "react-router-dom";
+import { useNavigate, NavLink} from "react-router-dom";
 import { createNewCart } from "../api";
 import CartMovies from  './CartMovies'
 import FeaturedMovies from "./FeaturedMovies";
@@ -69,7 +69,7 @@ export async function specificMovieList(searchMethod, searchFlow, limitNumber, o
     } catch (error) {}
 }
 
-const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMovieList, setAllMovies}) =>{
+const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMovieList, setAllMovies, setShowButton, showButton}) =>{
     const [cssActive, setCSSActive] = useState(null)
     const [purchaseAmount, setPurchaseAmount] = useState(0)
     const [pageNumber, setPageNumber] = useState(1)
@@ -77,6 +77,8 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
     const [searchFlow, setSearchFlow] = useState('asc')
     const [limitNumber, setLimitNumber] = useState(50)
     const [offsetNumber, setOffsetNumber] = useState(0)
+
+    let navigate = useNavigate()
 
     const getCurrentPageMovies = async (passedInPage)=>{
         const offsetNumber = (passedInPage - 1) * 50
@@ -103,6 +105,7 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
     }
     useEffect(()=>{
         getCurrentPageMovies(pageNumber)
+        setShowButton(false)
     },[searchMethod, searchFlow])
 
     return(
@@ -161,13 +164,13 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
                             event.target.value = 1
                         }}} ></input> */}
                    
-                        <span><CartMovies userDataObj={userDataObj} id={id} purchaseAmount={purchaseAmount} realPrice={realPrice} title={title}/></span>
+                        <span><CartMovies userDataObj={userDataObj} id={id} purchaseAmount={purchaseAmount} realPrice={realPrice} title={title} setShowButton={setShowButton} showButton={showButton}/></span>
                     </div>
               {/* </div> */}
               </div>
               <div className="movieInfoContainer"> 
               {/* <NavLink style={{color: 'black'}} to={`/movies/${linkTitle}`}>{title}  ({year})</NavLink> */}
-              <p>{title}  ({year})</p>
+              <p class='movie-titles'>{title}  ({year})</p>
               <p>${movie.price}.99</p>
               {/* <div className={`${className} movieInfo`}>{genre}  
               <br></br> 
@@ -189,7 +192,11 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
                 console.log(cssActive)}}>
                     { cssActive === movie.id ? '↑ See less' : '↓ See more' }</a>
                 </p> */}
-                <NavLink to={`/movies/${linkTitle}`}>get more info</NavLink> 
+                <button id='get-info-button' onClick={()=>{
+                  setShowButton(true)
+                  navigate(`/movies/${linkTitle}`)}}>
+                get more info</button>
+                {/* (<NavLink id='get-info-button' to={`/movies/${linkTitle}`}></NavLink>) */}
               </div>
               
             </div>

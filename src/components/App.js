@@ -13,6 +13,7 @@ const App = () => {
   const [allMovies, setAllMovies] = useState([])
   const [userDataObj, setUserDataObj] = useState(grabUser())
   const [filteredMovieList, setFilteredMovieList] = useState([])
+  const [showButton, setShowButton] = useState(false)
 
   const fetchMovies = async ()=>{
     const movieList = await getAllMovies()
@@ -39,9 +40,9 @@ useEffect(()=>{
     <>
     <Routes>
       <Route exact path='/' element={<Header setToken={setToken} token={token} userDataObj={userDataObj}/>}>
-      <Route index element={<Movies setToken={setToken} token={token} allMovies={allMovies} userDataObj={userDataObj} filteredMovieList={filteredMovieList} setFilteredMovieList={setFilteredMovieList} setAllMovies={setAllMovies}/>} />
+      <Route index element={<Movies setToken={setToken} token={token} allMovies={allMovies} userDataObj={userDataObj} filteredMovieList={filteredMovieList} setFilteredMovieList={setFilteredMovieList} setAllMovies={setAllMovies} showButton={showButton} setShowButton={setShowButton}/>} />
 
-      <Route path="/movies/:movieTitle" element={ <MoviePage userDataObj={userDataObj} token={token} allMovies={allMovies}/> } />
+      <Route path="/movies/:movieTitle" element={ <MoviePage userDataObj={userDataObj} token={token} allMovies={allMovies} showButton={showButton} setShowButton={setShowButton}/> } />
       <Route path='/orders' element={<Orders setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
 
       <Route path='/users' element={<UserForm setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
