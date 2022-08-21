@@ -28,7 +28,6 @@ const RemoveMovie = ({ userDataObj, CMI, myCart, setMyCart }) => {
     }
   }
 
-  useEffect(() => {}, [movies]);
 
   return (
     <>
