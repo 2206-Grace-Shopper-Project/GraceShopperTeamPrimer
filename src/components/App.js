@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {  Routes, Route } from 'react-router-dom';
 import { getAllMovies, specificMovieList } from '../api';
-import { grabToken, grabUser } from '../auth';
+import { grabGuestUser, grabToken, grabUser } from '../auth';
 import {Orders, UserForm, Movies, Carts, Header, Register, Login, AddMovie, MyReviews, WrongPage, MoviePage, AllOrders, AllUsers} from './'
 
 
