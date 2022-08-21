@@ -4,9 +4,9 @@ const {createOrder, getOrdersByUserId, getAllOrders} = require('../db/models/ord
 
 // POST create orders
 router.post('/', async (req, res, next) => {
-    const { cartId, address, email, quantity, date, price } = req.body
+    const { cartId, address, email, date, price } = req.body
     try {
-        const order = await createOrder({ cartId, address, email, quantity, date, price })
+        const order = await createOrder({ cartId, address, email, date, price })
        
         res.send(order)
     } catch (error) {
