@@ -385,8 +385,8 @@ export const removeMovieFromACart = async (id) => {
 
 // ORDERS FUNCTIONS
 
-export async function createNewOrder(cartId, address, email, quantity, date, price){
-  console.log( cartId, address, email, quantity, date, price )
+export async function createNewOrder(cartId, address, email, date, price){
+  console.log( cartId, address, email, date, price )
 
   try {
       const response = await fetch(`${BASE}/orders`, {
@@ -398,7 +398,6 @@ export async function createNewOrder(cartId, address, email, quantity, date, pri
               cartId, 
               address, 
               email, 
-              quantity, 
               date, 
               price
           }),

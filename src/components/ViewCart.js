@@ -4,6 +4,7 @@ import {
   getEachCartByUser,
   getMyAddresses,
   hideCart,
+  createNewOrder
 } from "../api";
 import EditCart from "./EditCart";
 import RemoveMovie from "./RemoveMovie";
@@ -34,19 +35,21 @@ const ViewCart = ({ userDataObj }) => {
     event.preventDefault();
     const cartId = myCart.id;
     await hideCart(cartId);
-    // console.log(event, 'EVENT')
+    console.log(event, 'EVENT')
 
-    // let userId = userDataObj.id
-    // let email = userDataObj.email
-    // let date = new Date().getTime()
-    // let addressArr = addressOnOrder.address.map((address)=>{
-    //     return address.address
-    // })
-    // let address = addressArr.toString()
+    let userId = userDataObj.id
+    let email = userDataObj.email
+    let date = new Date().getTime()
+    let addressArr = addressOnOrder.address.map((address)=>{
+        return address.address
+    })
+    let address = addressArr.toString()
+    let price = totalPrice
 
-    // // console.log( email, date, address)
-    console.log(totalPrice, 'totalprice')
-    // await createNewOrder(cartId, address, email, quantity, date, price)
+    console.log( email, date, address, price)
+    
+
+    await createNewOrder(cartId, address, email, date, price)
     const newestCartEver = await createNewCart(userId);
     setUserCart(newestCartEver);
 
