@@ -50,6 +50,7 @@ const ViewCart = ({ userDataObj }) => {
     setUserCart(newestCartEver);
   };
   console.log(myCart, "myCart");
+  console.log('is this the cmi', myCart.movies)
   return (
     <>
       {" "}
@@ -71,7 +72,6 @@ const ViewCart = ({ userDataObj }) => {
                       <div className="singleCart" key={index}>
                         <p>Movie Title: {movie.title}</p>
                         <img className="" src={movie.poster} />
-                        <p>Rating: {movie.rated}</p>
                         <p>Qty: {quantity}</p>
                         <p>${movie.price}.99 Each</p>
 
@@ -90,6 +90,8 @@ const ViewCart = ({ userDataObj }) => {
                               movieId={movieId}
                               quantity={quantity}
                               setCanEdit={setCanEdit}
+                              myCart={myCart}
+                              setMyCart={setMyCart}
                             />
                             <RemoveMovie
                               myCart={myCart}
