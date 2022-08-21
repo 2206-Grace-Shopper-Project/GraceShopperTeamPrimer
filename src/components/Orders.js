@@ -4,7 +4,7 @@ import { getUserOrders } from "../api";
 
 export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
 export async function getCartWithMovieById(id){
-    console.log(id)
+    console.log(id, 'line 7')
     try {
         const response = await fetch (`${BASE}/cart_movies/${id}`, {
             headers: {
@@ -30,22 +30,30 @@ const Orders = ({userDataObj}) =>{
         const userOrders = await getUserOrders(userId)
         setOrder(userOrders)
 
-        let idArr = orders.map((order) => {
-            return order.cartId
-        })
+        // console.log(orders, 'line 33')
 
-        let id = Number(idArr.toString())
-        const cart = await getCartWithMovieById(id)
+        // let idArr = orders.map((order) => {
+        //     return order.cartId
+        // })
 
-        console.log(cart, 'cart in orders')
-        setOrderCarts(cart)
+        // let id = Number(idArr.toString())
+        // console.log(id, 'line 38')
+        // const cart = await getCartWithMovieById(id)
+
+        // console.log(cart, 'cart in orders')
+        // setOrderCarts(cart)
         // console.log(orderCarts)
     }
-    console.log(orderCarts, 'orderCarts')
-    console.log(orders, 'orders')
+    // console.log(orderCarts, 'orderCarts')
+    console.log(orders, 'orders on line 48')
+
+    const getMoviesOnOrders = async () => {
+        console.log(orders, 'orders line 51')
+    }
 
     useEffect(() => {
         getUserOrderInfo()
+        getMoviesOnOrders()
     }, [])
     
     return(
@@ -56,12 +64,12 @@ const Orders = ({userDataObj}) =>{
                 let dateObj = new Date(orderDate)
                 let finalDateFormat = dateObj.toLocaleString()
                
-                console.log(order, 'inside orders.map')
+                // console.log(order, 'inside orders.map')
             
                 return (
                 <div id='orders' key={index}>
                     {orderCarts.map((element)  => {
-                        console.log(element, "line 64")
+                        // console.log(element, "line 64")
                         // return (
                         // <div key={idx}>
                         //     <p>Movies Purchased:{item.movieId}</p>
