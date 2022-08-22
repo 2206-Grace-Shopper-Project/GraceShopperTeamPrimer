@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams, NavLink, useNavigate } from "react-router-dom";
+import AddReview from "./AddReview";
 import CartMovies from "./CartMovies";
 import ReviewsByMovie from './ReviewsByMovie'
 
-const MoviePage = ({userDataObj, allMovies, setShowButton, showButton}) =>{
+
+const MoviePage = ({userDataObj, allMovies, setShowButton, showButton, token}) =>{
     const [movieObj, setMovieObj] = useState({})
     const [purchaseAmount, setPurchaseAmount] = useState(0)
+    const [isShown, setIsShown] = useState(false)
 
 
     const movieTitle = useParams().movieTitle.replace(/\+/g," ")
@@ -70,6 +73,7 @@ const MoviePage = ({userDataObj, allMovies, setShowButton, showButton}) =>{
               </div>
               
             </div>
+            <AddReview userDataObj={userDataObj} setIsShown={setIsShown} token={token} movieId={movieObj.id}/>
             <ReviewsByMovie movieId={movieObj.id}/>
         </>
     )
