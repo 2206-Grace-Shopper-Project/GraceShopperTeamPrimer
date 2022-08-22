@@ -465,7 +465,7 @@ export async function createReview(token, movieId, userId, review) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
       },
       body: JSON.stringify({
         movieId,
@@ -481,13 +481,16 @@ export async function createReview(token, movieId, userId, review) {
 }
 
 export async function getMovieReviews(movieId) {
+  console.log(movieId, "uma thurman")
   try {
     const response = await fetch(`${BASE}/reviews/movie/${movieId}`, {
       headers: {
         "Content-Type": "application/json",
       },
     });
+    console.log(response, "bruce willis")
     const result = await response.json();
+    console.log(result, "ving rhames")
     return result;
   } catch (error) {
     console.error;

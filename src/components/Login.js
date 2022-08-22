@@ -1,34 +1,11 @@
 import React, { useState } from "react";
 import { storeToken, storeUserData } from "../auth";
-// import { loginUser } from "../api";
+import { loginUser } from "../api";
 
 const Login = ({ setIsLoggedIn, setToken, token }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // STUFF THAT WILL PROBABLY GO AWAY AFTER THE MERGE
-  const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
-
-  async function loginUser(email, password) {
-    try {
-      const response = await fetch(`${BASE}/users/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password
-        }),
-      });
-      const result = await response.json();
-      return result;
-    } catch (error) {
-      console.error;
-    }
-  }
-
-  // <<<<<<<
 
   const handleSubmit = async (event) => {
     event.preventDefault();
