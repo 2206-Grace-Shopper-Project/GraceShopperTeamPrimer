@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getMovieReviews } from "../api";
 
-const ReviewsByMovie = ({ movieId }) => {
-  const [movieReviews, setMovieReviews] = useState([]);
+const ReviewsByMovie = ({ movieId, setMovieReviews, movieReviews }) => {
   const [isShown, setIsShown] = useState(false);
 
   const reviewArray = async () => {
