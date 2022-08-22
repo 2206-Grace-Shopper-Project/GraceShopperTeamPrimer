@@ -1,32 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { getMovieReviews } from "../api";
 
-// API Index
-const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
-
-async function getMovieReviews(movieId) {
-  try {
-    const response = await fetch(`${BASE}/reviews/movie/${movieId}`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const result = await response.json();
-    return result;
-  } catch (error) {
-    console.error;
-  }
-}
-
-// End of AP Index
-
-const ReviewsByMovie = ({movieId}) => {
-  const [movieReviews, setMovieReviews] = useState([]);
+const ReviewsByMovie = ({ movieId, setMovieReviews, movieReviews }) => {
   const [isShown, setIsShown] = useState(false);
 
   const reviewArray = async () => {
-    const movieSpecificReview = await getMovieReviews(movieId)
+    const movieSpecificReview = await getMovieReviews(movieId);
     setMovieReviews(movieSpecificReview);
   };
+  console.log(movieReviews, "harvey kietel")
 
   useEffect(() => {
     reviewArray();
@@ -39,7 +21,7 @@ const ReviewsByMovie = ({movieId}) => {
           return (
             <div key={index}>
               <div>
-                <b>User:</b> 
+                <b>User:</b>
                 {review.name}
               </div>
               <div>

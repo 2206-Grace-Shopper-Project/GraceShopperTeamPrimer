@@ -22,6 +22,8 @@ export { default as AllUsers} from './AllUsers'
 export {default as Logout} from './Logout'
 export {default as AddAddress} from './AddAddress'
 export {default as UpdateName} from './UpdateName'
+export {default as Loading} from './Loading'
+
 
 
 

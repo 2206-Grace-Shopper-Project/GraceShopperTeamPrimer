@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {  Routes, Route } from 'react-router-dom';
 import { getAllMovies, specificMovieList } from '../api';
 import { grabGuestUser, grabToken, grabUser } from '../auth';
-import {Orders, UserForm, Movies, Carts, Header, Register, Login, AddMovie, MyReviews, WrongPage, MoviePage, AllOrders, AllUsers} from './'
+import {Orders, UserForm, Movies, Carts, Header, Register, Login, AddMovie, MyReviews, WrongPage, MoviePage, AllOrders, AllUsers, Loading} from './'
 
 
 
@@ -14,6 +14,8 @@ const App = () => {
   const [filteredMovieList, setFilteredMovieList] = useState([])
   const [showButton, setShowButton] = useState(false)
   const [guestUserObj, SetGuestUserObj] = useState(grabGuestUser())
+  const [isLoading, setIsLoading] = useState(false)
+ 
 
   const fetchMovies = async ()=>{
     const movieList = await getAllMovies()
@@ -42,7 +44,7 @@ useEffect(()=>{
       <Route exact path='/' element={<Header setToken={setToken} token={token} userDataObj={userDataObj}/>}>
       <Route index element={<Movies setToken={setToken} token={token} allMovies={allMovies} userDataObj={userDataObj} filteredMovieList={filteredMovieList} setFilteredMovieList={setFilteredMovieList} setAllMovies={setAllMovies} showButton={showButton} setShowButton={setShowButton} guestUserObj={guestUserObj}/>} />
 
-      <Route path="/movies/:movieTitle" element={ <MoviePage userDataObj={userDataObj} token={token} allMovies={allMovies} showButton={showButton} setShowButton={setShowButton} /> } />
+      <Route path="/movies/:movieTitle" element={ !allMovies?.length ? <Loading /> : <MoviePage userDataObj={userDataObj} token={token} allMovies={allMovies} showButton={showButton} setShowButton={setShowButton} setIsLoading={setIsLoading}/> } />
       <Route path='/orders' element={<Orders setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
 
       <Route path='/users' element={<UserForm setToken={setToken} token={token} userDataObj={userDataObj}/>}/>

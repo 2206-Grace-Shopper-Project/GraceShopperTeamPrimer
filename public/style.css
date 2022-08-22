@@ -388,7 +388,13 @@ a.pagination.active{
   background-color: #282B30;
   color: white;
 }
-
+.cancelSearchButton{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 15%;
+  margin: 0% 45%;
+}
 /* a.pagination{
   
 } */
@@ -396,7 +402,9 @@ a.pagination.active{
 .movieFeature{
   height: 25px;
 }
-
+#noMovies{
+  font-weight: bold;
+}
 .singleCart{
   border: solid black;
 }
@@ -528,4 +536,34 @@ a.pagination.active{
 
 #orders {
   border: 2px solid black;
+}
+
+
+#loading {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  backdrop-filter: blur(3px);
+  background: rgba(0, 0, 0, 0.4);
+  
+  font-family: 'Roboto', sans-serif;
+  font-size: 2rem;
+  text-align: center;
+}
+
+#loading .message {
+  min-width: 480px;
+  padding: 3rem;
+
+  box-shadow: 0 2px 8px black;
+  background: white;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
