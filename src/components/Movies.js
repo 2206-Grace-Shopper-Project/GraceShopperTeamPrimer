@@ -9,7 +9,7 @@ import SearchMovie from "./SearchMovie";
 
 const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMovieList, setAllMovies, setShowButton, showButton, guestUserObj}) =>{
     const [cssActive, setCSSActive] = useState(null)
-    const [purchaseAmount, setPurchaseAmount] = useState(0)
+    const [purchaseAmount, setPurchaseAmount] = useState(1)
     const [pageNumber, setPageNumber] = useState(1)
     const [searchMethod, setSearchMethod] = useState('id')
     const [searchFlow, setSearchFlow] = useState('asc')
