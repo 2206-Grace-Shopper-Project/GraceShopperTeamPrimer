@@ -15,6 +15,7 @@ const CartMovies = ({
   title,
   showButton,
   guestUserObj,
+  setGuestUserObj
 }) => {
   let userId = null;
   // console.log(guestUserObj,'GUO')
@@ -59,6 +60,8 @@ need to keep log in info in local storage and stop it from overiding evreytime y
       guestUser.name = guestUserInfo.user.name;
       storeGuestUserData(guestUser);
       console.log(guestUserObj, "why did this break");
+      console.log(guestUser,'aftertheproblem')
+      setGuestUserObj(guestUser)
     }
 
     let userId = guestUserObj.id;
