@@ -9,10 +9,10 @@ const FilterMovies = ({allMovies, filteredMovieList, setFilteredMovieList, pageN
 
 
 
-    return(
+    // return(
 
-        // <aside className="test"><Link to='#' className="anchor" onClick={()=>{console.log('work')}}> Filter+↓</Link></aside>
-    )
+    //     // <aside className="test"><Link to='#' className="anchor" onClick={()=>{console.log('work')}}> Filter+↓</Link></aside>
+    // )
 }
 
 

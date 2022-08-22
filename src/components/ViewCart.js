@@ -36,7 +36,7 @@ const ViewCart = ({ userDataObj }) => {
     myCartToView();
   }, []);
 
-  const handleOnClick = async (event) => {
+  const handleOnSubmit = async (event) => {
     event.preventDefault();
     const cartId = myCart.id;
     await hideCart(cartId);
@@ -119,7 +119,8 @@ const ViewCart = ({ userDataObj }) => {
                     <p>TOTAL: {Math.round(totalPrice * 100) / 100}</p>
                     <p>CONFIRM PURCHASE</p>{" "}
                     <span>
-                      <form>
+                      <form onSubmit={handleOnSubmit}>
+                        {addressOnOrder?.length ? 
                         <select
                           name="address"
                           onChange={(event) => {
@@ -132,7 +133,9 @@ const ViewCart = ({ userDataObj }) => {
                             );
                           })}
                         </select>
-                        <button type="submit" onClick={handleOnClick}>
+                        :  
+                        <input name="address" type="text" placeholder="Enter Address"/>}
+                        <button type="submit">
                           purchase
                         </button>
                       </form>
