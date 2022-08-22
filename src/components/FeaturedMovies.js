@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllMovies } from "../api";
 
@@ -43,7 +43,7 @@ const FeaturedMovies = ({allMovies, setAllMovies})=>{
         {movieArrayToDisplay.length && movieArrayToDisplay ? 
         <>
         <h3 className='featured-movie-title'> Featured Movies!</h3>
-        <div className='featured-movies'>
+        <div key='moviefeature' className='featured-movies'>
         
         {movieArrayToDisplay.map((movie, index)=>{
             // console.log(movie)
@@ -52,11 +52,11 @@ const FeaturedMovies = ({allMovies, setAllMovies})=>{
             let linkTitle = movie.title.replace(/\s+/g, '+')
        
             return(
-                <>
+                <Fragment key={`${index}movie`}>
                 
-                <Link key={`${index}movie`} to={`/movies/${linkTitle}`}><img className="movieFeature" style={{height: '300px', marginLeft:'auto' }} src={poster}/></Link>
+                <Link to={`/movies/${linkTitle}`}><img className="movieFeature" style={{height: '300px', marginLeft:'auto' }} src={poster}/></Link>
              
-                </>
+                </Fragment>
             )
 
         })} </div></>: <></>} 

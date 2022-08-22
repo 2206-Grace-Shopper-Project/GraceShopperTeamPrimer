@@ -4,10 +4,12 @@ import { createMovie, createNewCart, deleteMovieAPI, editMovieAPI, specificMovie
 import CartMovies from  './CartMovies'
 import FeaturedMovies from "./FeaturedMovies";
 import FilterMovies from "./FilterMovies";
+import Loading from "./Loading";
 import SearchMovie from "./SearchMovie";
 
 
-const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMovieList, setAllMovies, setShowButton, showButton, guestUserObj}) =>{
+
+const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMovieList, setAllMovies, setShowButton, showButton, guestUserObj, setIsLoading}) =>{
     const [cssActive, setCSSActive] = useState(null)
     const [purchaseAmount, setPurchaseAmount] = useState(0)
     const [pageNumber, setPageNumber] = useState(1)
@@ -15,7 +17,7 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
     const [searchFlow, setSearchFlow] = useState('asc')
     const [limitNumber, setLimitNumber] = useState(50)
     const [offsetNumber, setOffsetNumber] = useState(0)
-    const [pageHighlighter, setPageHighlighter] = useState(0)
+    const [showMoviePagination, setShowMoviePagination] = useState(true)
 
     let navigate = useNavigate()
 
@@ -54,11 +56,11 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
     }, [pageNumber])
     return(
         <>
-        <FeaturedMovies allMovies={allMovies} setAllMovies={setAllMovies}/>
+        {allMovies?.length ? <FeaturedMovies allMovies={allMovies} setAllMovies={setAllMovies}/> : <Loading/>}
 
-        <SearchMovie allMovies={allMovies} filteredMovieList={filteredMovieList} setFilteredMovieList={setFilteredMovieList} pageNumber={pageNumber} setSearchMethod={setSearchMethod} setSearchFlow={setSearchFlow}/>
+        <SearchMovie allMovies={allMovies} filteredMovieList={filteredMovieList} setFilteredMovieList={setFilteredMovieList} pageNumber={pageNumber} setSearchMethod={setSearchMethod} setSearchFlow={setSearchFlow} setPageNumber={setPageNumber} setShowMoviePagination={setShowMoviePagination}/>
         <FilterMovies allMovies={allMovies} filteredMovieList={filteredMovieList} setFilteredMovieList={setFilteredMovieList} pageNumber={pageNumber}/>
-        <div className="paginationContainer">
+        {showMoviePagination ?  <div className="paginationContainer">
                 {pageNumber !== 1 ? <button id="paginationPrev" className="paginationButton" value={pageNumber - 1} onClick={handlePaginationPrev}>Prev</button> : <></>}
                  <a href="#" className={pageNumber === 1 ? "pagination activePage" : "pagination" } id={1} onClick={(handlePageClick)}>1</a>
                  <a href="#" className={pageNumber === 2 ? "pagination activePage" : "pagination" } id={2} onClick={handlePageClick}>2</a>
@@ -69,7 +71,9 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
 
                  {pageNumber !== 6 ? <button id="paginationNext" className="paginationButton" value={pageNumber + 1} onClick={handlePaginationNext}>Next</button>: <></>}
 
-            </div>
+            </div> : <button className="cancelSearchButton" onClick={()=>{
+                setShowMoviePagination(true)
+                getCurrentPageMovies(1)}}>Return to All Movies</button>}
         <div id="movieComponent">
 
         {filteredMovieList && filteredMovieList.length ? filteredMovieList.map((movie, index)=>{
@@ -102,14 +106,15 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
               <p>${movie.price}.99</p>
                 <button id='get-info-button' onClick={()=>{
                   setShowButton(true)
-                  navigate(`/movies/${linkTitle}`)}}>
+                  navigate(`/movies/${linkTitle}`)
+                  }}>
                 get more info</button>
               </div>
               
             </div>
             )
-        }) : <>Something Broke</>}
-            <div className="paginationContainer">
+        }) : <h1 id="noMovies">No Movies Found</h1>}
+            { showMoviePagination ?  <div className="paginationContainer">
                 {pageNumber !== 1 ? <button id="paginationPrev" className="paginationButton" value={pageNumber - 1} onClick={handlePaginationPrev}>Prev</button> : <></>}
                  <a href="#" className={pageNumber === 1 ? "pagination activePage" : "pagination" } id={1} onClick={(handlePageClick)}>1</a>
                  <a href="#" className={pageNumber === 2 ? "pagination activePage" : "pagination" } id={2} onClick={handlePageClick}>2</a>
@@ -120,7 +125,7 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
 
                  {pageNumber !== 6 ? <button id="paginationNext" className="paginationButton" value={pageNumber + 1} onClick={handlePaginationNext}>Next</button>: <></>}
 
-            </div>
+            </div> : <button className="cancelSearchButton" onClick={()=>{setShowMoviePagination(true)}}>Return to All Movies</button>}
         </div>
         </>
     )

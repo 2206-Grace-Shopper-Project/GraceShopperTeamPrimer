@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { specificMovieList } from "../api";
 
 
-const SearchMovie = ({allMovies, filteredMovieList, setFilteredMovieList, pageNumber, setSearchFlow, setSearchMethod})=>{
+const SearchMovie = ({allMovies, filteredMovieList, setFilteredMovieList, pageNumber, setSearchFlow, setSearchMethod, setPageNumber, setShowMoviePagination})=>{
     const [filterParams, setFilterParams] = useState(0)
     const [searchTerm, setSearchTerm] = useState('')
 
@@ -56,8 +56,7 @@ const SearchMovie = ({allMovies, filteredMovieList, setFilteredMovieList, pageNu
         event.preventDefault()
         setSearchTerm(event.target.movieSearchBar.value)
 
-    function postMatches(movie, searchTerm) {
-        console.log(searchTerm, 'its prolly null')
+    function movieMatches(movie, searchTerm) {
       if (
         movie.plot.toLowerCase().includes(searchTerm.toLowerCase()) ||
         movie.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -65,14 +64,14 @@ const SearchMovie = ({allMovies, filteredMovieList, setFilteredMovieList, pageNu
         movie.genre.toLowerCase().includes(searchTerm.toLowerCase()) ||
         movie.directors.toLowerCase().includes(searchTerm.toLowerCase())
       ) {
-        console.log('something worked')
         return true;
       }
     }
     const filteredMovies = allMovies.filter((movie) =>
-      postMatches(movie, event.target.movieSearchBar.value)
+      movieMatches(movie, event.target.movieSearchBar.value)
     );
     setFilteredMovieList(filteredMovies);
+    setShowMoviePagination(false)
         event.target.reset()
         }
     

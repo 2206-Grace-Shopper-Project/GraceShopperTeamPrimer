@@ -1,7 +1,7 @@
 import React from "react";
 import { createReview } from "../api";
 
-const AddReview = ({ userDataObj, setIsShown, token, movieId }) => {
+const AddReview = ({ userDataObj, setIsShown, token, movieId, setMovieReviews, movieReviews }) => {
  
 
   const handleSubmit = async (event) => {
@@ -10,6 +10,8 @@ const AddReview = ({ userDataObj, setIsShown, token, movieId }) => {
     const review = event.target.review.value;
     setIsShown(false);
     const result = await createReview(token, movieId, userId, review);
+    result.name = userDataObj.name
+    setMovieReviews([...movieReviews, result])
     console.log(result);
 
     // window.location.reload(true);
