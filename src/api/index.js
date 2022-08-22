@@ -286,6 +286,7 @@ export const getEachCartByUser = async (userId) => {
       },
     });
     const result = await response.json();
+    console.log(result, '!!!!!')
     const cart = result[0]
     console.log(cart, "this is rsult from api");
     return cart;

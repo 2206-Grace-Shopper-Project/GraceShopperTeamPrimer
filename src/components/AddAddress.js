@@ -36,14 +36,6 @@ const AddAddress =({token, userDataObj, setShowAddAddress})=>{
         event.preventDefault();
         const userId = userDataObj.id
         const address = event.target.address.value;
-        if(!userDataObj?.addresses){
-            userDataObj.addresses = []
-            console.log('didnt have an address key!')
-        }
-            userDataObj.addresses.push(address)
-            storeUserData(userDataObj)
-            console.log(userDataObj, 'what I have now')
-            console.log(grabUser(), 'what has been stored locally')
         
 
         await NewAddress(token, userId, address);

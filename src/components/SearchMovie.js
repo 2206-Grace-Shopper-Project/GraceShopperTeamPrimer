@@ -2,17 +2,77 @@ import React, { useState } from "react";
 import { specificMovieList } from "../api";
 
 
-const SearchMovie = ({allMovies, filteredMovieList, setFilteredMovieList})=>{
+const SearchMovie = ({allMovies, filteredMovieList, setFilteredMovieList, pageNumber, setSearchFlow, setSearchMethod})=>{
     const [filterParams, setFilterParams] = useState(0)
+    const [searchTerm, setSearchTerm] = useState('')
 
-    const handleOnChange = (event)=>{
-       console.log(event.target.value)
+    const handleOnChange = async (event)=>{
+        let searchMethod = null
+        let searchFlow = null
+        let limitNumber = 50
+        let offsetNumber = (pageNumber - 1) * 50
+
+        if(Number(event.target.value) === 1){
+            setSearchMethod('id') 
+            setSearchFlow('asc')
+            searchMethod = 'id'
+            searchFlow = null
+        }
+        if(Number(event.target.value) === 2){
+            setSearchMethod('title') 
+             setSearchFlow('asc')
+             searchMethod = 'title'
+            searchFlow = 'asc'
+       }
+       if(Number(event.target.value) === 3){
+            setSearchMethod('title') 
+            setSearchFlow('desc')
+            searchMethod = 'title'
+            searchFlow = 'desc'
+        }
+        if(Number(event.target.value) === 4){
+            setSearchMethod('price') 
+            setSearchFlow('desc')
+            searchMethod = 'price'
+            searchFlow = 'desc'
+        }
+        if(Number(event.target.value) === 5){
+            setSearchMethod('price') 
+            setSearchFlow('asc')
+            searchMethod = 'price'
+            searchFlow = 'asc'
+       }
+
+    //    console.log(event.target.value)
+    //     setFilterParams(event.target.value)
+    //     console.log(pageNumber)
+
+        const moviesToDisplay = await specificMovieList(searchMethod, searchFlow, limitNumber, offsetNumber)
+        setFilteredMovieList(moviesToDisplay)
 
     }
     
     const handleSubmit = (event) =>{
         event.preventDefault()
-        console.log(event.target)
+        setSearchTerm(event.target.movieSearchBar.value)
+
+    function postMatches(movie, searchTerm) {
+        console.log(searchTerm, 'its prolly null')
+      if (
+        movie.plot.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        movie.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        movie.actors.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        movie.genre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        movie.directors.toLowerCase().includes(searchTerm.toLowerCase())
+      ) {
+        console.log('something worked')
+        return true;
+      }
+    }
+    const filteredMovies = allMovies.filter((movie) =>
+      postMatches(movie, event.target.movieSearchBar.value)
+    );
+    setFilteredMovieList(filteredMovies);
         event.target.reset()
         }
     

@@ -375,6 +375,12 @@ a.pagination.active{
   color: red;
 }
 
+.activePage{
+  font-weight: bold;
+  text-shadow: 1px 1px 2px pink;
+  font-size: 22px;
+}
+
 .paginationButton {
   border: none;
   border-radius: 5px;
@@ -396,14 +402,16 @@ a.pagination.active{
 }
 
 .dropdown-content {
-  display: none;
+  visibility: hidden;
   border: 2px solid black;
+  margin-top: 10px;
 }
 
 .show-dropdown,
 .dropdowndiv {
-  display:flex;
-  flex-direction: column;
+  /* display:flex; */
+  visibility: visible;
+  margin-top: 10px;
 }
 
 .user-name{
@@ -412,6 +420,7 @@ a.pagination.active{
 
 #user-name:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 
@@ -493,7 +502,11 @@ a.pagination.active{
   font-size: 15px;
   padding: 5px;
 }
-
+.paginationButton:hover{
+  text-decoration: underline;
+  cursor: pointer;
+  background-color: #2e322d9e;
+}
 .singleTextContainer {
   display: flex;
 }

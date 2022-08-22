@@ -45,7 +45,7 @@ const FeaturedMovies = ({allMovies, setAllMovies})=>{
         <h3 className='featured-movie-title'> Featured Movies!</h3>
         <div className='featured-movies'>
         
-        {movieArrayToDisplay.map((movie)=>{
+        {movieArrayToDisplay.map((movie, index)=>{
             // console.log(movie)
             // console.log(allMovies)
             let poster = movie.poster
@@ -54,7 +54,7 @@ const FeaturedMovies = ({allMovies, setAllMovies})=>{
             return(
                 <>
                 
-                <Link to={`/movies/${linkTitle}`}><img className="movieFeature" style={{height: '300px', marginLeft:'auto' }} src={poster}/></Link>
+                <Link key={`${index}movie`} to={`/movies/${linkTitle}`}><img className="movieFeature" style={{height: '300px', marginLeft:'auto' }} src={poster}/></Link>
              
                 </>
             )
