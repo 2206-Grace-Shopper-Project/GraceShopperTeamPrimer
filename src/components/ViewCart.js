@@ -9,6 +9,8 @@ import {
 } from "../api";
 import EditCart from "./EditCart";
 import RemoveMovie from "./RemoveMovie";
+import { clearGuestUser } from "../auth";
+
 
 const ViewCart = ({ userDataObj, guestUserObj, currentUser}) => {
   
@@ -50,22 +52,45 @@ let userId = userDataObj.id
     const cartId = myCart.id;
     await hideCart(cartId);
     console.log(orderAddress, "EVENT");
-    // if(userDataObj?.id){
-
-    // }
-      let userId = userDataObj.id;
+    if(userDataObj){
+  let userId = userDataObj.id;
       let email = userDataObj.email;
     let date = new Date().getTime();
     let address = orderAddress;
     let price = Math.round(totalPrice * 100) / 100;
-    console.log(addressOnOrder[0].address);
+    // console.log(addressOnOrder[0].address);
     console.log(email, date, address, price);
 
     await createNewOrder(cartId, address, email, date, price)
     const newestCartEver = await createNewCart(userId);
     setUserCart(newestCartEver);
+    console.log(newestCartEver, 'newestcartever')
+      setMyCart(userCart)
+    console.log(myCart, 'newest cart ever')
+    window.location.assign("/");
+    alert('Order placed! A receipt has been sent to your order history!')
 
-    console.log(newestCartEver, 'newest cart ever')
+  }else{
+    let userId = guestUserObj.id;
+    let email = guestUserObj.email;
+  let date = new Date().getTime();
+  let address = orderAddress;
+  let price = Math.round(totalPrice * 100) / 100;
+  // console.log(addressOnOrder[0].address);
+  console.log(email, date, address, price);
+
+  await createNewOrder(cartId, address, email, date, price)
+  const newestCartEver = await createNewCart(userId);
+  setUserCart(newestCartEver);
+  console.log(newestCartEver, 'newestcartever')
+    setMyCart(userCart)
+  console.log(myCart, 'newest cart ever')
+    clearGuestUser();
+    window.location.assign("/");
+    alert('Order placed! Thank you for visiting please make an account for in depth order history!')
+    }
+    
+    
   };
   // console.log(myCart, "myCart");
 
