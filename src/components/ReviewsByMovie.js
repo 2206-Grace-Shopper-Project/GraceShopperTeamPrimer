@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { getMovieReviews } from "../api";
+import "./reviewsbymovie.css";
 
-const ReviewsByMovie = ({ movieId, setMovieReviews, movieReviews }) => {
+const ReviewsByMovie = ({
+  movieId,
+  setMovieReviews,
+  movieReviews,
+  movieObj,
+}) => {
   const [isShown, setIsShown] = useState(false);
 
   const reviewArray = async () => {
     const movieSpecificReview = await getMovieReviews(movieId);
     setMovieReviews(movieSpecificReview);
   };
-  console.log(movieReviews, "harvey kietel")
 
   useEffect(() => {
     reviewArray();
@@ -19,12 +24,12 @@ const ReviewsByMovie = ({ movieId, setMovieReviews, movieReviews }) => {
       ? movieReviews.map((review, index) => {
           let reviewId = review.id;
           return (
-            <div key={index}>
-              <div>
-                <b>User:</b>
+            <div className="individualReviews" key={index}>
+              <div className="userReview">
+                <b>User: </b>
                 {review.name}
               </div>
-              <div>
+              <div >
                 <b>Review: </b>
                 {review.review}
               </div>
@@ -34,8 +39,10 @@ const ReviewsByMovie = ({ movieId, setMovieReviews, movieReviews }) => {
       : null;
 
   return (
-    <div>
-      <p>Reviews By Movie Page</p>
+    <div className="reviewsByMovie">
+      <p className="componentHeader">
+        reviews of {movieObj.title}
+      </p>
       <div>{movieReviews.length > 0 ? MappedReviews : null}</div>
     </div>
   );
