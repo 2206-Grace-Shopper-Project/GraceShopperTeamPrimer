@@ -41,9 +41,11 @@ const ViewCart = ({ userDataObj }) => {
     const cartId = myCart.id;
     await hideCart(cartId);
     console.log(orderAddress, "EVENT");
+    // if(userDataObj?.id){
 
-    let userId = userDataObj.id;
-    let email = userDataObj.email;
+    // }
+      let userId = userDataObj.id;
+      let email = userDataObj.email;
     let date = new Date().getTime();
     let address = orderAddress;
     let price = Math.round(totalPrice * 100) / 100;
