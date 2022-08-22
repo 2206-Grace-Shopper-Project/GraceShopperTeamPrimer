@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createNewCart, getEachCartByUser } from "../api";
 import ViewCart from "./ViewCart";
 
-const Carts = ({ userDataObj }) => {
+const Carts = ({ userDataObj, guestUserObj}) => {
   let userId = userDataObj.id;
   const [userCart, setUserCart] = useState(null);
 
@@ -33,7 +33,7 @@ const Carts = ({ userDataObj }) => {
   return (
     <>
         <div>
-          <ViewCart userDataObj={userDataObj} />
+          <ViewCart userDataObj={userDataObj} guestUserObj={guestUserObj} />
         </div>
     </>
   )
