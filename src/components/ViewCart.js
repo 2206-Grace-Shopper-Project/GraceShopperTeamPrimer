@@ -1,3 +1,4 @@
+import e from "cors";
 import React, { useEffect, useState } from "react";
 import {
   createNewCart,
@@ -9,8 +10,8 @@ import {
 import EditCart from "./EditCart";
 import RemoveMovie from "./RemoveMovie";
 
-const ViewCart = ({ userDataObj }) => {
-  const userId = userDataObj.id;
+const ViewCart = ({ userDataObj, guestUserObj, currentUser}) => {
+  
   const [myCart, setMyCart] = useState([]);
   const [addressOnOrder, setAddressOnOrder] = useState([]);
   const [userCart, setUserCart] = useState([]);
@@ -18,22 +19,30 @@ const ViewCart = ({ userDataObj }) => {
   const [orderAddress, setOrderAddress] = useState([]);
   let totalPrice = 0;
 
-  async function myCartToView() {
+  async function myCartToView(userId) {
+    
+    console.log(userId,"whai it is")
     const cartObj = await getEachCartByUser(userId);
     console.log(cartObj, "cartOBJ");
     setMyCart(cartObj);
     console.log(myCart, "this is my cart in the function");
-    let id = userDataObj.id;
-    let addressInfo = await getMyAddresses(id);
-    console.log(addressInfo.address, "!!!!!!!!");
+    
+    let addressInfo = await getMyAddresses(userId);
+    // console.log(addressInfo.address, "!!!!!!!!");
     setAddressOnOrder(addressInfo.address);
-    if (addressInfo.address.length) {
+    if (addressInfo?.address?.length) {
       setOrderAddress(addressInfo.address[0].address);
     }
   }
 
   useEffect(() => {
-    myCartToView();
+    if(userDataObj){
+let userId = userDataObj.id
+  myCartToView(userId)}else{
+   let userId = guestUserObj.id
+    myCartToView(userId);
+  }
+    
   }, []);
 
   const handleOnSubmit = async (event) => {
@@ -58,7 +67,7 @@ const ViewCart = ({ userDataObj }) => {
 
     console.log(newestCartEver, 'newest cart ever')
   };
-  console.log(myCart, "myCart");
+  // console.log(myCart, "myCart");
 
   return (
     <>
