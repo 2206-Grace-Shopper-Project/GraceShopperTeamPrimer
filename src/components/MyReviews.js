@@ -16,7 +16,6 @@ const MyReviews = ({userDataObj, token}) => {
     useEffect(() => {
         reviewArray()
     }, [])
-    console.log (myReviews, "sam jackson")
     const MappedReviews =
         myReviews.length > 0
         ? myReviews.map((review, index) => {

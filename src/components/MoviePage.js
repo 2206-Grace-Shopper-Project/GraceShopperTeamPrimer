@@ -13,6 +13,7 @@ const MoviePage = ({userDataObj, allMovies, setShowButton, showButton, token}) =
 
     const movieTitle = useParams().movieTitle.replace(/\+/g," ")
     const getMovieData = ()=>{
+        console.log(allMovies, "phil lamar")
         allMovies.forEach(movie => {
         if(movie.title === movieTitle){
             setMovieObj(movie)
@@ -73,7 +74,10 @@ const MoviePage = ({userDataObj, allMovies, setShowButton, showButton, token}) =
               </div>
               
             </div>
-            <AddReview userDataObj={userDataObj} setIsShown={setIsShown} token={token} movieId={movieObj.id}/>
+            <div><button onClick={(event) => {setIsShown(true)}}>Review This</button></div>
+            <div>
+            {isShown? <AddReview userDataObj={userDataObj} setIsShown={setIsShown} token={token} movieId={movieObj.id}/> : null}
+            </div>
             <ReviewsByMovie movieId={movieObj.id}/>
         </>
     )
