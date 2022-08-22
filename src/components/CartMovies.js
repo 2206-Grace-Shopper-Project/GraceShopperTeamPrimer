@@ -21,8 +21,25 @@ const CartMovies = ({
   let userId = null;
 
   const handleOnClick = async (event) => {
-    event.preventDefault();
-if(purchaseAmount === 0){
+    event.preventDefault(); 
+    if (userDataObj) {
+     let userId = userDataObj.id;
+      const currentCart = await getEachCartByUser(userId);
+      if (purchaseAmount === 0) {
+        let quantity = 1;
+        const cartId = currentCart.id;
+        const movieId = id;
+        const response = await addMovieToCart(cartId, movieId, quantity);
+        console.log(response, "this is response from adding movie to cart");
+      } else {
+        let quantity = purchaseAmount;
+        const cartId = currentCart.id;
+        const movieId = id;
+        const response = await addMovieToCart(cartId, movieId, quantity);
+        console.log(response, "this is response from adding movie to cart");
+      }
+    }
+else if(purchaseAmount === 0){
   
     if (!userDataObj) {
       let name = "guest";
@@ -33,7 +50,8 @@ if(purchaseAmount === 0){
       guestUser.id = guestUserInfo.user.id;
       guestUser.name = guestUserInfo.user.name;
       storeGuestUserData(guestUser);
-let userId = guestUserObj.id
+      console.log(guestUserObj,"why did this break")
+    let userId = guestUserObj.id
 const guestOldCart = await getEachCartByUser(userId)
       if(!guestOldCart){
         const response = await createNewCart(userId)
@@ -81,24 +99,8 @@ const guestOldCart = await getEachCartByUser(userId)
     }
   }
       
-      
-    } else if (userDataObj) {
-     let userId = userDataObj.id;
-      const currentCart = await getEachCartByUser(userId);
-      if (purchaseAmount === 0) {
-        let quantity = 1;
-        const cartId = currentCart.id;
-        const movieId = id;
-        const response = await addMovieToCart(cartId, movieId, quantity);
-        console.log(response, "this is response from adding movie to cart");
-      } else {
-        let quantity = purchaseAmount;
-        const cartId = currentCart.id;
-        const movieId = id;
-        const response = await addMovieToCart(cartId, movieId, quantity);
-        console.log(response, "this is response from adding movie to cart");
-      }
-    }
+  } 
+   
 
     //search if !userDataObj
     //if true the create guest user name = guest pw=guestuser
