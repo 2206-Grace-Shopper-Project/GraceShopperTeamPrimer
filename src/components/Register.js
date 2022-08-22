@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 
-const Register = ({ setIsLoggedIn }) => {
+const Register = ({ setIsLoggedIn, setToken }) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");

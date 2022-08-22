@@ -15,8 +15,9 @@ const ViewCart = ({ userDataObj }) => {
   const [addressOnOrder, setAddressOnOrder] = useState([]);
   const [userCart, setUserCart] = useState([]);
   const [canEdit, setCanEdit] = useState(null);
+  const [orderAddress, setOrderAddress] = useState([])
   let totalPrice = 0
-
+  
   async function myCartToView() {
     const cartObj = await getEachCartByUser(userId);
     console.log(cartObj, "cartOBJ");
@@ -24,36 +25,38 @@ const ViewCart = ({ userDataObj }) => {
     console.log(myCart, "this is my cart in the function");
     let id = userDataObj.id;
     let addressInfo = await getMyAddresses(id);
-    setAddressOnOrder(addressInfo);
+    console.log(addressInfo.address, '!!!!!!!!')
+    setAddressOnOrder(addressInfo.address);
+    if(addressInfo.address.length){
+    setOrderAddress(addressInfo.address[0].address)
   }
-
+    
+  }
+  
   useEffect(() => {
     myCartToView();
   }, []);
-
+  
   const handleOnClick = async (event) => {
     event.preventDefault();
     const cartId = myCart.id;
-    await hideCart(cartId);
-    console.log(event, 'EVENT')
+    // await hideCart(cartId);
+    console.log(orderAddress, 'EVENT')
 
     let userId = userDataObj.id
     let email = userDataObj.email
     let date = new Date().getTime()
-    let addressArr = addressOnOrder.address.map((address)=>{
-        return address.address
-    })
-    let address = addressArr.toString()
+    let address = orderAddress
     let price = totalPrice
-
+    console.log(     addressOnOrder[0].address      )
     console.log( email, date, address, price)
     
 
-    await createNewOrder(cartId, address, email, date, price)
-    const newestCartEver = await createNewCart(userId);
-    setUserCart(newestCartEver);
+    // await createNewOrder(cartId, address, email, date, price)
+    // const newestCartEver = await createNewCart(userId);
+    // setUserCart(newestCartEver);
 
-console.log(newestCartEver, 'newest cart ever')
+// console.log(newestCartEver, 'newest cart ever')
 
 
 
@@ -122,7 +125,17 @@ console.log(newestCartEver, 'newest cart ever')
                   <div>
                     <p>TOTAL: {totalPrice}</p>
                     <p>CONFIRM PURCHASE</p>{" "}
-                    <button onClick={handleOnClick}>purchase</button>
+                    <span>
+              <form>
+                <select name="address" value={orderAddress} onChange={(event)=>{setOrderAddress(event.target.value)}}>
+                {addressOnOrder.map((address,index)=>{
+                     return(
+                          <option key={index} >{address.address}</option>
+                            ) 
+            })}
+            </select>
+            <button type="submit" onClick={handleOnClick}>purchase</button>
+            </form></span>
                   </div>{" "}
                 </div>
               ) : (

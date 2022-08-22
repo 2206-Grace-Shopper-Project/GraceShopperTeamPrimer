@@ -41,3 +41,18 @@ const SearchMovie = ({allMovies, filteredMovieList, setFilteredMovieList})=>{
 
 
 export default SearchMovie
+
+
+//                <form>
+//                 <select name="address">
+//                 {addressOnOrder.address.map((address)=>{
+//         return(
+//             <option>{address.address}</option>
+//              ) 
+//             })}
+//             </select>
+//             <button type="submit" onClick={handleOnClick}>purchase</button>
+//             </form>
+
+
+// let address = event.target.address.value
