@@ -53,7 +53,7 @@ router.patch("/:id", async (req, res, next) =>{
     }
 })
 
-router.get("cartId/:id", async (req, res, next) => {
+router.get("cartid/:id", async (req, res, next) => {
   try {
       const {id} = req.params
           console.log(id, 'cart id')

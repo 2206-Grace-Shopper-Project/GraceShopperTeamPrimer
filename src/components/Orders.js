@@ -6,7 +6,7 @@ export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
 export async function getCartById(id) {
     console.log(id, 'id in get cartsbyid')
     try {
-        const response = await fetch (`${BASE}/carts/${id}`, {
+        const response = await fetch (`${BASE}/carts/cartid/${id}`, {
             headers: {
                 "Content-Type": "application/json"
               }
