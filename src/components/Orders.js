@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { getUserOrders } from "../api";
-// import { grabUser } from "../auth";
+import { getUserOrders, } from "../api";
 
 export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
-export async function getCartWithMovieById(id){
-    console.log(id)
+
+export async function getCartById(id) {
+    // console.log(id, 'id in get cartsbyid')
     try {
-        const response = await fetch (`${BASE}/cart_movies/${id}`, {
+        const response = await fetch (`${BASE}/carts/cartid/${id}`, {
             headers: {
                 "Content-Type": "application/json"
               }
@@ -19,6 +19,8 @@ export async function getCartWithMovieById(id){
     }
 }
 
+
+
 const Orders = ({userDataObj}) =>{
     const [orders, setOrder] = useState([])
     const [orderCarts, setOrderCarts] = useState([])
@@ -29,23 +31,29 @@ const Orders = ({userDataObj}) =>{
             console.log(userId,"userId in getuserorderinfo")
         const userOrders = await getUserOrders(userId)
         setOrder(userOrders)
+    }
+    // console.log(orders, 'orders')
 
-        let idArr = orders.map((order) => {
+    const getCartsInOrders = async () => {
+        let cartIds = orders.map((order)=>{
             return order.cartId
         })
-
-        let id = Number(idArr.toString())
-        const cart = await getCartWithMovieById(id)
-
-        console.log(cart, 'cart in orders')
-        setOrderCarts(cart)
-        // console.log(orderCarts)
+        // console.log(cartIds, 'cartIds')
+        for (let i = 0; i < cartIds.length; i++){
+            // console.log(cartIds[i])
+            let id = cartIds[i]
+            // console.log(id, 'id')
+            let result = await getCartById(id)
+            // console.log(result, 'result')
+            // return result
+            setOrderCarts(result)
+        }
     }
-    console.log(orderCarts, 'orderCarts')
-    console.log(orders, 'orders')
+    // console.log(orderCarts, 'orderCarts')
 
     useEffect(() => {
         getUserOrderInfo()
+        getCartsInOrders()
     }, [])
     
     return(
@@ -55,21 +63,20 @@ const Orders = ({userDataObj}) =>{
                 let orderDate = Number(order.date)
                 let dateObj = new Date(orderDate)
                 let finalDateFormat = dateObj.toLocaleString()
-               
-                console.log(order, 'inside orders.map')
-            
                 return (
                 <div id='orders' key={index}>
-                    {orderCarts.map((element)  => {
-                        console.log(element, "line 64")
-                        // return (
-                        // <div key={idx}>
-                        //     <p>Movies Purchased:{item.movieId}</p>
-                        // </div>
-                        // )
+                    {orderCarts.map((order)=>{
+                        {order.movies.map((movie, idx)=>{
+                            console.log(movie.title, 'movie???')
+                            return (
+                                <div key={idx}>
+                                    <p>Purchased: {movie.title}</p>
+                                </div>
+                             )
+                        })}
                     })}
+                    {/* <p>Purchased: {movie.title}</p> */}
                     <p>Order Date: {finalDateFormat}</p>
-                    <p>Quantity:{order.quantity}</p>
                     <p>Price: ${order.price}</p>
                     <p>Sent To:{order.address}</p>
                 </div>

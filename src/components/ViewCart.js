@@ -17,7 +17,7 @@ const ViewCart = ({ userDataObj }) => {
   const [canEdit, setCanEdit] = useState(null);
   const [orderAddress, setOrderAddress] = useState([])
   let totalPrice = 0
-  
+
   async function myCartToView() {
     const cartObj = await getEachCartByUser(userId);
     console.log(cartObj, "cartOBJ");
@@ -57,8 +57,6 @@ const ViewCart = ({ userDataObj }) => {
     // setUserCart(newestCartEver);
 
 // console.log(newestCartEver, 'newest cart ever')
-
-
 
 
 
