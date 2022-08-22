@@ -40,9 +40,9 @@ useEffect(()=>{
     <>
     <Routes>
       <Route exact path='/' element={<Header setToken={setToken} token={token} userDataObj={userDataObj}/>}>
-      <Route index element={<Movies setToken={setToken} token={token} allMovies={allMovies} userDataObj={userDataObj} filteredMovieList={filteredMovieList} setFilteredMovieList={setFilteredMovieList} setAllMovies={setAllMovies} showButton={showButton} setShowButton={setShowButton}/>} />
+      <Route index element={<Movies setToken={setToken} token={token} allMovies={allMovies} userDataObj={userDataObj} filteredMovieList={filteredMovieList} setFilteredMovieList={setFilteredMovieList} setAllMovies={setAllMovies} showButton={showButton} setShowButton={setShowButton} guestUserObj={guestUserObj}/>} />
 
-      <Route path="/movies/:movieTitle" element={ <MoviePage userDataObj={userDataObj} token={token} allMovies={allMovies} showButton={showButton} setShowButton={setShowButton} guestUserObj={guestUserObj}/> } />
+      <Route path="/movies/:movieTitle" element={ <MoviePage userDataObj={userDataObj} token={token} allMovies={allMovies} showButton={showButton} setShowButton={setShowButton} /> } />
       <Route path='/orders' element={<Orders setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
 
       <Route path='/users' element={<UserForm setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
