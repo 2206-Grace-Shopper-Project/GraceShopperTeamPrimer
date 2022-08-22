@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { createNewCart, getEachCartByUser } from "../api";
-import PurchaseItems from "./PurchaseItems";
 import ViewCart from "./ViewCart";
 
 const Carts = ({ userDataObj }) => {
