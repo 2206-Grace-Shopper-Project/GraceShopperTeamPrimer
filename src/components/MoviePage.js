@@ -141,7 +141,7 @@ const MoviePage = ({
           />
         ) : null}
       </div>
-      {movieObj.id ? <ReviewsByMovie movieId={movieObj.id}  movieReviews={movieReviews} setMovieReviews={setMovieReviews}/> : <Loading/>}
+      {movieObj.id ? <ReviewsByMovie movieId={movieObj.id}  movieReviews={movieReviews} setMovieReviews={setMovieReviews} movieObj={movieObj}/> : <Loading/>}
     </>
   );
 };
