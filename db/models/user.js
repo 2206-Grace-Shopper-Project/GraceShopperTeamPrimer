@@ -80,8 +80,9 @@ async function updateUser ({ id, ...fields }) {
   if (setString.length === 0) {
     return;
   }
-  const hashedPassword = await bcrypt.hash(fields.password, SALT_COUNT)
-  fields.password = hashedPassword
+  if (fields.password) {const hashedPassword = await bcrypt.hash(fields.password, SALT_COUNT)
+  fields.password = hashedPassword}
+  
   try {
     const { rows: [user]} = await client.query(`
       UPDATE users

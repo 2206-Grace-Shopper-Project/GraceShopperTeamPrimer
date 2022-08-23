@@ -21,6 +21,7 @@ const MyReviews = ({ userDataObj, token }) => {
     myReviews.length > 0
       ? myReviews.map((review, index) => {
           let reviewId = review.id;
+          let title = review.title;
           return (
             <div className="individualReviews" key={index}>
               <div>
@@ -43,6 +44,9 @@ const MyReviews = ({ userDataObj, token }) => {
                   {isShown && clickId ===`${reviewId}`? (
                     <EditReview
                       setIsShown={setIsShown}
+                      myReviews={myReviews}
+                      setMyReviews={setMyReviews}
+                      title={review.title}
                       reviewId={reviewId}
                       reviewText={review.review}
                       token={token}

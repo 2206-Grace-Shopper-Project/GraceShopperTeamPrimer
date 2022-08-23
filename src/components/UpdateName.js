@@ -5,9 +5,9 @@ import "./extra.css"
 // export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
 export const BASE = `http://localhost:4000/api`;
 
-export async function updateUserInfo(userId, name, email){
+export async function updateName(userId, name){
     const token = localStorage.getItem("token")
-    console.log(name, email, userId, "line 9 from UpdateName")
+    console.log(name, userId, "line 10 from UpdateName")
     try {
         const response = await fetch(`${BASE}/users/${userId}`, {
             method: "PATCH",
@@ -16,8 +16,7 @@ export async function updateUserInfo(userId, name, email){
             Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({
-                name,
-                // email
+                name
             }),
         });
         const result = await response.json();
@@ -39,7 +38,7 @@ const handleSubmit = async (event) => {
     const name = event.target.newName.value
     const email = userDataObj.email
     
-    console.log(await updateUserInfo(userId, name, email), "HERE IS THAT UPDATED INFO");
+    console.log(await updateName(userId, name), "HERE IS THAT UPDATED INFO");
     setShowUpdateName(false)
  
   };
