@@ -5,6 +5,8 @@ import CartMovies from "./CartMovies";
 import Loading from "./Loading";
 import ReviewsByMovie from "./ReviewsByMovie";
 import "./extra.css"
+import EditMovie from "./EditMovie";
+import DeleteMovie from "./DeleteMovie";
 
 
 const MoviePage = ({
@@ -18,6 +20,7 @@ const MoviePage = ({
   const [purchaseAmount, setPurchaseAmount] = useState(1);
   const [isShown, setIsShown] = useState(false);
   const [movieReviews, setMovieReviews] = useState([]);
+  const [editMovieEntry, setEditMovieEntry] = useState(false)
 
 
   const movieTitle = useParams().movieTitle.replace(/\+/g, " ");
@@ -143,6 +146,14 @@ const MoviePage = ({
         ) : null}
       </div>
       {movieObj.id ? <ReviewsByMovie movieId={movieObj.id}  movieReviews={movieReviews} setMovieReviews={setMovieReviews} movieObj={movieObj}/> : <Loading/>}
+
+      {movieObj.id && userDataObj?.id === 5 || userDataObj?.id === 8 || userDataObj?.id === 9 || userDataObj?.id === 11 ? 
+        <div className="moviePageButton">
+            {editMovieEntry ? <EditMovie setEditMovieEntry={setEditMovieEntry} movieObj={movieObj} setMovieObj={setMovieObj}/> : <button onClick={()=>setEditMovieEntry(true)}>Admin:Edit Movie</button> }
+            <DeleteMovie movieId={movieObj.id}/>
+        </div> : <></> 
+    
+    }
     </>
   );
 };
