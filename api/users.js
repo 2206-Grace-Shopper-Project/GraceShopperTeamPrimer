@@ -80,7 +80,8 @@ router.post("/login", async (req, res, next) => {
 // PATCH - update user info
 router.patch("/:userId", async (req, res, next) => {
   const { userId } = req.params;
-  const { email, name, password } = req.body;
+  const { email, name } = req.body;
+
   const updatedUserData = {};
   try {
     const _user = await getUserByEmail(email);
@@ -91,7 +92,7 @@ router.patch("/:userId", async (req, res, next) => {
         error: "error",
       });
     }
-    if (password.length < 8) {
+    if (req.body.password && req.body.password?.length < 8) {
       next({
         name: "errorPasswordLength",
         message: "Password Too Short! Must be at least 8 characters",
@@ -102,7 +103,7 @@ router.patch("/:userId", async (req, res, next) => {
     updatedUserData.id = userId;
     updatedUserData.name = name;
     updatedUserData.email = email;
-    updatedUserData.password = password;
+   if (req.body.password) {updatedUserData.password = req.body.password};
     if (user.id == req.user.id) {
       const updatedData = await updateUser(updatedUserData);
       res.send(updatedData);
