@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getMovieReviews } from "../api";
-import "./reviewsbymovie.css";
+import "./extra.css";
 
 const ReviewsByMovie = ({
   movieId,
@@ -39,11 +39,11 @@ const ReviewsByMovie = ({
       : null;
 
   return (
-    <div className="reviewsByMovie">
+    <div className="componentBasics">
       <p className="componentHeader">
         reviews of {movieObj.title}
       </p>
-      <div>{movieReviews.length > 0 ? MappedReviews : null}</div>
+      <div>{movieReviews.length > 0 ? MappedReviews : <div className="individualReviews">Looks like no one has reviewed {movieObj.title} yet</div>}</div>
     </div>
   );
 };

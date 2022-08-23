@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-
+import "./extra.css"
 
 // goes into API INDEX
 // export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
@@ -46,13 +46,16 @@ const handleSubmit = async (event) => {
 
     return(
         <div>
-            <div>TheUpdateNamePage</div>
+            
             <form onSubmit={handleSubmit}>
                <div><label>New Name: </label></div> 
-               <div><input name="newName" placeholder="There is no Dana, only ZUUL"></input></div> 
-                <div><button type="submit">update!</button></div>
+               <div><input className="newName" name="newName" placeholder="There is no Dana, only ZUUL"></input></div> 
+                <div>
+                    <button type="submit">update!</button>
+                   <button onClick={(event)=>{setShowUpdateName(false);}}>nevermind!</button>
+                </div>
             </form>
-            <button onClick={(event)=>{setShowUpdateName(false);}}>nevermind!</button>
+         
 
         </div>
     )

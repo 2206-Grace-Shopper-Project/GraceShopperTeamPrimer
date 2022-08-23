@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { storeToken, storeUserData } from "../auth";
 import { loginUser } from "../api";
+import "./extra.css"
 
 const Login = ({ setIsLoggedIn, setToken, token }) => {
   const [email, setEmail] = useState("");
@@ -33,28 +34,29 @@ const Login = ({ setIsLoggedIn, setToken, token }) => {
 
 
   return (
-    <div>
-      <p>Welcome Back</p>
-      <form onSubmit={handleSubmit}>
+    <div className="compLogReg">
+      <p className="logRegHeader">Welcome Back</p>
+      <form className="loginForm" onSubmit={handleSubmit}>
+        <fieldset className="fsLogReg">
+          <legend>Login</legend>
         <div>
-          <label>
-            email:
             <input
+              className="loginInput"
               name="email"
               type="text"
+              placeholder="email"
             />
-          </label>
         </div>
         <div>
-          <label>
-            password:
             <input
+              className="loginInput"
               name="password"
               type="text"
+              placeholder="password"
             />
-          </label>
         </div>
         <button type="submit">Submit</button>
+        </fieldset>
       </form>
     </div>
   );

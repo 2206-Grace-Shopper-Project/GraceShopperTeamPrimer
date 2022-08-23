@@ -1,0 +1,103 @@
+.addreview {
+    font-family: Roboto;
+    margin-left: 35px;
+}
+
+.reviewForm {
+    width: 90%;
+    height: 100px;
+    font-family: Roboto;
+    margin-top: 7px;
+    margin-bottom: 7px
+}
+
+.componentBasics {
+    margin-left: 35px;
+    font-family: Roboto;
+}
+
+.componentHeader{
+    color: #f5f5f5;
+    text-transform: uppercase;
+    font-size: 18pt;
+}
+.userFormHeader{
+    color: #f5f5f5;
+    /* -webkit-text-stroke: 1px black; */
+    
+
+    text-transform: uppercase;
+    font-size: 24pt;
+  
+}
+
+
+
+.individualReviews {
+    background-color:#bebebe;
+    border: 2px solid black;
+    margin-bottom: 7px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 5px;
+    width: 68%;
+}
+
+.userReview{
+    border-bottom: dashed 1px;
+}
+
+.reviewButton{
+    margin-left: 35px;
+}
+
+.fsLogReg {
+    background-color: #d3d3d3;
+    margin-right: 13px;
+    border: solid;
+}
+
+.loginInput{
+    width: 150px;
+    margin-bottom: 2px;
+}
+
+
+.compLogReg {
+    margin: auto;
+    font-family: Roboto;
+    background-color: #bebebe;
+    padding-left: 10px;
+    padding-bottom: 20px;
+    width: 50%;  
+}
+.compUserForm {
+    font-family: Roboto;
+    background-color: #bebebe;
+    width: 75%;
+    margin-left: 35px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 20px;
+  
+}
+
+.logRegHeader{
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.newName{
+    width: 185px;
+    margin-bottom: 3px;
+}
+
+.addressDisplay{
+    margin-bottom:7px
+}
+
+.newaddress {
+    width: 215px;
+    margin-top:2px;
+    margin-bottom: 2px;
+}

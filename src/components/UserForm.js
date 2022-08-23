@@ -20,16 +20,19 @@ const UserForm = ({ userDataObj, token }) => {
   const MappedAddresses =
     myAddresses.length > 0
       ? myAddresses.map((address, index) => {
-          return <div key={index}>{address.address}</div>;
+          return <div className="addressDisplay" key={index}>{address.address}</div>;
         })
       : null;
 
   return (
-    <div>
-      <h1>Hello {userDataObj.name}</h1>
+    <div className="compUserForm">
+      <h1 className="userFormHeader">Hello {userDataObj.name}</h1>
       <div>Change Password</div>
+      <fieldset>
+          <legend>name</legend>
       <div>
-        Name: {userDataObj.name}{" "}
+        
+       {userDataObj.name}{" "}
         <button
           onClick={(event) => {
             setShowUpdateName(true);
@@ -47,27 +50,35 @@ const UserForm = ({ userDataObj, token }) => {
           />
         ) : null}
       </div>
-      <div>Email: {userDataObj.email}</div>
-      <div>Address:</div>
+      </fieldset>
+      <fieldset>
+        <legend>email</legend>
+          <div>{userDataObj.email}</div>
+      </fieldset>
+     <fieldset>
+      <legend>addresses</legend>
+     
+      <div className="addressDisplay">{MappedAddresses}</div>
       <div>
         <button
           onClick={(event) => {
             setShowAddAddress(true);
           }}
-        >
+          >
           Add A New Address
         </button>
       </div>
-      <div>
-        {showAddAddress ? (
-          <AddAddress
-            setShowAddAddress={setShowAddAddress}
-            userDataObj={userDataObj}
-            token={token}
-          />
-        ) : null}
-      </div>
-      <div>{MappedAddresses}</div>
+          <div>
+            {showAddAddress ? (
+              <AddAddress
+                setShowAddAddress={setShowAddAddress}
+                userDataObj={userDataObj}
+                token={token}
+              />
+            ) : null}
+          </div>
+     </fieldset>
+      
     </div>
   );
 };

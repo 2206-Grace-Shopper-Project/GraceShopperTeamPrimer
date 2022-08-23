@@ -1,5 +1,6 @@
 import React from "react";
 import { NewAddress } from "../api";
+import "./extra.css"
 
 const AddAddress = ({ token, userDataObj, setShowAddAddress }) => {
   const handleSubmit = async (event) => {
@@ -16,8 +17,8 @@ const AddAddress = ({ token, userDataObj, setShowAddAddress }) => {
     <div>
       <div>Add Address Below</div>
       <form onSubmit={handleSubmit}>
-        <label>Address? </label>
-        <input name="address" placeholder="what's the address?"></input>
+      
+        <input className="newaddress" name="address" placeholder="what's the address?"></input>
         <button type="submit">Add Address!</button>
         <button
           onClick={(event) => {
