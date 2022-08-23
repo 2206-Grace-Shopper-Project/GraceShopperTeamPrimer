@@ -13,10 +13,10 @@ const App = () => {
   const [userDataObj, setUserDataObj] = useState(grabUser())
   const [filteredMovieList, setFilteredMovieList] = useState([])
   const [showButton, setShowButton] = useState(false)
-  const [guestUserObj, SetGuestUserObj] = useState(grabGuestUser())
+  const [guestUserObj, setGuestUserObj] = useState(grabGuestUser())
   const [isLoading, setIsLoading] = useState(false)
  
-
+console.log(guestUserObj,"guestUserinObj")
   const fetchMovies = async ()=>{
     const movieList = await getAllMovies()
     console.log('main all fetch')
@@ -42,9 +42,9 @@ useEffect(()=>{
     <>
     <Routes>
       <Route exact path='/' element={<Header setToken={setToken} token={token} userDataObj={userDataObj}/>}>
-      <Route index element={<Movies setToken={setToken} token={token} allMovies={allMovies} userDataObj={userDataObj} filteredMovieList={filteredMovieList} setFilteredMovieList={setFilteredMovieList} setAllMovies={setAllMovies} showButton={showButton} setShowButton={setShowButton} guestUserObj={guestUserObj}/>} />
+      <Route index element={<Movies setToken={setToken} token={token} allMovies={allMovies} userDataObj={userDataObj} filteredMovieList={filteredMovieList} setFilteredMovieList={setFilteredMovieList} setAllMovies={setAllMovies} showButton={showButton} setShowButton={setShowButton} guestUserObj={guestUserObj} setGuestUserObj={setGuestUserObj}/>} />
 
-      <Route path="/movies/:movieTitle" element={ !allMovies?.length ? <Loading /> : <MoviePage userDataObj={userDataObj} token={token} allMovies={allMovies} showButton={showButton} setShowButton={setShowButton} setIsLoading={setIsLoading}/> } />
+      <Route path="/movies/:movieTitle" element={ !allMovies?.length ? <Loading /> : <MoviePage guestUserObj={guestUserObj} setGuestUserObj={setGuestUserObj} userDataObj={userDataObj} token={token} allMovies={allMovies} showButton={showButton} setShowButton={setShowButton} setIsLoading={setIsLoading}/> } />
       <Route path='/orders' element={<Orders setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
 
       <Route path='/users' element={<UserForm setToken={setToken} token={token} userDataObj={userDataObj}/>}/>

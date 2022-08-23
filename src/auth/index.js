@@ -29,3 +29,7 @@ export const clearUsernameAndToken = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("userData");
 };
+
+export const clearGuestUser = () => {
+  localStorage.removeItem("guestUserData")
+}

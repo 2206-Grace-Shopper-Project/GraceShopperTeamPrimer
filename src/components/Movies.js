@@ -9,7 +9,7 @@ import SearchMovie from "./SearchMovie";
 
 
 
-const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMovieList, setAllMovies, setShowButton, showButton, guestUserObj, setIsLoading}) =>{
+const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMovieList, setAllMovies, setShowButton, showButton, guestUserObj, setIsLoading, setGuestUserObj}) =>{
     const [cssActive, setCSSActive] = useState(null)
     const [purchaseAmount, setPurchaseAmount] = useState(1)
     const [pageNumber, setPageNumber] = useState(1)
@@ -98,7 +98,7 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
                 <div className="priceText movieText">
                     
                    
-                        <span><CartMovies userDataObj={userDataObj} id={id} purchaseAmount={purchaseAmount} realPrice={realPrice} title={title} setShowButton={setShowButton} showButton={showButton} guestUserObj={guestUserObj}/></span>
+                       <span><CartMovies userDataObj={userDataObj} id={id} purchaseAmount={purchaseAmount} realPrice={realPrice} title={title} setShowButton={setShowButton} showButton={showButton} guestUserObj={guestUserObj} setGuestUserObj={setGuestUserObj} /></span>
                     </div>
               </div>
               <div className="movieInfoContainer"> 
