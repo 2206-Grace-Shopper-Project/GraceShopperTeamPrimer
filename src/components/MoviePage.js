@@ -4,6 +4,7 @@ import AddReview from "./AddReview";
 import CartMovies from "./CartMovies";
 import Loading from "./Loading";
 import ReviewsByMovie from "./ReviewsByMovie";
+import "./extra.css"
 
 
 const MoviePage = ({
@@ -120,7 +121,7 @@ const MoviePage = ({
           </div>
         </div>
       </div>
-      <div>
+      <div className="reviewButton">
         <button
           onClick={(event) => {
             setIsShown(true);
@@ -141,7 +142,7 @@ const MoviePage = ({
           />
         ) : null}
       </div>
-      {movieObj.id ? <ReviewsByMovie movieId={movieObj.id}  movieReviews={movieReviews} setMovieReviews={setMovieReviews}/> : <Loading/>}
+      {movieObj.id ? <ReviewsByMovie movieId={movieObj.id}  movieReviews={movieReviews} setMovieReviews={setMovieReviews} movieObj={movieObj}/> : <Loading/>}
     </>
   );
 };

@@ -366,18 +366,9 @@ input[type="search"] {
   color: white;
 }
 
-a.pagination:active {
-  text-decoration: underline;
-}
-
-a.pagination.active{
-  text-decoration: underline;
-  color: red;
-}
-
 .activePage{
   font-weight: bold;
-  text-shadow: 1px 1px 2px pink;
+  text-shadow: 1px 1px 2px #282B30;
   font-size: 22px;
 }
 
@@ -401,6 +392,7 @@ a.pagination.active{
 
 .movieFeature{
   height: 25px;
+  max-width: 20vw;
 }
 #noMovies{
   font-weight: bold;
@@ -409,9 +401,16 @@ a.pagination.active{
   border: solid black;
 }
 
+.cart-total {
+  color: white;
+  font-size: 25px;
+  text-align: end;
+  margin-right: 15vw;
+}
+
 .dropdown-content {
   visibility: hidden;
-  border: 2px solid black;
+  /* border: 2px solid black; */
   margin-top: 10px;
 }
 
@@ -424,6 +423,7 @@ a.pagination.active{
 
 .user-name{
   font-family: "IBM Plex Sans";
+  padding-top: 18px;
 }
 
 #user-name:hover {
@@ -528,25 +528,15 @@ a.pagination.active{
   font-weight: bold;
 }
 
-.order-history{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#orders {
-  border: 2px solid black;
-}
-
 
 #loading {
   position: fixed;
-
+  
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-
+  
   backdrop-filter: blur(3px);
   background: rgba(0, 0, 0, 0.4);
   
@@ -558,12 +548,113 @@ a.pagination.active{
 #loading .message {
   min-width: 480px;
   padding: 3rem;
-
+  
   box-shadow: 0 2px 8px black;
   background: white;
-
+  
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+
+/* USER ORDER HISTORY */
+.order-history{
+  display: flex;
+  flex-direction: column;
+}
+
+#orders {
+  background-color: #D9D9D9;
+  padding: 10px;
+  margin: 10px;
+}
+
+.ordersbox{
+  margin-right: 8vw;
+  margin-left: 8vw;
+}
+
+.ordermovietitle {
+  display: flex; 
+  padding: 5px;
+  margin: 10px;
+}
+
+.ordermovietitle > p {
+  margin-left: 10px;
+}
+
+#movie-poster {
+  max-height: 20vh;
+  max-width: 12vw;
+}
+
+#price-and-address {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin: 5px;
+  padding: 5px;
+}
+
+/* #order-quantity {
+  font-weight: bolder;
+} */
+
+
+/* ADMIN FUNCTIONS (all orders, all users, add movie) */
+.all-orders-title,
+.movieForm > h1,
+.all-users > h1,
+.order-history > h1 {
+  color: white;
+  text-align: center;
+}
+
+.all-users{
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+
+#all-users {
+  border-bottom: 2px solid black;
+  display: flex;
+  justify-content: space-around;
+  background-color: #D9D9D9;
+  padding: 5px;
+}
+
+#all-orders {
+  display: flex;
+  flex-direction: column;
+  background-color: #D9D9D9;
+  padding: 10px;
+  margin: 10px;
+}
+
+#newMovieForm {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin: 10px;
+  background-color: #D9D9D9;
+}
+
+#newMovieForm > input {
+  margin: 5px;
+  padding: 5px;
+  border: none;
+}
+
+#add-movie-button {
+  border: none;
+  padding: 5px;
+  align-self: center;
+  border-radius: 5px;
+  background-color: #282B30;
+  color: white;
+}
+

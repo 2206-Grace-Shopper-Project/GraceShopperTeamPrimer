@@ -13,7 +13,7 @@ const AddMovie = ({token, userDataObj}) =>{
         <div>
         {userDataObj.id === 5 || userDataObj.id === 8 || userDataObj.id === 9 || userDataObj.id === 11 ?
             <div className='movieForm'>
-                <label>Add New Movie</label>
+                <h1>Add New Movie</h1>
             <form onSubmit={handleSubmit} id="newMovieForm">
                 <input name="title" placeholder='title'></input>
                 <input name="genre" placeholder='genre'></input>
@@ -25,7 +25,7 @@ const AddMovie = ({token, userDataObj}) =>{
                 <input name="price" placeholder='price'></input>
                 <input name="poster" placeholder='poster'></input>
                 <input name="inventory" placeholder='inventory'></input>
-                <button type="Submit" onClick={() => {}}>Add New Movie</button>
+                <button id='add-movie-button' type="Submit" onClick={() => {}}>Add</button>
             </form>
             </div>
             : <h1>nice try buddy</h1> }

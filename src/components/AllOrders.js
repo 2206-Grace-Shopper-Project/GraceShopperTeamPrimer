@@ -5,14 +5,15 @@ import { getAllOrders } from "../api";
 export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
 
 export async function getCartById(id) {
+    // console.log(id, 'id in get cartsbyid')
     try {
-        const response = await fetch (`${BASE}/carts/${id}`, {
+        const response = await fetch (`${BASE}/carts/cartid/${id}`, {
             headers: {
                 "Content-Type": "application/json"
               }
         })
         const result = await response.json()
-        console.log(result, 'result from getCartById')
+        // console.log(result, 'result from getCartById')
         return result
     } catch (error) {
         throw error
@@ -27,42 +28,58 @@ const AllOrders = ({userDataObj}) =>{
     const getAllUserOrders = async() => {
         const ordersList = await getAllOrders()
         setOrders(ordersList)
-        // {orders.map(async(order) => {
-        //     let id = order.cartId
-        //     const carts = await getCartById(id)
-        //     setOrderCarts(carts)
-        // })}
     }
+
+    const getMoviesOnOrders = async() => {
+        let cartIds = orders.map((order)=>{
+            return order.cartId
+        })
+        let order = []
+        for await(const id of cartIds){
+            const response = await getCartById(id)
+            order.push(response[0])
+        }
+        setOrderCarts(order)
+    }
+
+    console.log(orderCarts, 'hehe')
 
     useEffect(() => {
         getAllUserOrders();
     }, [])
+    
+    useEffect(() => {
+        getMoviesOnOrders()
+    }, [orders])
 
     return (
         <div> 
         {userDataObj.id === 5 || userDataObj.id === 8 || userDataObj.id === 9 || userDataObj.id === 11 ? 
         <div>
-        <h1>All Orders</h1>
+        <h1 className='all-orders-title'>All Orders</h1>
         {orders.map((order, index) => {
-            console.log(orders, 'orders')
             let orderDate = Number(order.date)
             let dateObj = new Date(orderDate)
             let finalDateFormat = dateObj.toLocaleString()
 
             return (
                 <div key={index} id="all-orders">
-                    
-                    {/* {orderCarts.map((cart, idx)  => {
-                        console.log(cart.isPurchased, "line 77")
+                    {orderCarts.length ? orderCarts.map((cart)=>{
                         return (
-                            <div key={idx}>
-                                <p>Movies Purchased:{cart.movies}</p>
-                            </div>
-                        )
-                    })} */}
+                            <div>
+                        {(cart.id === order.cartId) ? 
+                                (cart.movies.map((movie, idx)=>{
+                                    return (
+                                        <div className ='ordermovietitle' key={idx}>
+                                            <span><img src={movie.poster} id='movie-poster'></img></span>
+                                            <p>{movie.title} (Qty: {movie.quantity})</p>
+                                        </div>
+                                    )
+                                }))
+                            : null } </div>)
+                    }) : <></>}
                     <p>Customer Name: {order.name}</p>
                     <p>Date Purchased: {finalDateFormat}</p>
-                    <p>Quantity: {order.quantity}</p>
                     <p>Price: ${order.price}</p>
                     <p>Sent To: {order.address}</p>
                     <p>Email: {order.email}</p>

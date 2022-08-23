@@ -22,11 +22,15 @@ const AllUsers = ({userDataObj}) =>{
             <h1>All Users</h1>
                 {users.map((user, index)=> {
                     return (
+                    <div>
+                    {user.name !== 'guest' ? 
                         <div key={index} id='all-users'>
-                            <p>Id: {user.id}</p>
-                            <p>Name: {user.name}</p>
-                            <p>Email: {user.email}</p>
+                            <p><span>Id:</span> {user.id}</p>
+                            <p><span>Name:</span> {user.name}</p>
+                            <p><span>Email: </span> {user.email}</p>
                         </div>
+                    : <></>}
+                    </div>
                     )
                 })}
             </div>

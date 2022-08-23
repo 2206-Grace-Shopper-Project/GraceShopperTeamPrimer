@@ -12,7 +12,7 @@ export async function getCartById(id) {
               }
         })
         const result = await response.json()
-        console.log(result, 'result from getCartById')
+        // console.log(result, 'result from getCartById')
         return result
     } catch (error) {
         throw error
@@ -24,6 +24,7 @@ export async function getCartById(id) {
 const Orders = ({userDataObj}) =>{
     const [orders, setOrder] = useState([])
     const [orderCarts, setOrderCarts] = useState([])
+    
 
     const getUserOrderInfo = async () => {
         let user = userDataObj
@@ -39,49 +40,69 @@ const Orders = ({userDataObj}) =>{
             return order.cartId
         })
         // console.log(cartIds, 'cartIds')
-        for (let i = 0; i < cartIds.length; i++){
-            // console.log(cartIds[i])
-            let id = cartIds[i]
-            // console.log(id, 'id')
-            let result = await getCartById(id)
-            // console.log(result, 'result')
-            // return result
-            setOrderCarts(result)
+        let order = []
+        for await(const id of cartIds){
+            const response = await getCartById(id)
+            // console.log(response, 'response')
+            order.push(response[0])
         }
+        setOrderCarts(order)
     }
+ 
     // console.log(orderCarts, 'orderCarts')
+
 
     useEffect(() => {
         getUserOrderInfo()
-        getCartsInOrders()
     }, [])
+
+    useEffect(()=>{
+        getCartsInOrders()
+    },[orders])
     
+
     return(
-        <div className='order-history'>
+        <div>
+        {(orders.length) ? 
+        (<div className='order-history'>
+
             <h1>Order History</h1>
+
+            <div className='ordersbox'>
             {orders.map((order, index) => {
+                // console.log(order, 'order')
                 let orderDate = Number(order.date)
                 let dateObj = new Date(orderDate)
                 let finalDateFormat = dateObj.toLocaleString()
+
                 return (
                 <div id='orders' key={index}>
-                    {orderCarts.map((order)=>{
-                        {order.movies.map((movie, idx)=>{
-                            console.log(movie.title, 'movie???')
-                            return (
-                                <div key={idx}>
-                                    <p>Purchased: {movie.title}</p>
-                                </div>
-                             )
-                        })}
-                    })}
-                    {/* <p>Purchased: {movie.title}</p> */}
-                    <p>Order Date: {finalDateFormat}</p>
+                    <p>Date Purchased: {finalDateFormat}</p>
+                    {orderCarts.length ? orderCarts.map((cart)=>{
+                        return (
+                            <div>
+                        {(cart.id === order.cartId) ? 
+                                (cart.movies.map((movie, idx)=>{
+                                    // console.log(movie.title, 'MOVIE TITLE')
+                                    return (
+                                        <div className ='ordermovietitle' key={idx}>
+                                            <span><img src={movie.poster} id='movie-poster'></img></span>
+                                            <p>{movie.title} <span id='order-quantity'>(Qty: {movie.quantity})</span></p>
+                                        </div>
+                                    )
+                                }))
+                            : null } </div>)
+                    }) : <></>}
+                    <div id='price-and-address'>
                     <p>Price: ${order.price}</p>
-                    <p>Sent To:{order.address}</p>
+                    <p>Sent To: {order.address}</p>
+                    </div>
                 </div>
                 )
             })}
+            </div>
+        </div>) 
+        : <p>order list blank</p>}
         </div>
     )
 }
