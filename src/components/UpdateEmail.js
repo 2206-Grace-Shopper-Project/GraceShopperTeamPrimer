@@ -6,7 +6,7 @@ import "./extra.css"
 export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
 
 
-export async function updateName(userId, updateObj){
+export async function updateEmail(userId, updateObj){
     const token = localStorage.getItem("token")
 
     try {
@@ -51,7 +51,7 @@ const handleSubmit = async (event) => {
             
             <form onSubmit={handleSubmit}>
                <div><label>New Name: </label></div> 
-               <div><input className="newName" name="newName" placeholder="There is no Dana, only ZUUL"></input></div> 
+               <div><input className="newName" name="newName" placeholder="Remember the movie You've got mail?"></input></div> 
                 <div>
                     <button type="submit">update!</button>
                    <button onClick={(event)=>{setShowUpdateName(false);}}>nevermind!</button>
