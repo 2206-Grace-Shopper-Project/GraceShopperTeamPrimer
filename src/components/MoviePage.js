@@ -15,6 +15,8 @@ const MoviePage = ({
   setShowButton,
   showButton,
   token,
+  guestUserObj,
+  setGuestUserObj
 }) => {
   const [movieObj, setMovieObj] = useState({});
   const [purchaseAmount, setPurchaseAmount] = useState(1);
