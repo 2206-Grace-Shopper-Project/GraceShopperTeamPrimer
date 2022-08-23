@@ -1,53 +1,66 @@
 import React, { useEffect, useState } from "react";
 import { getMyReviews } from "../api";
-import {EditReview } from "./"
+import { EditReview } from "./";
+import "./extra.css";
 
+const MyReviews = ({ userDataObj, token }) => {
+  const [myReviews, setMyReviews] = useState([]);
+  const [isShown, setIsShown] = useState(false);
+  const [clickId, setClickId] = useState("")
 
-const MyReviews = ({userDataObj, token}) => {
-    const[myReviews, setMyReviews] = useState([]);
-    const[isShown, setIsShown] = useState(false);
+  const reviewArray = async () => {
+    const userId = userDataObj.id;
+    setMyReviews(await getMyReviews(userId, token));
+  };
 
-    
-    const reviewArray= async() =>{
-        const userId = userDataObj.id
-        setMyReviews(await getMyReviews(userId, token))
-    }
+  useEffect(() => {
+    reviewArray();
+  }, [userDataObj.id]);
 
-    useEffect(() => {
-        reviewArray()
-    }, [])
-    const MappedReviews =
-        myReviews.length > 0
-        ? myReviews.map((review, index) => {
-            let reviewId = review.id
-            return(
-                <div key={index}>
-                    <div><b>Film: </b>{review.title}</div>
-                    <div><b>Your Review: </b>{review.review}</div>
-                      <button onClick={(event) => {
-                 setIsShown(true)
-                 }}
-                      >Edit This Review</button>
-                      <div>
-                      <div>
-                {isShown ?
-                <EditReview setIsShown={setIsShown} reviewId={reviewId} token={token}/> :null}
+  const MappedReviews =
+    myReviews.length > 0
+      ? myReviews.map((review, index) => {
+          let reviewId = review.id;
+          return (
+            <div className="individualReviews" key={index}>
+              <div>
+                <b>Film: </b>
+                {review.title}
               </div>
-                      </div>
+              <div>
+                <b>Your Review: </b> {review.review}
+              </div>
+              <button
+                onClick={(event) => {
+                  setIsShown(true);
+                  setClickId(`${reviewId}`)
+                }}
+              >
+                Edit This Review
+              </button>
+              <div>
+                <div>
+                  {isShown && clickId ===`${reviewId}`? (
+                    <EditReview
+                      setIsShown={setIsShown}
+                      reviewId={reviewId}
+                      reviewText={review.review}
+                      token={token}
+                    />
+                  ) : null}
                 </div>
-              
-            )
-            })
-        :null;
-        
+              </div>
+            </div>
+          );
+        })
+      : null;
 
-    return (
-        <div>
-            <p>My Reviews Page</p>
-            <div>{myReviews.length > 0 ? MappedReviews : null}</div>
+  return (
+    <div className="componentBasics">
+      <p className="componentHeader">Yeah, yeah. Everyone's a critic.</p>
+      <div>{myReviews.length > 0 ? MappedReviews : null}</div>
+    </div>
+  );
+};
 
-        </div>
-    )
-}
-
-export default MyReviews
+export default MyReviews;

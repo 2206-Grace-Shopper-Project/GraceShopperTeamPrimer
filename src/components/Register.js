@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { storeToken, storeUserData } from "../auth";
+import "./extra.css"
 
 
 const Register = ({ setIsLoggedIn, setToken }) => {
@@ -60,40 +61,45 @@ const Register = ({ setIsLoggedIn, setToken }) => {
 
 // Here's the return that shows up on the site
   return (
-    <div>
-      <p>ONE OF US! ONE OF US! GOOBLE GOBBLE GOOBLE GOBBLE!</p>
-      <form onSubmit={handleSubmit}>
+    <div className="compLogReg">
+      <p className="logRegHeader">Sign up!
+      (ONE OF US! ONE OF US! GOOBLE GOBBLE GOOBLE GOBBLE!)</p>
+      <form className="loginForm" onSubmit={handleSubmit}>
+      <fieldset className="fsLogReg">
+        <legend>Register</legend>
         <div>
-          <label>
-            Name
             <input
+              className="loginInput"
+              placeholder="name"
               name="name"
               type="text"
               required 
             />
-          </label>
         </div>
         <div>
-          <label>
-            Email
+       
             <input
+              className="loginInput"
+              placeholder="email"
               name="email"
               type="text"
               required
             />
-          </label>
+    
         </div>
         <div>
-          <label>
-            password
+ 
             <input
+              className="loginInput"
+              placeholder="password"
               name="password"
               type="text"
               required
             />
-          </label>
+      
         </div>
         <button type="submit">Submit</button>
+        </fieldset>
       </form>
     </div>
   );

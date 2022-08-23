@@ -1,9 +1,9 @@
 import React from "react";
 import { editReview } from "../api";
+import "./extra.css"
 
-const EditReview = ({ setIsShown, token, reviewId }) => {
+const EditReview = ({ setIsShown, token, reviewId, reviewText }) => {
   let id = reviewId;
-  console.log(id, "with cameo by penn gilette");
   const handleSubmit = async (event) => {
     event.preventDefault();
     const review = event.target[0].value;
@@ -13,11 +13,18 @@ const EditReview = ({ setIsShown, token, reviewId }) => {
 
   return (
     <div>
-      <b>Edit Reviews page</b>
       <form onSubmit={handleSubmit}>
-        <label>New Review</label>
-        <input id="newReview" required />
-        <button type="submit">Update Your Review</button>
+        <textarea className="reviewForm" 
+        defaultValue={reviewText}
+        id="newReview" required />
+        <div>
+          <button type="submit">Update Your Review</button>
+          <button onClick={(event) => {
+              setIsShown(false);
+            }}
+          >nevermind</button>
+        </div>
+        
       </form>
     </div>
   );

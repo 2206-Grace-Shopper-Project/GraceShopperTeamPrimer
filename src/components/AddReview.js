@@ -1,6 +1,6 @@
 import React from "react";
 import { createReview } from "../api";
-import "./addreview.css"
+import "./extra.css"
 
 const AddReview = ({ userDataObj, setIsShown, token, movieId, setMovieReviews, movieReviews }) => {
  
@@ -22,7 +22,7 @@ const AddReview = ({ userDataObj, setIsShown, token, movieId, setMovieReviews, m
     <div className="addreview">
       <form onSubmit={handleSubmit}>
         <textarea
-          className="ReviewForm"
+          className="reviewForm"
           name="review"
           placeholder="Tell the nice folks out there what you thought of the film"
         ></textarea>
