@@ -15,17 +15,17 @@ const CartMovies = ({
   title,
   showButton,
   guestUserObj,
-  setGuestUserObj
+  setGuestUserObj,
 }) => {
+  //useStates
+  const [purchaseMovieId, setPurchaseMovieId] = useState(null);
+  const [tempId, setTempId] = useState(guestUserObj);
 
-  const [purchaseMovieId,setPurchaseMovieId] = useState(null);
+  // let userId = null;
 
+  //this creates a cart for the guest user after we create a user lower in the code
 
-  let userId = null;
-
-
-
-  async function generateCart (userId){
+  async function generateCart(userId) {
     console.log("createcart function");
     const response = await createNewCart(userId);
     let cartId = response.id;
@@ -34,24 +34,47 @@ const CartMovies = ({
     const movieInCart = await addMovieToCart(cartId, movieId, quantity);
     console.log(movieInCart, "this should be added to cart");
     console.log(response, "newCart");
+    setPurchaseMovieId(null);
+  } 
+  const getGuestUser = async () => {
+      const guestOldCart = await getEachCartByUser(tempId.id);
+      if (guestOldCart) {
+        console.log("HavecartFunction");
+        let cartId = guestOldCart.id;
+        const movieId = id;
+        let quantity = purchaseAmount;
+        const result = await addMovieToCart(cartId, movieId, quantity);
+        console.log(
+          result,
+          "if they have a cart but are not logged in and they added a movie"
+        );
+      }
+    }
 
-  }
 
-useEffect(()=>{
-if(guestUserObj?.id && purchaseMovieId){
-userId = guestUserObj.id
+    useEffect(()=>{
+      if(tempId?.id && purchaseMovieId){
+       getGuestUser()
+      }
+    },[tempId])
 
-generateCart(userId)}
-setPurchaseMovieId(null)
-},[guestUserObj])
-
+  useEffect(() => {
+    if (grabGuestUser() && purchaseMovieId) {
+     let userId = grabGuestUser().id;
+      console.log(userId,'useridin Effect')
+      generateCart(userId);
+      setTempId(userId);
+    }
+  }, [guestUserObj]);
 
   // console.log(guestUserObj,'GUO')
   const handleOnClick = async (event) => {
     event.preventDefault();
 
-    setPurchaseMovieId(id)
+    setPurchaseMovieId(id);
 
+    console.log(tempId,"tempid")
+    console.log(guestUserObj,'this shuld be a guest user')
     if (userDataObj) {
       let userId = userDataObj.id;
       const currentCart = await getEachCartByUser(userId);
@@ -76,9 +99,9 @@ setPurchaseMovieId(null)
       }
     }
     /*  
-need to keep log in info in local storage and stop it from overiding evreytime you click the button probably by making a useEffect to call my create guestuser function 
-    */
-    //  console.log(guestUserObj,"what is this")
+this creates a guest user if we are not logged in and add a movie to cart   
+*/
+
     if (!userDataObj && !guestUserObj) {
       console.log("onclikc working ");
       let name = "guest";
@@ -90,13 +113,13 @@ need to keep log in info in local storage and stop it from overiding evreytime y
       guestUser.name = guestUserInfo.user.name;
       storeGuestUserData(guestUser);
       console.log(guestUserObj, "why did this break");
-      console.log(guestUser,'aftertheproblem')
-      setGuestUserObj(guestUser)
+      console.log(guestUser, "aftertheproblem");
+      setGuestUserObj(guestUser);
     }
-    let userId = guestUserObj.id;
     
-    const guestOldCart = await getEachCartByUser(userId);
-    if (guestOldCart) {
+
+    if (guestUserObj?.id) {
+    const guestOldCart = await getEachCartByUser(guestUserObj.id);
       console.log("HavecartFunction");
       let cartId = guestOldCart.id;
       const movieId = id;
@@ -106,8 +129,9 @@ need to keep log in info in local storage and stop it from overiding evreytime y
         result,
         "if they have a cart but are not logged in and they added a movie"
       );
-    } 
-    
+    }
+
+   
 
     //  else {
     //   if (!userDataObj) {

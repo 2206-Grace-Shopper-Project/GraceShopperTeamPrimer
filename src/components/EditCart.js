@@ -11,6 +11,8 @@ const EditCart = ({
 }) => {
   let userId = userDataObj.id;
   let id = CMI;
+
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     let quantity = event.target.quantity.value;
