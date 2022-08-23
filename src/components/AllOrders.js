@@ -43,12 +43,12 @@ const AllOrders = ({userDataObj}) =>{
     const [orderCarts, setOrderCarts] = useState([])
 
     const [pageNumber, setPageNumber] = useState(1)
-    const [limitNumber, setLimitNumber] = useState(15)
+    const [limitNumber, setLimitNumber] = useState(10)
     const [offsetNumber, setOffsetNumber] = useState(0)
     const [showOrderPagination, setShowOrderPagination] = useState(true)
 
     const getAllUserOrders = async(passedInPage) => {
-        const offsetNumber = (passedInPage - 1) * 15
+        const offsetNumber = (passedInPage - 1) * 10
         setOffsetNumber(offsetNumber)
         console.log(offsetNumber, 'line 54')
         // const ordersList = await getAllOrders()
