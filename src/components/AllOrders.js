@@ -40,37 +40,38 @@ const AllOrders = ({userDataObj}) =>{
     const [orders, setOrders] = useState([])
     const [orderCarts, setOrderCarts] = useState([])
 
-    // const [pageNumber, setPageNumber] = useState(1)
-    // const [limitNumber, setLimitNumber] = useState(10)
-    // const [offsetNumber, setOffsetNumber] = useState(0)
-    // const [showOrderPagination, setShowOrderPagination] = useState(true)
-    // let navigate = useNavigate()
+    const [pageNumber, setPageNumber] = useState(1)
+    const [limitNumber, setLimitNumber] = useState(15)
+    const [offsetNumber, setOffsetNumber] = useState(0)
+    const [showOrderPagination, setShowOrderPagination] = useState(true)
+    let navigate = useNavigate()
 
-    const getAllUserOrders = async() => {
-        // const offsetNumber = (passedInPage - 1) * 10
-        // setOffsetNumber(offsetNumber)
-        const ordersList = await getAllOrders()
-        // const ordersList = await getAllSpecificOrders(limitNumber, offsetNumber)
+    const getAllUserOrders = async(passedInPage) => {
+        const offsetNumber = (passedInPage - 1) * 15
+        setOffsetNumber(offsetNumber)
+        // const ordersList = await getAllOrders()
+        const ordersList = await getAllSpecificOrders(limitNumber, offsetNumber)
+        console.log(ordersList, 'ordersList')
         setOrders(ordersList)
     }
 
-    // const handlePaginationPrev = (event) =>{
-    //     event.preventDefault()
-    //     setPageNumber(pageNumber - 1)
-    //     getCurrentPageMovies(Number(event.target.value))
-    //     }
+    const handlePaginationPrev = (event) =>{
+        event.preventDefault()
+        setPageNumber(pageNumber - 1)
+        getAllUserOrders(Number(event.target.value))
+        }
     
-    //     const handlePaginationNext = (event) =>{
-    //         event.preventDefault()
-    //     setPageNumber(pageNumber + 1)
-    //     getCurrentPageMovies(Number(event.target.value))
-    //     }
-    //     const handlePageClick = (event) =>{
-    //         event.preventDefault()
-    //         console.log(event.target)
-    //         setPageNumber(Number(event.target.id))
-    //         getCurrentPageMovies(Number(event.target.id))
-    //     }
+        const handlePaginationNext = (event) =>{
+            event.preventDefault()
+        setPageNumber(pageNumber + 1)
+        getAllUserOrders(Number(event.target.value))
+        }
+        const handlePageClick = (event) =>{
+            event.preventDefault()
+            console.log(event.target)
+            setPageNumber(Number(event.target.id))
+            getAllUserOrders(Number(event.target.id))
+        }
 
     const getMoviesOnOrders = async() => {
         let cartIds = orders.map((order)=>{
@@ -92,12 +93,17 @@ const AllOrders = ({userDataObj}) =>{
         getMoviesOnOrders()
     }, [orders])
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [pageNumber])
+
     return (
         <div> 
           
-        {userDataObj.id === 5 || userDataObj.id === 8 || userDataObj.id === 9 || userDataObj.id === 11 ? 
+        {(userDataObj.id === 5 || userDataObj.id === 8 || userDataObj.id === 9 || userDataObj.id === 11) ? 
         <div>
-            {/* {showOrderPagination ?  <div className="paginationContainer">
+            <h1 className='all-orders-title'>All Orders</h1>
+            {showOrderPagination ?  <div className="paginationContainer">
                 {pageNumber !== 1 ? <button id="paginationPrev" className="paginationButton" value={pageNumber - 1} onClick={handlePaginationPrev}>Prev</button> : <></>}
                  <a href="#" className={pageNumber === 1 ? "pagination activePage" : "pagination" } id={1} onClick={(handlePageClick)}>1</a>
                  <a href="#" className={pageNumber === 2 ? "pagination activePage" : "pagination" } id={2} onClick={handlePageClick}>2</a>
@@ -105,10 +111,12 @@ const AllOrders = ({userDataObj}) =>{
                  <a href="#" className={pageNumber === 4 ? "pagination activePage" : "pagination" } id={4} onClick={handlePageClick}>4</a>
                  <a href="#" className={pageNumber === 5 ? "pagination activePage" : "pagination" } id={5} onClick={handlePageClick}>5</a>
                  <a href="#" className={pageNumber === 6 ? "pagination activePage" : "pagination" } id={6} onClick={handlePageClick}>6</a>
+                 <a href="#" className={pageNumber === 7 ? "pagination activePage" : "pagination" } id={7} onClick={handlePageClick}>7</a>
+                 <a href="#" className={pageNumber === 8 ? "pagination activePage" : "pagination" } id={8} onClick={handlePageClick}>8</a>
 
-                 {pageNumber !== 6 ? <button id="paginationNext" className="paginationButton" value={pageNumber + 1} onClick={handlePaginationNext}>Next</button>: <></>} */}
+                 {pageNumber !== 8 ? <button id="paginationNext" className="paginationButton" value={pageNumber + 1} onClick={handlePaginationNext}>Next</button>: <></>}
+                 </div> : <></>}
 
-        <h1 className='all-orders-title'>All Orders</h1>
         {orders.map((order, index) => {
             let orderDate = Number(order.date)
             let dateObj = new Date(orderDate)
@@ -134,12 +142,13 @@ const AllOrders = ({userDataObj}) =>{
                     <p>Date Purchased: {finalDateFormat}</p>
                     <p>Price: ${order.price}</p>
                     <p>Sent To: {order.address}</p>
-                    <p>Email: {order.email}</p>
+                    {order.email ? <p>Email: {order.email}</p> : null}
                 </div>
             )
         })} </div>
         : <h1>nice try buddy</h1> }
         
+  
     </div>
     )
 }

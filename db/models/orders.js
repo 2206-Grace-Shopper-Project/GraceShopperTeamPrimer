@@ -40,6 +40,7 @@ async function getAllOrders({limitNumber, offsetNumber}) {
         JOIN cart ON orders."cartId" = cart.id
         JOIN users ON cart."userId" = users.id
         WHERE "isPurchased" = true
+        ORDER BY id
         LIMIT ${limitNumber} OFFSET ${offsetNumber};
         `)
         return orders
