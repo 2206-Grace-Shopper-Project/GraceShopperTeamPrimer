@@ -98,7 +98,7 @@ let userId = userDataObj.id
           {/* <h1 className="viewCartTitle">Cart</h1> */}
 
           <div>
-            <h3>{myCart.name}'s picks</h3>
+            <h3 id='user-cart'>{myCart.name}'s picks</h3>
             {myCart.movies ? (
               myCart.movies.length ? (
                 <div>
@@ -111,8 +111,8 @@ let userId = userDataObj.id
                     totalPrice += (movie.price + 0.99) * quantity;
                     return (
                       <div className="singleCart" key={index}>
-                        <p>Movie Title: {movie.title}</p>
                         <img id='movie-poster' src={movie.poster} />
+                        <p>Movie Title: {movie.title}</p>
                         <p>Qty: {quantity}</p>
                         <p>${movie.price}.99 Each</p>
 
@@ -149,11 +149,11 @@ let userId = userDataObj.id
                   })}{" "}
                   <div>
                     <p className='cart-total'>TOTAL: {Math.round(totalPrice * 100) / 100}</p>
-                    <button onClick={()=>{
+                    <button id='checkout-button' onClick={()=>{
                       setConfirmPurchase(true)
                     }}>Checkout Cart</button>{" "}
-                    { confirmPurchase ? <span>
-                      <p>CONFIRM PURCHASE</p>
+                    { confirmPurchase ? <div id='checkout-form'>
+                      <p>Choose Shipping Address:</p>
                       <form onSubmit={handleOnSubmit}>
                         {addressOnOrder?.length ? 
                         <select
@@ -171,10 +171,10 @@ let userId = userDataObj.id
                         :  
                         <input name="address" type="text" placeholder="Enter Address"/>}
                         <button type="submit">
-                          purchase
+                          Purchase
                         </button>
                       </form>
-                    </span> : <></>}
+                    </div> : <></>}
                   </div>{" "}
                 </div>
               ) : (

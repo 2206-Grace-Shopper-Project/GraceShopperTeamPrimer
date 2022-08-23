@@ -94,7 +94,7 @@ const Orders = ({userDataObj}) =>{
                             : null } </div>)
                     }) : <></>}
                     <div id='price-and-address'>
-                    <p>Price: ${order.price}</p>
+                    <p className='order-history-price'>Price: ${order.price}</p>
                     <p>Sent To: {order.address}</p>
                     </div>
                 </div>
