@@ -133,12 +133,14 @@ let userId = userDataObj.id
                               setCanEdit={setCanEdit}
                               myCart={myCart}
                               setMyCart={setMyCart}
+                              guestUserObj={guestUserObj}
                             />
                             <RemoveMovie
                               myCart={myCart}
                               setMyCart={setMyCart}
                               userDataObj={userDataObj}
                               CMI={CMI}
+                              guestUserObj={guestUserObj}
                             />{" "}
                           </>
                         ) : (

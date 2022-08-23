@@ -32,14 +32,15 @@ async function getOrdersByUserId(userId) {
     }
 }
 
-async function getAllOrders() {
+async function getAllOrders({limitNumber, offsetNumber}) {
     try {
         const {rows: orders} = await client.query(`
         SELECT orders.*, users.name
         FROM orders
         JOIN cart ON orders."cartId" = cart.id
         JOIN users ON cart."userId" = users.id
-        WHERE "isPurchased" = true;
+        WHERE "isPurchased" = true
+        LIMIT ${limitNumber} OFFSET ${offsetNumber};
         `)
         return orders
     } catch (error) {

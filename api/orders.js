@@ -28,9 +28,13 @@ router.get('/:userId', async (req, res, next) => {
 })
 
 // GET all orders (admin)
-router.get('/', async (req, res, next) => {
+router.get('/:limitNumber/:offsetNumber', async (req, res, next) => {
+    let {limitNumber, offsetNumber} = req.params
+    limitNumber = Number(limitNumber)
+    offsetNumber = Number(offsetNumber)
+
     try {
-        const allOrders = await getAllOrders()
+        const allOrders = await getAllOrders({limitNumber, offsetNumber})
         res.send(allOrders)
     } catch (error) {
         console.error("error getting all orders")
