@@ -47,10 +47,11 @@ const AllOrders = ({userDataObj}) =>{
     let navigate = useNavigate()
 
     const getAllUserOrders = async(passedInPage) => {
-        const offsetNumber = (passedInPage - 1) * 10
+        const offsetNumber = (passedInPage - 1) * 15
         setOffsetNumber(offsetNumber)
-        const ordersList = await getAllOrders()
-        // const ordersList = await getAllSpecificOrders(limitNumber, offsetNumber)
+        // const ordersList = await getAllOrders()
+        const ordersList = await getAllSpecificOrders(limitNumber, offsetNumber)
+        console.log(ordersList, 'ordersList')
         setOrders(ordersList)
     }
 
