@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getMyAddresses } from "../api";
 import { AddAddress, UpdateName } from "./";
 
-const UserForm = ({ userDataObj, token }) => {
+const UserForm = ({ userDataObj, setUserDataObj, token }) => {
   const [showAddAddress, setShowAddAddress] = useState(false);
   const [myAddresses, setMyAddresses] = useState([]);
   const [showUpdateName, setShowUpdateName] = useState(false);
@@ -47,6 +47,7 @@ const UserForm = ({ userDataObj, token }) => {
       <div>
         {showUpdateName ? (
           <UpdateName
+            setUserDataObj={setUserDataObj}
             setShowUpdateName={setShowUpdateName}
             userDataObj={userDataObj}
             token={token}

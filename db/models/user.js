@@ -80,7 +80,7 @@ async function updateUser ({ id, ...fields }) {
   if (setString.length === 0) {
     return;
   }
-  if (fields.password) {const hashedPassword = await bcrypt.hash(fields.password, SALT_COUNT)
+  if (fields?.password) {const hashedPassword = await bcrypt.hash(fields.password, SALT_COUNT)
   fields.password = hashedPassword}
   
   try {
