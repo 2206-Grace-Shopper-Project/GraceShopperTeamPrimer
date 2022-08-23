@@ -47,7 +47,7 @@ useEffect(()=>{
       <Route path="/movies/:movieTitle" element={ !allMovies?.length ? <Loading /> : <MoviePage guestUserObj={guestUserObj} setGuestUserObj={setGuestUserObj} userDataObj={userDataObj} token={token} allMovies={allMovies} showButton={showButton} setShowButton={setShowButton} setIsLoading={setIsLoading}/> } />
       <Route path='/orders' element={<Orders setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
 
-      <Route path='/users' element={<UserForm setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
+      <Route path='/users' element={<UserForm setToken={setToken} token={token} userDataObj={userDataObj} setUserDataObj={setUserDataObj}/>}/>
 
       <Route path='/all-orders' element={<AllOrders setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
       <Route path='/all-users' element={<AllUsers setToken={setToken} token={token} userDataObj={userDataObj}/>}/>

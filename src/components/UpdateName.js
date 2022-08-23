@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 import "./extra.css"
 
 // goes into API INDEX
-// export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
-export const BASE = `http://localhost:4000/api`;
+export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
 
-export async function updateName(userId, name){
+
+export async function updateName(userId, updateObj){
     const token = localStorage.getItem("token")
-    console.log(name, userId, "line 10 from UpdateName")
+
     try {
         const response = await fetch(`${BASE}/users/${userId}`, {
             method: "PATCH",
@@ -15,9 +15,7 @@ export async function updateName(userId, name){
                 "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify({
-                name
-            }),
+            body: JSON.stringify(updateObj),
         });
         const result = await response.json();
         return result;  
@@ -29,18 +27,21 @@ export async function updateName(userId, name){
 
 
 
-const UpdateName = ({setShowUpdateName, userDataObj,}) => {
-    console.log(userDataObj)
+const UpdateName = ({setShowUpdateName, userDataObj,setUserDataObj}) => {
 
 const handleSubmit = async (event) => {
     event.preventDefault();
     const userId = userDataObj.id
     const name = event.target.newName.value
     const email = userDataObj.email
+    const updateObj = {}
+    updateObj.name = name
+    updateObj.email = email
+    updateObj.id = userId
     
-    console.log(await updateName(userId, name), "HERE IS THAT UPDATED INFO");
+    await updateName(userId, updateObj), 
     setShowUpdateName(false)
- 
+    setUserDataObj(updateObj)
   };
 
     return(
