@@ -17,6 +17,7 @@ const ViewCart = ({ userDataObj, guestUserObj, currentUser}) => {
   const [userCart, setUserCart] = useState([]);
   const [canEdit, setCanEdit] = useState(null);
   const [orderAddress, setOrderAddress] = useState([]);
+  const [confirmPurchase, setConfirmPurchase] = useState(false)
   let totalPrice = 0;
 
   async function myCartToView(userId) {
@@ -74,7 +75,7 @@ let userId = userDataObj.id
       {" "}
       {myCart ? (
         <>
-          <h1 className="viewCartTitle">Cart</h1>
+          {/* <h1 className="viewCartTitle">Cart</h1> */}
 
           <div>
             <h3>{myCart.name}'s picks</h3>
@@ -91,7 +92,7 @@ let userId = userDataObj.id
                     return (
                       <div className="singleCart" key={index}>
                         <p>Movie Title: {movie.title}</p>
-                        <img className="" src={movie.poster} />
+                        <img id='movie-poster' src={movie.poster} />
                         <p>Qty: {quantity}</p>
                         <p>${movie.price}.99 Each</p>
 
@@ -127,9 +128,12 @@ let userId = userDataObj.id
                     );
                   })}{" "}
                   <div>
-                    <p>TOTAL: {Math.round(totalPrice * 100) / 100}</p>
-                    <p>CONFIRM PURCHASE</p>{" "}
-                    <span>
+                    <p className='cart-total'>TOTAL: {Math.round(totalPrice * 100) / 100}</p>
+                    <button onClick={()=>{
+                      setConfirmPurchase(true)
+                    }}>Checkout Cart</button>{" "}
+                    { confirmPurchase ? <span>
+                      <p>CONFIRM PURCHASE</p>
                       <form onSubmit={handleOnSubmit}>
                         {addressOnOrder?.length ? 
                         <select
@@ -150,7 +154,7 @@ let userId = userDataObj.id
                           purchase
                         </button>
                       </form>
-                    </span>
+                    </span> : <></>}
                   </div>{" "}
                 </div>
               ) : (
