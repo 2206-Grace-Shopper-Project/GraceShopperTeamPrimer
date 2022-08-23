@@ -6,6 +6,8 @@ const UserForm = ({ userDataObj, token }) => {
   const [showAddAddress, setShowAddAddress] = useState(false);
   const [myAddresses, setMyAddresses] = useState([]);
   const [showUpdateName, setShowUpdateName] = useState(false);
+  const [showUpdateEmail, setShowUpdateEmail] = useState(false);
+  const [showDeleteAddress, setShowDeleteAddress] = useState(false);
 
   const addressArray = async () => {
     const addyResponse = await getMyAddresses(userDataObj.id);
@@ -20,14 +22,15 @@ const UserForm = ({ userDataObj, token }) => {
   const MappedAddresses =
     myAddresses.length > 0
       ? myAddresses.map((address, index) => {
-          return <div className="addressDisplay" key={index}>{address.address}</div>;
+          return <div className="addressDisplay" key={index}>{address.address}{" "}<button
+          onClick={(event) => {setShowDeleteAddress(true);}}>delete</button></div>;
         })
       : null;
 
   return (
     <div className="compUserForm">
       <h1 className="userFormHeader">Hello {userDataObj.name}</h1>
-      <div>Change Password</div>
+      
       <fieldset>
           <legend>name</legend>
       <div>
@@ -53,7 +56,9 @@ const UserForm = ({ userDataObj, token }) => {
       </fieldset>
       <fieldset>
         <legend>email</legend>
-          <div>{userDataObj.email}</div>
+          <div>{userDataObj.email}{" "}
+          <button
+          onClick={(event) => {setShowUpdateEmail(true);}}>update</button></div>
       </fieldset>
      <fieldset>
       <legend>addresses</legend>
