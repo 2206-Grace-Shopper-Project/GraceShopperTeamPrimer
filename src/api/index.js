@@ -280,6 +280,7 @@ export const createNewCart = async (userId) => {
 
 export const getEachCartByUser = async (userId) => {
   try {
+    console.log(userId,"userID")
     const response = await fetch(`${BASE}/carts/${userId}`, {
       headers: {
         "Content-Type": "application/json",
