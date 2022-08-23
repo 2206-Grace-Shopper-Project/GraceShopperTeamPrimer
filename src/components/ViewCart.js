@@ -75,7 +75,8 @@ let userId = userDataObj.id
     let userId = guestUserObj.id;
     let email = guestUserObj.email;
   let date = new Date().getTime();
-  let address = orderAddress;
+  // let address = orderAddress;
+  let address = event.target[0].value
   let price = Math.round(totalPrice * 100) / 100;
   // console.log(addressOnOrder[0].address);
   console.log(email, date, address, price);
