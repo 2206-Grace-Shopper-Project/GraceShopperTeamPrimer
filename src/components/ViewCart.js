@@ -81,11 +81,6 @@ let userId = userDataObj.id
   console.log(email, date, address, price);
 
   await createNewOrder(cartId, address, email, date, price)
-  const newestCartEver = await createNewCart(userId);
-  setUserCart(newestCartEver);
-  console.log(newestCartEver, 'newestcartever')
-    setMyCart(userCart)
-  console.log(myCart, 'newest cart ever')
     clearGuestUser();
     window.location.assign("/");
     alert('Order placed! Thank you for visiting please make an account for in depth order history!')

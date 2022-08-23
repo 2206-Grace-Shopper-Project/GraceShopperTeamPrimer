@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   addMovieToCart,
   getEachCartByUser,
@@ -17,10 +17,40 @@ const CartMovies = ({
   guestUserObj,
   setGuestUserObj
 }) => {
+
+  const [purchaseMovieId,setPurchaseMovieId] = useState(null);
+
+
   let userId = null;
+
+
+
+  async function generateCart (userId){
+    console.log("createcart function");
+    const response = await createNewCart(userId);
+    let cartId = response.id;
+    const movieId = id;
+    let quantity = purchaseAmount;
+    const movieInCart = await addMovieToCart(cartId, movieId, quantity);
+    console.log(movieInCart, "this should be added to cart");
+    console.log(response, "newCart");
+
+  }
+
+useEffect(()=>{
+if(guestUserObj?.id && purchaseMovieId){
+userId = guestUserObj.id
+
+generateCart(userId)}
+setPurchaseMovieId(null)
+},[guestUserObj])
+
+
   // console.log(guestUserObj,'GUO')
   const handleOnClick = async (event) => {
     event.preventDefault();
+
+    setPurchaseMovieId(id)
 
     if (userDataObj) {
       let userId = userDataObj.id;
@@ -63,8 +93,8 @@ need to keep log in info in local storage and stop it from overiding evreytime y
       console.log(guestUser,'aftertheproblem')
       setGuestUserObj(guestUser)
     }
-
     let userId = guestUserObj.id;
+    
     const guestOldCart = await getEachCartByUser(userId);
     if (guestOldCart) {
       console.log("HavecartFunction");
@@ -76,16 +106,8 @@ need to keep log in info in local storage and stop it from overiding evreytime y
         result,
         "if they have a cart but are not logged in and they added a movie"
       );
-    } else if (!guestOldCart) {
-      console.log("createcart function");
-      const response = await createNewCart(userId);
-      let cartId = response.id;
-      const movieId = id;
-      let quantity = purchaseAmount;
-      const movieInCart = await addMovieToCart(cartId, movieId, quantity);
-      console.log(movieInCart, "this should be added to cart");
-      console.log(response, "newCart");
-    }
+    } 
+    
 
     //  else {
     //   if (!userDataObj) {
