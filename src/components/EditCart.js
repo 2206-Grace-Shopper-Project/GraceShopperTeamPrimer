@@ -85,7 +85,7 @@ const EditCart = ({
   };
 
   return (
-    <div>
+    <div id = 'edit-cart'>
       <form onSubmit={handleSubmit}>
         <label htmlFor="quantity">Qty:</label>
         <input type="number" required name="quantity" min="1" />
