@@ -21,6 +21,8 @@ export async function getCartById(id) {
 }
 
 export async function getAllSpecificOrders(limitNumber, offsetNumber) {
+    console.log(limitNumber, 'limitNumber')
+    console.log(offsetNumber, 'offsetNumber')
     try {
       const response = await fetch(`${BASE}/orders/${limitNumber}/${offsetNumber}`, {
         headers: {
@@ -44,11 +46,11 @@ const AllOrders = ({userDataObj}) =>{
     const [limitNumber, setLimitNumber] = useState(15)
     const [offsetNumber, setOffsetNumber] = useState(0)
     const [showOrderPagination, setShowOrderPagination] = useState(true)
-    let navigate = useNavigate()
 
     const getAllUserOrders = async(passedInPage) => {
         const offsetNumber = (passedInPage - 1) * 15
         setOffsetNumber(offsetNumber)
+        console.log(offsetNumber, 'line 54')
         // const ordersList = await getAllOrders()
         const ordersList = await getAllSpecificOrders(limitNumber, offsetNumber)
         console.log(ordersList, 'ordersList')
@@ -86,7 +88,7 @@ const AllOrders = ({userDataObj}) =>{
     }
 
     useEffect(() => {
-        getAllUserOrders();
+        getAllUserOrders(pageNumber);
     }, [])
     
     useEffect(() => {
@@ -113,8 +115,10 @@ const AllOrders = ({userDataObj}) =>{
                  <a href="#" className={pageNumber === 6 ? "pagination activePage" : "pagination" } id={6} onClick={handlePageClick}>6</a>
                  <a href="#" className={pageNumber === 7 ? "pagination activePage" : "pagination" } id={7} onClick={handlePageClick}>7</a>
                  <a href="#" className={pageNumber === 8 ? "pagination activePage" : "pagination" } id={8} onClick={handlePageClick}>8</a>
+                 <a href="#" className={pageNumber === 9 ? "pagination activePage" : "pagination" } id={9} onClick={handlePageClick}>9</a>
+                 <a href="#" className={pageNumber === 10 ? "pagination activePage" : "pagination" } id={10} onClick={handlePageClick}>10</a>
 
-                 {pageNumber !== 8 ? <button id="paginationNext" className="paginationButton" value={pageNumber + 1} onClick={handlePaginationNext}>Next</button>: <></>}
+                 {pageNumber !== 10 ? <button id="paginationNext" className="paginationButton" value={pageNumber + 1} onClick={handlePaginationNext}>Next</button>: <></>}
                  </div> : <></>}
 
         {orders.map((order, index) => {
