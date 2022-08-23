@@ -58,6 +58,8 @@ const MoviePage = ({
                   title={movieObj.title}
                   setShowButton={setShowButton}
                   showButton={showButton}
+                  guestUserObj={guestUserObj} 
+                  setGuestUserObj={setGuestUserObj}
                 />
               </span>
               <label htmlFor="quantity">Qty: </label>
