@@ -236,6 +236,7 @@ div.movieInfoContainer {
 .singleMoviePoster{
   margin-left: 30%;
   margin-top: 10%;
+  height: 450px
 }
 
 .singlePriceText {
