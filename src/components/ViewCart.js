@@ -26,7 +26,6 @@ const ViewCart = ({ userDataObj, guestUserObj, currentUser }) => {
     console.log(myCart, "this is my cart in the function");
 
     let addressInfo = await getMyAddresses(userId);
-    // console.log(addressInfo.address, "!!!!!!!!");
     setAddressOnOrder(addressInfo.address);
     if (addressInfo?.address?.length) {
       setOrderAddress(addressInfo.address[0].address);
@@ -57,23 +56,19 @@ const ViewCart = ({ userDataObj, guestUserObj, currentUser }) => {
       let date = new Date().getTime();
       let address = orderAddress;
       let price = Math.round(totalPrice * 100) / 100;
-      // console.log(addressOnOrder[0].address);
       console.log(email, date, address, price);
 
- FrontEndCartBranch
       await createNewOrder(cartId, address, email, date, price);
       const newestCartEver = await createNewCart(userId);
       setUserCart(newestCartEver);
       setMyCart(userCart);
-      // window.location.assign("/");
       alert("Order placed! A receipt has been sent to your order history!");
+      window.location.assign("/");
     } else {
       let email = guestUserObj.email;
       let date = new Date().getTime();
-      // let address = orderAddress;
       let address = event.target[0].value;
       let price = Math.round(totalPrice * 100) / 100;
-      // console.log(addressOnOrder[0].address);
       console.log(email, date, address, price);
 
 
@@ -101,11 +96,9 @@ const ViewCart = ({ userDataObj, guestUserObj, currentUser }) => {
               myCart.movies.length ? (
                 <div>
                   {myCart.movies.map((movie, index) => {
-                    // console.log(movie, "MOVIE")
                     let CMI = movie.cartMoviesId;
                     let movieId = movie.id;
                     let quantity = movie.quantity;
-                    // setTotalPrice(totalPrice + (movie.price * quantity))
                     totalPrice += (movie.price + 0.99) * quantity;
                     return (
                       <div className="singleCart" key={index}>
@@ -197,7 +190,6 @@ const ViewCart = ({ userDataObj, guestUserObj, currentUser }) => {
             ) : (
               <h4>loading your cart</h4>
             )}
-            {/* { myCart.movies.length ? () : <></>    }   */}
           </div>
         </>
       ) : null}
