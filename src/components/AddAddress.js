@@ -2,17 +2,23 @@ import React from "react";
 import { NewAddress } from "../api";
 import "./extra.css"
 
-const AddAddress = ({ token, userDataObj, setShowAddAddress }) => {
+const AddAddress = ({ token, userDataObj, setShowAddAddress, myAddresses, setMyAddresses }) => {
   const handleSubmit = async (event) => {
-    console.log(token, "Angelina Jolie");
     event.preventDefault();
     const userId = userDataObj.id;
     const address = event.target.address.value;
-
-    await NewAddress(token, userId, address);
+    const result = await NewAddress(token, userId, address);
+    const updatedAddresses = [...myAddresses]
+    const newAddressObj = {}
+    newAddressObj.address = result.address
+    newAddressObj.id = result.id
+    const response = updatedAddresses.concat(newAddressObj)
+    setMyAddresses(response)
     setShowAddAddress(false);
   };
 
+
+// begin return for component
   return (
     <div>
       <div>Add Address Below</div>

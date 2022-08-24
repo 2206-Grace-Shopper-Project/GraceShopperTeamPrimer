@@ -6,13 +6,13 @@ import "./extra.css"
 
 const BASE = `https://radiant-citadel-20620.herokuapp.com/api`
 
-export async function deleteAddy (token, addressId){
+export async function deleteAddy (addressId){
+  console.log(addressId, "eric Stoltz")
   try {
-    const response = await fetch(`${BASE}/address/${addressId}`, {
+    const response = await fetch(`${BASE}/users/address/${addressId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
     });
     const result = await response.json();
@@ -26,9 +26,7 @@ export async function deleteAddy (token, addressId){
 // end of goin' over to the API index
 
 
-const DeleteAddress = ({ token, userDataObj, setShowDeleteAddress, address }) => {
-
-console.log(address, "kathy griffin")
+const DeleteAddress = ({ token, userDataObj, setShowDeleteAddress, clickId, address, myAddresses, setMyAddresses }) => {
 
   return (
     <div>
@@ -36,15 +34,20 @@ console.log(address, "kathy griffin")
       <div>
         <button
         onClick={async (event) =>{
-         
-          const confirmation = await deleteAddy(token, address.id)
-          console.log(confirmation, "steve buscemi")
+       
+          await deleteAddy(address.id)
+          const updatedAddresses = [...myAddresses]
+          updatedAddresses.forEach((element, index)=>{
+            if (element.id === address.id) {
+              updatedAddresses.splice(index, 1)
+              console.log(updatedAddresses, "post-splice")
+            }
+          })
+          console.log(updatedAddresses, "peter Greene")
+          console.log(address.id, "here's address.id")
+          setMyAddresses(updatedAddresses)
           setShowDeleteAddress(false);
-          // if (confirmation.success){
-          //  setMyInfo({...myInfo ,posts:myInfo.posts.filter((post)=> {
-          //      return(post._id !== singlePost._id)
-          // })})
-          // }
+          
         }}
         >Yep!</button>
 
