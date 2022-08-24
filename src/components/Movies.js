@@ -103,7 +103,7 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
               </div>
               <div className="movieInfoContainer"> 
               <p className='movie-titles'>{title}  ({year})</p>
-              <p>${movie.price}.99</p>
+              <p className='movie-prices'>${movie.price}.99</p>
                 <button id='get-info-button' onClick={()=>{
                   setShowButton(true)
                   navigate(`/movies/${linkTitle}`)

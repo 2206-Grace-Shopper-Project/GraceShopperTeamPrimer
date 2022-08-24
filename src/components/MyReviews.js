@@ -60,8 +60,8 @@ const MyReviews = ({ userDataObj, token }) => {
       : null;
 
   return (
-    <div className="componentBasics">
-      <p className="componentHeader">Yeah, yeah. Everyone's a critic.</p>
+    <div className="singleComponentBasics">
+      <p className="singleComponentHeader">Yeah, yeah. Everyone's a critic.</p>
       <div>{myReviews.length > 0 ? MappedReviews : null}</div>
     </div>
   );

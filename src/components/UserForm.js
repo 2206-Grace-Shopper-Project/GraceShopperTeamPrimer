@@ -29,6 +29,7 @@ const UserForm = ({ userDataObj, setUserDataObj, token }) => {
             <div className="addressDisplay" key={index}>
               {address.address}{" "}
               <button
+                id='delete-address-button'
                 onClick={(event) => {
                   setShowDeleteAddress(true);
                   setClickId(`${address.id}`);
@@ -51,6 +52,7 @@ const UserForm = ({ userDataObj, setUserDataObj, token }) => {
       : null;
 
   return (
+    <div id='userForm'>
     <div className="compUserForm">
       <h1 className="userFormHeader">Hello {userDataObj.name}</h1>
 
@@ -59,6 +61,7 @@ const UserForm = ({ userDataObj, setUserDataObj, token }) => {
         <div>
           {userDataObj.name}{" "}
           <button
+            id='userform-button'
             onClick={(event) => {
               setShowUpdateName(true);
             }}
@@ -82,6 +85,7 @@ const UserForm = ({ userDataObj, setUserDataObj, token }) => {
         <div>
           {userDataObj.email}{" "}
           <button
+            id='userform-button'
             onClick={(event) => {
               setShowUpdateEmail(true);
             }}
@@ -106,6 +110,7 @@ const UserForm = ({ userDataObj, setUserDataObj, token }) => {
         <div className="addressDisplay">{MappedAddresses}</div>
         <div>
           <button
+            id='userform-button'
             onClick={(event) => {
               setShowAddAddress(true);
             }}
@@ -123,6 +128,7 @@ const UserForm = ({ userDataObj, setUserDataObj, token }) => {
           ) : null}
         </div>
       </fieldset>
+    </div>
     </div>
   );
 };

@@ -44,7 +44,7 @@ console.log(movieObj, 'when component loads')
     }
 return(
     <>
-        <form onSubmit={handleSubmit}>
+        <form className='edit-movie-form' onSubmit={handleSubmit}>
             <label htmlFor="title">Title</label>
             <input name="title" maxLength={255} value={movieTitle} onChange={(event)=>setMovieTitle(event.target.value)} required placeholder='title'></input>
             <label htmlFor="genre">Genre</label>
