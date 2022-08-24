@@ -4,10 +4,9 @@ import AddReview from "./AddReview";
 import CartMovies from "./CartMovies";
 import Loading from "./Loading";
 import ReviewsByMovie from "./ReviewsByMovie";
-import "./extra.css"
+import "./extra.css";
 import EditMovie from "./EditMovie";
 import DeleteMovie from "./DeleteMovie";
-
 
 const MoviePage = ({
   userDataObj,
@@ -16,32 +15,32 @@ const MoviePage = ({
   showButton,
   token,
   guestUserObj,
-  setGuestUserObj
+  setGuestUserObj,
 }) => {
   const [movieObj, setMovieObj] = useState({});
   const [purchaseAmount, setPurchaseAmount] = useState(1);
   const [isShown, setIsShown] = useState(false);
   const [movieReviews, setMovieReviews] = useState([]);
-  const [editMovieEntry, setEditMovieEntry] = useState(false)
+  const [editMovieEntry, setEditMovieEntry] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const movieTitle = useParams().movieTitle.replace(/\+/g, " ");
   const getMovieData = () => {
-    console.log(allMovies, "phil lamar");
     allMovies.forEach((movie) => {
       if (movie.title === movieTitle) {
         setMovieObj(movie);
-        console.log('went in here first if')
-        if(userDataObj?.id === 5 || userDataObj?.id === 8 || userDataObj?.id === 9 || userDataObj?.id === 11 ){
-          console.log('maybe in here?')
-          return
+        if (
+          userDataObj?.id === 5 ||
+          userDataObj?.id === 8 ||
+          userDataObj?.id === 9 ||
+          userDataObj?.id === 11
+        ) {
+          return;
         }
-        if(movie.deleted){
-          console.log('something went wrong')
-          navigate('/MovieDoesNotExist', {replace: true})
+        if (movie.deleted) {
+          navigate("/MovieDoesNotExist", { replace: true });
         }
-        console.log(movie, "it works");
         return;
       }
     });
@@ -53,14 +52,12 @@ const MoviePage = ({
 
   return (
     <>
-      {/* <h1>All about: {movieTitle}</h1> */}
       <div key={movieObj.id} className="singleMovieContainer">
         <div className="singleTopRowContainer">
           <img className="singleMoviePoster" src={movieObj.poster} />
           <div className="singleTextContainer">
             <div className="singlePriceText singleMovieText">
               <p id="moviePrice">${movieObj.price}.99</p>
-              {/* <br></br> */}
               <span>
                 <CartMovies
                   userDataObj={userDataObj}
@@ -70,7 +67,7 @@ const MoviePage = ({
                   title={movieObj.title}
                   setShowButton={setShowButton}
                   showButton={showButton}
-                  guestUserObj={guestUserObj} 
+                  guestUserObj={guestUserObj}
                   setGuestUserObj={setGuestUserObj}
                 />
               </span>
@@ -110,8 +107,6 @@ const MoviePage = ({
               ) : (
                 <br></br>
               )}
-
-              {/* <button onClick={()=>{<CartMovies userDataObj={userDataObj} id={movieObj.id} purchaseAmount={purchaseAmount} realPrice={movieObj.price + .99} title={movieObj.title}/>}}>add to cart</button> */}
             </div>
           </div>
         </div>
@@ -134,40 +129,70 @@ const MoviePage = ({
               Directors: {movieObj.directors}{" "}
             </span>
             <br></br>
-            {/* <span className='furtherMovieInfo'>{movieObj.rated} </span> */}
           </div>
         </div>
       </div>
-      {userDataObj ? <div className="reviewButton">
-        <button
-          onClick={(event) => {
-            setIsShown(true);
-          }}
+      {userDataObj ? (
+        <div className="reviewButton">
+          <button
+            onClick={(event) => {
+              setIsShown(true);
+            }}
           >
-          Add Review
-        </button>
-      </div> : <></>}
+            Add Review
+          </button>
+        </div>
+      ) : (
+        <></>
+      )}
       <div>
         {isShown ? (
           <AddReview
-          userDataObj={userDataObj}
-          setIsShown={setIsShown}
-          token={token}
+            userDataObj={userDataObj}
+            setIsShown={setIsShown}
+            token={token}
+            movieId={movieObj.id}
+            movieReviews={movieReviews}
+            setMovieReviews={setMovieReviews}
+          />
+        ) : null}
+      </div>
+
+      {movieObj.id ? (
+        <ReviewsByMovie
           movieId={movieObj.id}
           movieReviews={movieReviews}
           setMovieReviews={setMovieReviews}
+          movieObj={movieObj}
+        />
+      ) : (
+        <Loading />
+      )}
+      {(movieObj.id && userDataObj?.id === 5) ||
+      userDataObj?.id === 8 ||
+      userDataObj?.id === 9 ||
+      userDataObj?.id === 11 ? (
+        <div className="moviePageButton">
+          {editMovieEntry ? (
+            <EditMovie
+              setEditMovieEntry={setEditMovieEntry}
+              movieObj={movieObj}
+              setMovieObj={setMovieObj}
+            />
+          ) : (
+            <button onClick={() => setEditMovieEntry(true)}>
+              Admin: Edit Movie
+            </button>
+          )}
+          <DeleteMovie
+            movieId={movieObj.id}
+            movieDeleted={movieObj.deleted}
+            movieObj={movieObj}
           />
-          ) : null}
-      </div>
-
-  {movieObj.id ? <ReviewsByMovie movieId={movieObj.id}  movieReviews={movieReviews} setMovieReviews={setMovieReviews} movieObj={movieObj}/> : <Loading/>}
-  {movieObj.id && userDataObj?.id === 5 || userDataObj?.id === 8 || userDataObj?.id === 9 || userDataObj?.id === 11 ? 
-    <div className="moviePageButton">
-        {editMovieEntry ? <EditMovie setEditMovieEntry={setEditMovieEntry} movieObj={movieObj} setMovieObj={setMovieObj}/> : <button onClick={()=>setEditMovieEntry(true)}>Admin: Edit Movie</button> }
-        <DeleteMovie movieId={movieObj.id} movieDeleted={movieObj.deleted} movieObj={movieObj}/>
-    </div> : <></> 
-
-}
+        </div>
+      ) : (
+        <></>
+      )}
     </>
   );
 };

@@ -16,11 +16,8 @@ const App = () => {
   const [guestUserObj, setGuestUserObj] = useState(grabGuestUser())
   const [isLoading, setIsLoading] = useState(false)
  
-console.log(guestUserObj,"guestUserinObj")
   const fetchMovies = async ()=>{
     const movieList = await getAllMovies()
-    console.log('main all fetch')
-    console.log(movieList, 'what happened')
     setAllMovies(movieList)
   } 
   const fetchMoviesToShowDefault = async ()=>{
@@ -29,7 +26,6 @@ console.log(guestUserObj,"guestUserinObj")
     const limitNumber = 50
     const offsetNumber = 0
     const defaultList = await specificMovieList(searchMethod, searchFlow, limitNumber, offsetNumber)
-    console.log('filter fetch')
 
     setFilteredMovieList(defaultList)
   }
@@ -57,10 +53,6 @@ useEffect(()=>{
       <Route path='/carts' element={<Carts setToken={setToken} token={token} userDataObj={userDataObj} guestUserObj={guestUserObj}/> }/>
 
       <Route path='/login-register' element={<div><Login setToken={setToken} token={token} userDataObj={userDataObj}/><Register setToken={setToken} token={token} userDataObj={userDataObj}/></div>}/>
-
-      {/* <Route path='/login' element={<Login setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
-
-      <Route path='/register' element={<Register setToken={setToken} token={token} userDataObj={userDataObj}/>}/> */}
 
       <Route path='/myreviews' element={<MyReviews setToken={setToken} token={token} userDataObj={userDataObj}/>}/>
       </Route>
