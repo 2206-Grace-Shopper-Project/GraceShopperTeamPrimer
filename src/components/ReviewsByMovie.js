@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { getMovieReviews } from "../api";
-import "./extra.css";
 
 const ReviewsByMovie = ({
   movieId,
@@ -29,7 +28,7 @@ const ReviewsByMovie = ({
                 <b>User: </b>
                 {review.name}
               </div>
-              <div >
+              <div>
                 <b>Review: </b>
                 {review.review}
               </div>
@@ -43,10 +42,16 @@ const ReviewsByMovie = ({
       {/* <p className="componentHeader">
         reviews of {movieObj.title}
       </p> */}
-      <p className="componentHeader">
-        Reviews
-      </p>
-      <div>{movieReviews.length > 0 ? MappedReviews : <div className="individualReviews">Looks like no one has reviewed {movieObj.title} yet</div>}</div>
+      <p className="componentHeader">Reviews</p>
+      <div>
+        {movieReviews.length > 0 ? (
+          MappedReviews
+        ) : (
+          <div className="individualReviews">
+            Looks like no one has reviewed {movieObj.title} yet
+          </div>
+        )}
+      </div>
     </div>
   );
 };
