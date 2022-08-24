@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getAllMovies, createMovie, updateMovie,  getMovieById, getANumberOfMoviesBySearchCategory, deleteMovieInDB } = require("../db");
+const { getAllMovies, createMovie, updateMovie,  getMovieById, getANumberOfMoviesBySearchCategory, deleteMovieInDB, updateInventoryCount } = require("../db");
 
 router.get("/", async (req, res, next) => {
   try {
