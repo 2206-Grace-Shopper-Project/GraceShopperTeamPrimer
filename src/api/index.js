@@ -220,11 +220,28 @@ export async function editMovieAPI(movieObj) {
 
 export async function deleteMovieAPI(id) {
   try {
-    const response = await fetch(`${BASE}/movies/${id}`, {
-      method: "DELETE",
+    const response = await fetch(`${BASE}/movies/delete/${id}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
+    });
+    const result = await response.json();
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function updateMovieInventory(id, newInventory) {
+  try {
+    const response = await fetch(`${BASE}/movies/delete/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({newInventory}),
     });
     const result = await response.json();
 
