@@ -12,6 +12,9 @@ const Carts = ({ userDataObj, guestUserObj }) => {
   //onClick for create a new cart
 
   async function doesCartExist() {
+    if(!guestUserObj && !userDataObj){
+      return
+    }
     if (userDataObj) {
       userId = userDataObj.id;
       setCurrentUser(userId);

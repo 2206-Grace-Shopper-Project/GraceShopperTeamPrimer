@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postinstall": "npm run client:build",
     "client:dev": "react-scripts start",
+    "client:build": "react-scripts build",
     "server:dev": "nodemon index.js",
     "db:build": "node ./db/seedData",
     "start:dev": "concurrently \"npm run client:dev\" \"npm run server:dev\"",
