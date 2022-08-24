@@ -86,9 +86,9 @@ body {
 
 .websiteTitle{
   color: white;
-  font-size: larger;
+  font-size: 28px;
   font-family: 'Montserrat Alternates', sans-serif;
-  margin-right: 32vw;
+  margin-right: 28vw;
 }
 
 #logo {
@@ -107,8 +107,13 @@ body {
   margin-top: 10px;
 }
 
+.login-register-link {
+  font-family:'Mulish', sans-serif;  
+  color: white;
+  margin-right: 5%;
+}
+
 .user-name{
-  /* font-family: "IBM Plex Sans"; */
   font-family:'Mulish', sans-serif;
   padding: 18px 0 0 0;
   margin-bottom: 0;
@@ -125,10 +130,6 @@ body {
 
 #add-cart-icon {
   color: black;
-}
-
-.login-register-link{
-  color: white
 }
 
 
