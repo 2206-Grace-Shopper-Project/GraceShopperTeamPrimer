@@ -47,7 +47,6 @@ router.patch("/inventory/:movieId", async (req, res, next) => {
   try {
     const id  = req.params.movieId;
     const {newInventory} = req.body
-    req.body.id = id;
     if(!(await getMovieById(id))){
         next({
             name: "MovieNotFoundError",
