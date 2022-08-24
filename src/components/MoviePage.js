@@ -164,7 +164,7 @@ const MoviePage = ({
   {movieObj.id && userDataObj?.id === 5 || userDataObj?.id === 8 || userDataObj?.id === 9 || userDataObj?.id === 11 ? 
     <div className="moviePageButton">
         {editMovieEntry ? <EditMovie setEditMovieEntry={setEditMovieEntry} movieObj={movieObj} setMovieObj={setMovieObj}/> : <button onClick={()=>setEditMovieEntry(true)}>Admin: Edit Movie</button> }
-        <DeleteMovie movieId={movieObj.id} movieDeleted={movieObj.deleted}/>
+        <DeleteMovie movieId={movieObj.id} movieDeleted={movieObj.deleted} movieObj={movieObj}/>
     </div> : <></> 
 
 }
