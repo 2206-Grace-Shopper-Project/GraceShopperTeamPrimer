@@ -2,45 +2,8 @@ export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
 
 // USER FUNCTIONS
 
-export async function getMyAddresses(id){
-  try {
-      const response = await fetch(`${BASE}/users/${id}`, {
-          headers: {
-              "Content-Type": "application/json",
-          },
-      });
-      const result = await response.json();
-      return result;
-  } catch (error) {
-      console.error
-  }
-
-}
-
-export async function NewAddress(token, userId, address) {
-  
-  try {
-      const response = await fetch (`${BASE}/users/address/${userId}`, {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${token}`
-          },
-          body: JSON.stringify({
-              address
-          })
-      });
-      const result = await response.json();
-      console.log(result, "and wendell pierce as agent richard gill")
-      return result;
-  } catch (error) {
-      console.error
-  }
-}
-
 export async function createUser(name, email, password) {
   try {
-    console.log(email, name, password);
     const response = await fetch(`${BASE}/users/register`, {
       method: "POST",
       headers: {
@@ -90,22 +53,41 @@ export async function loginUser(email, password) {
   }
 }
 
-export async function editReview(token, id, review) {
+export async function updateEmail(userId, updateObj){
+  const token = localStorage.getItem("token")
+
   try {
-    const response = await fetch(`${BASE}/reviews/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        review,
-      }),
-    });
-    const result = await response.json();
-    return result;
+      const response = await fetch(`${BASE}/users/${userId}`, {
+          method: "PATCH",
+          headers: {
+              "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(updateObj),
+      });
+      const result = await response.json();
+      return result;  
   } catch (error) {
-    console.error;
+      console.error;
+  }
+}
+
+export async function updateName(userId, updateObj){
+  const token = localStorage.getItem("token")
+
+  try {
+      const response = await fetch(`${BASE}/users/${userId}`, {
+          method: "PATCH",
+          headers: {
+              "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(updateObj),
+      });
+      const result = await response.json();
+      return result;  
+  } catch (error) {
+      console.error;
   }
 }
 
@@ -144,7 +126,6 @@ export async function addNewMovie(event, token){
           }),
      })
       const result = await response.json()
-      console.log(result, 'result ')
       return result
   } catch(error) {
       throw error
@@ -246,7 +227,6 @@ export async function updateMovieInventory(id, newInventory) {
       }),
     });
     const result = await response.json();
-    console.log(result)
     return result;
   } catch (error) {
     console.error(error);
@@ -299,14 +279,12 @@ export const createNewCart = async (userId) => {
 
 export const getEachCartByUser = async (userId) => {
   try {
-    console.log(userId,"userID")
     const response = await fetch(`${BASE}/carts/${userId}`, {
       headers: {
         "Content-Type": "application/json",
       },
     });
     const result = await response.json();
-    console.log(result, '!!!!!')
     const cart = result[0]
     console.log(cart, "this is rsult from api");
     return cart;
@@ -315,9 +293,22 @@ export const getEachCartByUser = async (userId) => {
   }
 };
 
+export async function getCartById(id) {
+  try {
+      const response = await fetch (`${BASE}/carts/cartid/${id}`, {
+          headers: {
+              "Content-Type": "application/json"
+            }
+      })
+      const result = await response.json()
+      return result
+  } catch (error) {
+      throw error
+  }
+}
+
 export const hideCart = async (id) => {
   try {
-    console.log(id, "id from ");
     const response = await fetch(`${BASE}/carts/${id}`, {
       method: "PATCH",
       headers: {
@@ -407,8 +398,6 @@ export const removeMovieFromACart = async (id) => {
 // ORDERS FUNCTIONS
 
 export async function createNewOrder(cartId, address, email, date, price){
-  console.log( cartId, address, email, date, price )
-
   try {
       const response = await fetch(`${BASE}/orders`, {
           method: "POST",
@@ -453,9 +442,23 @@ export async function getUserOrders(userId) {
         "Content-Type": "application/json",
       },
     });
-    console.log(response);
     const result = await response.json();
     console.log(result, "result from getUserOrders");
+    return result;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function getAllSpecificOrders(limitNumber, offsetNumber) {
+  try {
+    const response = await fetch(`${BASE}/orders/${limitNumber}/${offsetNumber}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const result = await response.json();
+    console.log(result, "result from getAllOrders");
     return result;
   } catch (error) {
     throw error;
@@ -501,18 +504,90 @@ export async function createReview(token, movieId, userId, review) {
 }
 
 export async function getMovieReviews(movieId) {
-  console.log(movieId, "uma thurman")
   try {
     const response = await fetch(`${BASE}/reviews/movie/${movieId}`, {
       headers: {
         "Content-Type": "application/json",
       },
     });
-    console.log(response, "bruce willis")
     const result = await response.json();
-    console.log(result, "ving rhames")
     return result;
   } catch (error) {
     console.error;
+  }
+}
+
+export async function editReview(token, id, review) {
+  try {
+    const response = await fetch(`${BASE}/reviews/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        review,
+      }),
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error;
+  }
+}
+
+//Address functions
+
+
+export async function getMyAddresses(id){
+  try {
+      const response = await fetch(`${BASE}/users/${id}`, {
+          headers: {
+              "Content-Type": "application/json",
+          },
+      });
+      const result = await response.json();
+      return result;
+  } catch (error) {
+      console.error
+  }
+
+}
+
+
+export async function NewAddress(token, userId, address) {
+  
+  try {
+      const response = await fetch (`${BASE}/users/address/${userId}`, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
+          },
+          body: JSON.stringify({
+              address
+          })
+      });
+      const result = await response.json();
+      return result;
+  } catch (error) {
+      console.error
+  }
+}
+
+
+export async function deleteAddy (token, addressId){
+  try {
+    const response = await fetch(`${BASE}/address/${addressId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
   }
 }

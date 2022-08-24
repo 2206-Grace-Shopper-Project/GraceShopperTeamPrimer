@@ -1,52 +1,44 @@
 import React, { useEffect, useState } from "react";
-import { createNewCart, getEachCartByUser } from "../api";
+import { getEachCartByUser } from "../api";
 import ViewCart from "./ViewCart";
 
-const Carts = ({ userDataObj, guestUserObj}) => {
-  let userId = null
+const Carts = ({ userDataObj, guestUserObj }) => {
+  let userId = null;
   const [userCart, setUserCart] = useState(null);
-  const [currentUser, setCurrentUser] = useState(null)
+  const [currentUser, setCurrentUser] = useState(null);
   useEffect(() => {
     doesCartExist();
   }, []);
   //onClick for create a new cart
-  
-
 
   async function doesCartExist() {
-    if(userDataObj){
-   userId = userDataObj.id
-   setCurrentUser(userId)
-  }  
-  if(guestUserObj){
-    userId = guestUserObj.id
-    setCurrentUser(userId)
-  }
+    if (userDataObj) {
+      userId = userDataObj.id;
+      setCurrentUser(userId);
+    }
+    if (guestUserObj) {
+      userId = guestUserObj.id;
+      setCurrentUser(userId);
+    }
     const canCreate = await getEachCartByUser(userId);
-    if (!canCreate.length ) {
+    if (!canCreate.length) {
       setUserCart(null);
     } else {
       setUserCart(canCreate[0]);
     }
   }
 
-  // const handleOnClick = async (event) => {
-  //   event.preventDefault();
-  //   if (userCart === null) {
-  //     const response = await createNewCart(userId);
-  //     console.log(response, "CreateCart Response");
-  //   }
-
-    //end of create cart function
-  // };
-
   return (
     <>
-        <div>
-          <ViewCart userDataObj={userDataObj} guestUserObj={guestUserObj} currentUser={currentUser}/>
-        </div>
+      <div>
+        <ViewCart
+          userDataObj={userDataObj}
+          guestUserObj={guestUserObj}
+          currentUser={currentUser}
+        />
+      </div>
     </>
-  )
+  );
 };
 
 export default Carts;

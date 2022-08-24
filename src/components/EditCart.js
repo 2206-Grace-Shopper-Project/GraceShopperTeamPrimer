@@ -8,60 +8,20 @@ const EditCart = ({
   setCanEdit,
   myCart,
   setMyCart,
-  guestUserObj
+  guestUserObj,
 }) => {
-  
   let id = CMI;
 
-  
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if(guestUserObj && myCart){
-     let userId = guestUserObj.id
-     let quantity = event.target.quantity.value;
-     const cart = await getEachCartByUser(userId);
-     console.log(cart, "just chcking my cart for today");
-     const newQ = await updateMovieQuantity(id, quantity);
-     console.log(newQ, "newQuantity");
-     let cartId = newQ.cartId;
-     let movieId = newQ.movieId;
-     quantity = newQ.quantity;
-     console.log(quantity, "QUANTITY");
-     console.log(movieId, "MOVIEID");
-     console.log(cartId, "CARTID");
-
-     let newMovies = [...myCart.movies];
-     newMovies.map((element) => {
-       if (
-         movieId === element.id &&
-         cartId === element.cartId &&
-         CMI === element.cartMoviesId
-       ) {
-         element.quantity = quantity;
-       }
-       console.log(element.quantity, "this should be the new quantity");
-       let finalMovies = [...newMovies];
-       console.log(finalMovies, "is this possible");
-       cart.movies = finalMovies;
-     });
-
-     setMyCart(cart);
-     setCanEdit(false);
-
-    }else
-    if (myCart) {
-      let userId = userDataObj.id;
+    if (guestUserObj && myCart) {
+      let userId = guestUserObj.id;
       let quantity = event.target.quantity.value;
       const cart = await getEachCartByUser(userId);
-      console.log(cart, "just chcking my cart for today");
       const newQ = await updateMovieQuantity(id, quantity);
-      console.log(newQ, "newQuantity");
       let cartId = newQ.cartId;
       let movieId = newQ.movieId;
       quantity = newQ.quantity;
-      console.log(quantity, "QUANTITY");
-      console.log(movieId, "MOVIEID");
-      console.log(cartId, "CARTID");
 
       let newMovies = [...myCart.movies];
       newMovies.map((element) => {
@@ -72,50 +32,41 @@ const EditCart = ({
         ) {
           element.quantity = quantity;
         }
-        console.log(element.quantity, "this should be the new quantity");
         let finalMovies = [...newMovies];
-        console.log(finalMovies, "is this possible");
         cart.movies = finalMovies;
       });
 
       setMyCart(cart);
       setCanEdit(false);
+    } else if (myCart) {
+      let userId = userDataObj.id;
+      let quantity = event.target.quantity.value;
+      const cart = await getEachCartByUser(userId);
+      const newQ = await updateMovieQuantity(id, quantity);
+      let cartId = newQ.cartId;
+      let movieId = newQ.movieId;
+      quantity = newQ.quantity;
 
-      // let newMovieObj = await addMovieToCart(cartId, movieId, quantity)
+      let newMovies = [...myCart.movies];
+      newMovies.map((element) => {
+        if (
+          movieId === element.id &&
+          cartId === element.cartId &&
+          CMI === element.cartMoviesId
+        ) {
+          element.quantity = quantity;
+        }
+        let finalMovies = [...newMovies];
+        cart.movies = finalMovies;
+      });
 
-      // console.log(newMovieObj,"this is a new movie")
+      setMyCart(cart);
+      setCanEdit(false);
     }
-
-    // if (myCart) {
-    //   const cart = await getEachCartByUser(userId);
-    //   let cartId = cart.id;
-    //   console.log("CartId", cartId);
-    //   console.log("movieId??", movieId);
-    //   console.log(event.target.quantity.value, "new Quantity ");
-    //   console.log("this should be your cart", cart);
-    //   const response = await updateMovieQuantity(id, quantity);
-    //   console.log("this is response from edit movie", response);
-
-    //   const newQuantity = [...myCart.movies];
-    //   newQuantity.forEach((element, index) => {
-    //       if (element.cartMoviesId === id) {
-    //          console.log(element, 'this is your element')
-    //         if(element.quantity){
-    //             response.quantity = element.quantity
-
-    //           newQuantity.splice(index, 1, response);
-    //           cart.movies[10] = newQuantity;}
-
-    //         }
-
-    //         setMyCart(cart);
-    //         setCanEdit(false);
-    //   });
-    // }
   };
 
   return (
-    <div id = 'edit-cart'>
+    <div id="edit-cart">
       <form onSubmit={handleSubmit}>
         <label htmlFor="quantity">Qty:</label>
         <input type="number" required name="quantity" min="1" />
