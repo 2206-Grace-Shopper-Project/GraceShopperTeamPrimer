@@ -163,7 +163,7 @@ const ViewCart = ({ userDataObj, guestUserObj, currentUser }) => {
                         </select>
                         :  
                         <input name="address" type="text" placeholder="Enter Address"/>}
-                        <button type="submit">
+                        <button id='purchase-button' type="submit">
                           Purchase
                         </button>
                       </form>
