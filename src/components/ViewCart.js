@@ -73,7 +73,7 @@ let userId = userDataObj.id
     console.log(newestCartEver, 'newestcartever')
       setMyCart(userCart)
     console.log(myCart, 'newest cart ever')
-    // window.location.assign("/");
+    window.location.assign("/");
     alert('Order placed! A receipt has been sent to your order history!')
 
   }else{
