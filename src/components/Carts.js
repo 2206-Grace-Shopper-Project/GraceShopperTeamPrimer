@@ -31,11 +31,14 @@ const Carts = ({ userDataObj, guestUserObj }) => {
   return (
     <>
       <div>
-        <ViewCart
+        {guestUserObj || userDataObj ? <ViewCart
           userDataObj={userDataObj}
           guestUserObj={guestUserObj}
           currentUser={currentUser}
-        />
+          />
+        : <div id='empty-cart'>
+        <h4 className='cart-empty' >oops... looks like theres nothing in your cart.</h4>
+        </div> }
       </div>
     </>
   );
