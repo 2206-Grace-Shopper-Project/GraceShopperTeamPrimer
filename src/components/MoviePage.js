@@ -24,6 +24,7 @@ const MoviePage = ({
   const [movieReviews, setMovieReviews] = useState([]);
   const [editMovieEntry, setEditMovieEntry] = useState(false)
 
+  const navigate = useNavigate()
 
   const movieTitle = useParams().movieTitle.replace(/\+/g, " ");
   const getMovieData = () => {
@@ -31,6 +32,15 @@ const MoviePage = ({
     allMovies.forEach((movie) => {
       if (movie.title === movieTitle) {
         setMovieObj(movie);
+        console.log('went in here first if')
+        if(userDataObj?.id === 5 || userDataObj?.id === 8 || userDataObj?.id === 9 || userDataObj?.id === 11 ){
+          console.log('maybe in here?')
+          return
+        }
+        if(movie.deleted){
+          console.log('something went wrong')
+          navigate('/MovieDoesNotExist', {replace: true})
+        }
         console.log(movie, "it works");
         return;
       }
@@ -154,7 +164,7 @@ const MoviePage = ({
       {movieObj.id && userDataObj?.id === 5 || userDataObj?.id === 8 || userDataObj?.id === 9 || userDataObj?.id === 11 ? 
         <div className="moviePageButton">
             {editMovieEntry ? <EditMovie setEditMovieEntry={setEditMovieEntry} movieObj={movieObj} setMovieObj={setMovieObj}/> : <button onClick={()=>setEditMovieEntry(true)}>Admin:Edit Movie</button> }
-            <DeleteMovie movieId={movieObj.id}/>
+            <DeleteMovie movieId={movieObj.id} movieDeleted={movieObj.deleted}/>
         </div> : <></> 
     
     }
