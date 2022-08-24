@@ -1,4 +1,3 @@
-import e from "cors";
 import React, { useEffect, useState } from "react";
 import {
   createNewCart,
@@ -6,11 +5,11 @@ import {
   getMyAddresses,
   hideCart,
   createNewOrder,
+  updateMovieInventory,
 } from "../api";
 import EditCart from "./EditCart";
 import RemoveMovie from "./RemoveMovie";
 import { clearGuestUser } from "../auth";
-
 
 const ViewCart = ({ userDataObj, guestUserObj, currentUser}) => {
   
@@ -50,6 +49,12 @@ let userId = userDataObj.id
 
   const handleOnSubmit = async (event) => {
     event.preventDefault();
+    console.log(myCart.movies, '!!!!!!!!!!!!')
+    for await (const movie of myCart.movies){
+      let newInventory = movie.inventory - movie.quantity
+      console.log(movie.id, newInventory, 'what we send to the function')
+      await updateMovieInventory(movie.id, newInventory)
+    }
     const cartId = myCart.id;
     await hideCart(cartId);
     console.log(orderAddress, "EVENT");
@@ -68,7 +73,7 @@ let userId = userDataObj.id
     console.log(newestCartEver, 'newestcartever')
       setMyCart(userCart)
     console.log(myCart, 'newest cart ever')
-    window.location.assign("/");
+    // window.location.assign("/");
     alert('Order placed! A receipt has been sent to your order history!')
 
   }else{
