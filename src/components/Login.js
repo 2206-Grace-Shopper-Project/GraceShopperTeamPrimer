@@ -51,7 +51,7 @@ const Login = ({ setIsLoggedIn, setToken, token }) => {
             <input
               className="loginInput"
               name="password"
-              type="text"
+              type="password"
               placeholder="password"
             />
         </div>

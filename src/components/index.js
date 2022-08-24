@@ -24,6 +24,9 @@ export {default as AddAddress} from './AddAddress'
 export {default as UpdateName} from './UpdateName'
 export {default as Loading} from './Loading'
 
+export {default as UpdateEmail} from './UpdateEmail'
+export {default as DeleteAddress} from './DeleteAddress'
+
 
 
 

@@ -127,6 +127,10 @@ body {
   color: black;
 }
 
+.login-register-link{
+  color: white
+}
+
 
 /* MOVIES ON MAIN PAGE */
 #movieComponent {
