@@ -5,8 +5,13 @@ import { Logout } from "./";
 const Header = ({ setToken, userDataObj }) => {
   const navigate = useNavigate()
   const [active, setActive] = useState(false)
+  const [currentHeader, setCurrentHeader] = useState('default')
+console.log(active, 'drop down status')
+console.log(currentHeader, 'drop down status current header')
 
   const handleOnChange = (event) =>{
+    console.log(event.target.value)
+    setCurrentHeader('default')
     setActive(false)
   navigate(event.target.value)
   }
@@ -33,8 +38,8 @@ const Header = ({ setToken, userDataObj }) => {
               {userDataObj.name} ▾
             </p>
             <div id="user-dropdown" className={active ? "dropdown-content show-dropdown" : "dropdown-content"}>
-            <select onChange={handleOnChange}>
-              
+            <select onChange={handleOnChange} defaultValue={currentHeader}>
+            <option value={'default'} disabled ></option>  
             <option value='/users'>View Profile</option>
             <option value='/myreviews'>My Reviews</option>
             <option value='/orders'>Order History</option>

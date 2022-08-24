@@ -9,6 +9,7 @@ const UserForm = ({ userDataObj, setUserDataObj, token }) => {
   const [showUpdateEmail, setShowUpdateEmail] = useState(false);
   const [showDeleteAddress, setShowDeleteAddress] = useState(false);
   const [clickId, setClickId] = useState("")
+  
 
   const addressArray = async () => {
     const addyResponse = await getMyAddresses(userDataObj.id);
@@ -20,10 +21,10 @@ const UserForm = ({ userDataObj, setUserDataObj, token }) => {
     addressArray();
   }, []);
 
-  const MappedAddresses =
+console.log(myAddresses, "this is the myAddresses State")
+  const mappedAddresses =
     myAddresses.length > 0
       ? myAddresses.map((address, index) => {
-        console.log(address, "julia sweeney")
           return (
             <div>
             <div className="addressDisplay" key={index}>
@@ -43,7 +44,9 @@ const UserForm = ({ userDataObj, setUserDataObj, token }) => {
               (<DeleteAddress 
                 setShowDeleteAddress={setShowDeleteAddress}
                 address={address}
-                token={token}
+                myAddresses={myAddresses}
+                setMyAddresses={setMyAddresses}
+                clickId={clickId}
               />) : null}
             </div>
             </div>
@@ -107,7 +110,7 @@ const UserForm = ({ userDataObj, setUserDataObj, token }) => {
       <fieldset>
         <legend>addresses</legend>
 
-        <div className="addressDisplay">{MappedAddresses}</div>
+        <div className="addressDisplay">{mappedAddresses}</div>
         <div>
           <button
             id='userform-button'
@@ -124,6 +127,8 @@ const UserForm = ({ userDataObj, setUserDataObj, token }) => {
               setShowAddAddress={setShowAddAddress}
               userDataObj={userDataObj}
               token={token}
+              myAddresses={myAddresses}
+              setMyAddresses={setMyAddresses}
             />
           ) : null}
         </div>

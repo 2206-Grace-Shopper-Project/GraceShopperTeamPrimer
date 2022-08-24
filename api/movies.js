@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getAllMovies, createMovie, updateMovie,  getMovieById, getANumberOfMoviesBySearchCategory, deleteMovieInDB } = require("../db");
+const { getAllMovies, createMovie, updateMovie,  getMovieById, getANumberOfMoviesBySearchCategory, deleteMovieInDB, updateInventoryCount } = require("../db");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -47,7 +47,6 @@ router.patch("/inventory/:movieId", async (req, res, next) => {
   try {
     const id  = req.params.movieId;
     const {newInventory} = req.body
-    req.body.id = id;
     if(!(await getMovieById(id))){
         next({
             name: "MovieNotFoundError",
