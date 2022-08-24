@@ -60,6 +60,7 @@ const ViewCart = ({ userDataObj, guestUserObj, currentUser }) => {
       // console.log(addressOnOrder[0].address);
       console.log(email, date, address, price);
 
+ FrontEndCartBranch
       await createNewOrder(cartId, address, email, date, price);
       const newestCartEver = await createNewCart(userId);
       setUserCart(newestCartEver);
@@ -74,6 +75,8 @@ const ViewCart = ({ userDataObj, guestUserObj, currentUser }) => {
       let price = Math.round(totalPrice * 100) / 100;
       // console.log(addressOnOrder[0].address);
       console.log(email, date, address, price);
+
+
 
       await createNewOrder(cartId, address, email, date, price);
       clearGuestUser();
