@@ -134,8 +134,8 @@ const deleteMovieInDB = async (id) => {
       rows: [movie],
     } = await client.query(
       `
-        DELETE
-        FROM movies
+        UPDATE movies
+        SET deleted=true 
         WHERE id=$1
         RETURNING *;
         `,
@@ -145,6 +145,28 @@ const deleteMovieInDB = async (id) => {
     return movie;
   } catch (error) {
     console.error("error in delete movies function");
+    throw error;
+  }
+};
+
+
+const updateInventoryCount = async (id, newInventory) => {
+  try {
+    const {
+      rows: [movie],
+    } = await client.query(
+      `
+        UPDATE movies
+        SET inventory=$2 
+        WHERE id=$1
+        RETURNING *;
+        `,
+      [id, newInventory]
+    );
+
+    return movie;
+  } catch (error) {
+    console.error("error in update inventory movies function");
     throw error;
   }
 };
@@ -208,4 +230,5 @@ module.exports = {
   deleteMovieInDB,
   attachMoviesToCarts,
   getANumberOfMoviesBySearchCategory,
+  updateInventoryCount
 };

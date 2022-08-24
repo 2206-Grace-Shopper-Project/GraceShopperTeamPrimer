@@ -42,6 +42,7 @@ console.log(movieObj, 'when component loads')
 return(
     <>
         <form onSubmit={handleSubmit}>
+            <label></label>
             <input name="title" maxLength={255} value={movieTitle} onChange={(event)=>setMovieTitle(event.target.value)} required placeholder='title'></input>
             <input name="genre" maxLength={255} value={movieGenre} onChange={(event)=>setMovieGenre(event.target.value)} required placeholder='genre'></input>
             <input name="year" type='number' value={movieYear} onChange={(event)=>setMovieYear(event.target.value)} required placeholder='year'></input>

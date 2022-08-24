@@ -108,7 +108,7 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
                   setShowButton(true)
                   navigate(`/movies/${linkTitle}`)
                   }}>
-                get more info</button>
+                See More</button>
               </div>
               
             </div>

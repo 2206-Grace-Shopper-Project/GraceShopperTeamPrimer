@@ -43,7 +43,26 @@ router.patch("/:movieId", async (req, res, next) => {
   }
 });
 
-router.delete('/:movieId', async (req, res, next) =>{
+router.patch("/inventory/:movieId", async (req, res, next) => {
+  try {
+    const id  = req.params.movieId;
+    const {newInventory} = req.body
+    req.body.id = id;
+    if(!(await getMovieById(id))){
+        next({
+            name: "MovieNotFoundError",
+            message: `Movie ${id} not found`,
+            error: "Error!",
+          });
+    }
+    const response = await updateInventoryCount(id, newInventory );
+    res.send(response)
+  } catch (error) {
+    next({ message: "Error updating movie!", name: "UpdateError", error });
+  }
+});
+
+router.patch('/delete/:movieId', async (req, res, next) =>{
     try {
         const id  = Number(req.params.movieId)
         console.log(id, '####')
