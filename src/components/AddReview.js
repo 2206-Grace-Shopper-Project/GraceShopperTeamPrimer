@@ -11,6 +11,10 @@ const AddReview = ({ userDataObj, setIsShown, token, movieId, setMovieReviews, m
     const review = event.target.review.value;
     setIsShown(false);
     const result = await createReview(token, movieId, userId, review);
+    if(result.error === 'PreviouslyReviewedError'){
+      alert(`you've already reviewed this movie!`)
+      return
+      }
     result.name = userDataObj.name
     setMovieReviews([...movieReviews, result])
     console.log(result);

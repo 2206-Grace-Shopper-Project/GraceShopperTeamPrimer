@@ -51,7 +51,7 @@ const handleSubmit = async (event) => {
             
             <form onSubmit={handleSubmit}>
                <div><label>New Email:</label></div> 
-               <div><input className="newEmail" name="newEmail" placeholder="ShopGirl@aol.com is already taken"></input></div> 
+               <div><input className="newEmail" name="newEmail" placeholder="ShopGirl@aol.com is already taken" required></input></div> 
                 <div>
                     <button type="submit">update!</button>
                    <button onClick={(event)=>{setShowUpdateEmail(false);}}>nevermind!</button>

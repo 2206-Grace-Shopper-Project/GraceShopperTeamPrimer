@@ -51,7 +51,7 @@ const handleSubmit = async (event) => {
             
             <form onSubmit={handleSubmit}>
                <div><label>New Name: </label></div> 
-               <div><input className="newName" name="newName" placeholder="There is no Dana, only ZUUL"></input></div> 
+               <div><input className="newName" name="newName" placeholder="There is no Dana, only ZUUL" required></input></div> 
                 <div>
                     <button type="submit">update!</button>
                    <button onClick={(event)=>{setShowUpdateName(false);}}>nevermind!</button>

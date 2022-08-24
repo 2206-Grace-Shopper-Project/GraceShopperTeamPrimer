@@ -24,7 +24,7 @@ const AddAddress = ({ token, userDataObj, setShowAddAddress, myAddresses, setMyA
       <div>Add Address Below</div>
       <form onSubmit={handleSubmit}>
       
-        <input className="newaddress" name="address" placeholder="what's the address?"></input>
+        <input className="newaddress" name="address" placeholder="what's the address?" required></input>
         <button type="submit">Add Address!</button>
         <button
           onClick={(event) => {
