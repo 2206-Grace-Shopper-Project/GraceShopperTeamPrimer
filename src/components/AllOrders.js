@@ -1,41 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { getAllOrders } from "../api";
-
-export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
-
-export async function getCartById(id) {
-    // console.log(id, 'id in get cartsbyid')
-    try {
-        const response = await fetch (`${BASE}/carts/cartid/${id}`, {
-            headers: {
-                "Content-Type": "application/json"
-              }
-        })
-        const result = await response.json()
-        // console.log(result, 'result from getCartById')
-        return result
-    } catch (error) {
-        throw error
-    }
-}
-
-export async function getAllSpecificOrders(limitNumber, offsetNumber) {
-    console.log(limitNumber, 'limitNumber')
-    console.log(offsetNumber, 'offsetNumber')
-    try {
-      const response = await fetch(`${BASE}/orders/${limitNumber}/${offsetNumber}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const result = await response.json();
-      console.log(result, "result from getAllOrders");
-      return result;
-    } catch (error) {
-      throw error;
-    }
-  }
+import { getCartById, getAllSpecificOrders } from "../api";
 
 
 const AllOrders = ({userDataObj}) =>{
@@ -50,10 +14,7 @@ const AllOrders = ({userDataObj}) =>{
     const getAllUserOrders = async(passedInPage) => {
         const offsetNumber = (passedInPage - 1) * 10
         setOffsetNumber(offsetNumber)
-        console.log(offsetNumber, 'line 54')
-        // const ordersList = await getAllOrders()
         const ordersList = await getAllSpecificOrders(limitNumber, offsetNumber)
-        console.log(ordersList, 'ordersList')
         setOrders(ordersList)
     }
 
@@ -70,7 +31,6 @@ const AllOrders = ({userDataObj}) =>{
         }
         const handlePageClick = (event) =>{
             event.preventDefault()
-            console.log(event.target)
             setPageNumber(Number(event.target.id))
             getAllUserOrders(Number(event.target.id))
         }
