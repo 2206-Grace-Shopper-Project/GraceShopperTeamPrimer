@@ -23,7 +23,6 @@ const ViewCart = ({ userDataObj, guestUserObj, currentUser }) => {
   async function myCartToView(userId) {
     const cartObj = await getEachCartByUser(userId);
     setMyCart(cartObj);
-    console.log(myCart, "this is my cart in the function");
 
     let addressInfo = await getMyAddresses(userId);
     setAddressOnOrder(addressInfo.address);
@@ -56,7 +55,6 @@ const ViewCart = ({ userDataObj, guestUserObj, currentUser }) => {
       let date = new Date().getTime();
       let address = orderAddress;
       let price = Math.round(totalPrice * 100) / 100;
-      console.log(email, date, address, price);
 
       await createNewOrder(cartId, address, email, date, price);
       const newestCartEver = await createNewCart(userId);
@@ -69,7 +67,6 @@ const ViewCart = ({ userDataObj, guestUserObj, currentUser }) => {
       let date = new Date().getTime();
       let address = event.target[0].value;
       let price = Math.round(totalPrice * 100) / 100;
-      console.log(email, date, address, price);
 
 
 
@@ -81,15 +78,12 @@ const ViewCart = ({ userDataObj, guestUserObj, currentUser }) => {
       );
     }
   };
-  // console.log(myCart, "myCart");
 
   return (
     <>
       {" "}
       {myCart ? (
         <>
-          {/* <h1 className="viewCartTitle">Cart</h1> */}
-
           <div>
             <h3 id="user-cart">{myCart.name}'s picks</h3>
             {myCart.movies ? (
