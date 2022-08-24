@@ -63,6 +63,7 @@ const ViewCart = ({ userDataObj, guestUserObj, currentUser }) => {
       setUserCart(newestCartEver);
       setMyCart(userCart);
       alert("Order placed! A receipt has been sent to your order history!");
+      window.location.assign("/");
     } else {
       let email = guestUserObj.email;
       let date = new Date().getTime();
