@@ -3,7 +3,6 @@ import { useNavigate, NavLink} from "react-router-dom";
 import { createMovie, createNewCart, deleteMovieAPI, editMovieAPI, specificMovieList } from "../api";
 import CartMovies from  './CartMovies'
 import FeaturedMovies from "./FeaturedMovies";
-import FilterMovies from "./FilterMovies";
 import Loading from "./Loading";
 import SearchMovie from "./SearchMovie";
 
@@ -25,7 +24,6 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
         const offsetNumber = (passedInPage - 1) * 50
         setOffsetNumber(offsetNumber)
         const moviesToDisplay = await specificMovieList(searchMethod, searchFlow, limitNumber, offsetNumber)
-        console.log(moviesToDisplay, '!')
         setFilteredMovieList(moviesToDisplay)
     }
 
@@ -59,7 +57,6 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
         {allMovies?.length ? <FeaturedMovies allMovies={allMovies} setAllMovies={setAllMovies}/> : <Loading/>}
 
         <SearchMovie allMovies={allMovies} filteredMovieList={filteredMovieList} setFilteredMovieList={setFilteredMovieList} pageNumber={pageNumber} setSearchMethod={setSearchMethod} setSearchFlow={setSearchFlow} setPageNumber={setPageNumber} setShowMoviePagination={setShowMoviePagination}/>
-        <FilterMovies allMovies={allMovies} filteredMovieList={filteredMovieList} setFilteredMovieList={setFilteredMovieList} pageNumber={pageNumber}/>
         {showMoviePagination ?  <div className="paginationContainer">
                 {pageNumber !== 1 ? <button id="paginationPrev" className="paginationButton" value={pageNumber - 1} onClick={handlePaginationPrev}>Prev</button> : <></>}
                  <a href="#" className={pageNumber === 1 ? "pagination activePage" : "pagination" } id={1} onClick={(handlePageClick)}>1</a>

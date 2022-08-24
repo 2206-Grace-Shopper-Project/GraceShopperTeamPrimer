@@ -1,35 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { deleteMovieAPI} from "../api";
+import { deleteMovieAPI } from "../api";
 
-const DeleteMovie = ({movieId, movieDeleted, movieObj}) =>{
-const [isDeleted, setIsDeleted] = useState(movieDeleted)
+const DeleteMovie = ({ movieId, movieDeleted, movieObj }) => {
+  const [isDeleted, setIsDeleted] = useState(movieDeleted);
 
-useEffect(()=>{
-setIsDeleted(movieObj.deleted)
-},[movieObj])
-    const handleOnclick = async (event)=>{
-        event.preventDefault()
-        if(isDeleted){
-            alert('Movie has already been deleted')
-        }else{
-            let confirmAction = confirm("Are you sure you want to delete this movie?")
-            console.log('I was clicked')
-                if(confirmAction){
-                await deleteMovieAPI(movieId)
-                setIsDeleted(true)
-                } 
-        }
-
+  useEffect(() => {
+    setIsDeleted(movieObj.deleted);
+  }, [movieObj]);
+  const handleOnclick = async (event) => {
+    event.preventDefault();
+    if (isDeleted) {
+      alert("Movie has already been deleted");
+    } else {
+      let confirmAction = confirm(
+        "Are you sure you want to delete this movie?"
+      );
+      if (confirmAction) {
+        await deleteMovieAPI(movieId);
+        setIsDeleted(true);
+      }
     }
-return(
+  };
+  return <button onClick={handleOnclick}>Admin: Delete Movie</button>;
+};
 
-    <button onClick={handleOnclick}>Admin: Delete Movie</button>
-)
-
-
-}
-
-
-
-
-export default DeleteMovie
+export default DeleteMovie;
