@@ -88,7 +88,7 @@ body {
   color: white;
   font-size: larger;
   font-family: 'Montserrat Alternates', sans-serif;
-  margin-right: 25vw;
+  margin-right: 32vw;
 }
 
 #logo {
@@ -151,9 +151,9 @@ body {
   flex-wrap: wrap;
   width: 315px;
   background-color: #D9D9D9;
-  margin: 5px;
+  /* margin: 5px; */
   padding: 5px;
-  margin-bottom: 5%;
+  margin-bottom: 3%;
   font-family: 'Nunito', sans-serif;
 }
 
@@ -227,6 +227,11 @@ div.movieInfoContainer {
 .movie-titles{
   font-family: 'Nunito', sans-serif;
   font-weight: bold;
+  margin: 0 5px;
+}
+
+.movie-prices {
+  margin: 5px 0px 0px 10px;
 }
 
 
@@ -235,24 +240,29 @@ div.movieInfoContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-left: 30px;
 }
 
 .singleMoviePoster{
-  margin-left: 30%;
-  margin-top: 10%;
+  /* margin-left: 30%;
+  margin-top: 10%; */
   height: 450px
 }
 
 .singlePriceText {
   display: flex;
   text-align: center;
-  font-family: "Roboto";
+  font-family: 'Nunito', sans-serif;
   flex-direction: column;
   align-items: center;
   align-self: center;
   color: white;
   padding: 5%;
-  margin: 5%;
+}
+
+.singlePriceText > span,
+.singlePriceText > input {
+  margin: 5px;
 }
 
 /* .textContainer {
@@ -325,6 +335,15 @@ a:hover {
   border-radius: 5px;
   font-size: 15px;
   padding: 5px;
+  margin: 5px;
+}
+
+#add-to-cart:hover,
+.moviePageButton > button:hover,
+.edit-movie-form > button:hover,
+#checkout-button:hover {
+  background-color: #bfbfbf;
+  cursor: pointer;
 }
 
 .singleTextContainer {
@@ -333,6 +352,7 @@ a:hover {
 
 #moviePrice {
   font-size: 20px;
+  margin-bottom: 5px;
 }
 
 
@@ -454,6 +474,19 @@ input[type="search"] {
 #user-cart {
   color: white;
   margin-left: 6vw;
+  font-family:'Mulish', sans-serif;
+}
+
+#empty-cart {
+  display: flex;
+  justify-content: center;
+}
+
+.cart-empty {
+  background-color: #D9D9D9;
+  padding: 20px;
+  border-radius: 5px;
+  font-family: 'Nunito', sans-serif;
 }
 
 .singleCart{
@@ -462,11 +495,12 @@ input[type="search"] {
   background-color: #D9D9D9;
   padding: 20px;
   margin: 0 25px;
-  border: 2px solid black;
+  border: 2px solid #282B30;
   font-family: 'Nunito', sans-serif;
 }
 
-.singleCart > button {
+.singleCart > button,
+#purchase-button {
   align-self: center;
   border: none;
   background-color: #282B30;
@@ -487,6 +521,7 @@ input[type="search"] {
   font-size: 25px;
   text-align: end;
   margin-right: 15vw;
+  font-family:'Mulish', sans-serif;
 }
 
 #checkout-button {
@@ -495,6 +530,7 @@ input[type="search"] {
   border: none;
   border-radius: 5px;
   padding: 5px;
+  margin-bottom: 10px;
 }
 
 #checkout-form {
@@ -502,17 +538,29 @@ input[type="search"] {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 28%;
-  margin-top: 8%;
-  width: 40vw;
+  border-radius: 5px;
+  /* margin-left: 35%;
+  margin-top: 6%;
+  margin-bottom: 10px; */
+  margin: 6% 0 10px 35%;
+  width: 30vw;
   align-self: center;
   padding-bottom: 10px;
+  font-family: 'Nunito', sans-serif;
 }
 
 #checkout-form > form {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#checkout-select {
+  padding: 0;
+  font-size: 15px;
+  border-radius: 5px;
+  border: none;
+  margin: 8px;
 }
 
 
@@ -604,6 +652,10 @@ input[type="search"] {
   max-width: 12vw;
 }
 
+#cart-movie-poster {
+  max-width: 10vw;
+}
+
 #price-and-address {
   display: flex;
   flex-direction: row-reverse;
@@ -642,13 +694,23 @@ input[type="search"] {
   padding: 5px;
 }
 
+#users-span {
+  font-weight: bold;
+}
+
 #all-orders {
   display: flex;
   flex-direction: column;
   background-color: #D9D9D9;
   padding: 10px;
-  margin: 10px;
+  margin: 20px;
   font-family: 'Nunito', sans-serif;
+}
+
+.movieForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #newMovieForm {
@@ -657,6 +719,7 @@ input[type="search"] {
   padding: 10px;
   margin: 10px;
   background-color: #D9D9D9;
+  width: 50%;
 }
 
 #newMovieForm > input {
@@ -674,38 +737,102 @@ input[type="search"] {
   color: white;
 }
 
-/* USERS AND REVIEWS */
-.addreview {
-  font-family: Roboto;
-  margin-left: 35px;
+.moviePageButton {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
 }
 
-.reviewForm {
+.moviePageButton > button {
+  display: flex;
+  max-height: 25px;
+  background-color: #D9D9D9;
+  border: none;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  align-items: center;
+}
+
+.edit-movie-form {
+  display: flex;
+  flex-direction: column;
+  background-color: #282B30;
+  border-radius: 4px;
+  padding: 10px;
+  font-family: 'Nunito', sans-serif;
+  color: white;
+}
+
+.edit-movie-form > button {
+  border: none;
+  border-radius: 5px;
+  align-self: center;
+  width: 30%;
+  margin: 10px;
+  padding: 5px;
+}
+
+
+/* USERS AND REVIEWS */
+/* .addreview {
+  font-family: Roboto;
+  margin-left: 35px;
+} */
+
+.addreview {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 15px;
+}
+
+/* .reviewForm {
   width: 90%;
   height: 100px;
   font-family: Roboto;
   margin-top: 7px;
   margin-bottom: 7px
+} */
+
+.reviewForm {
+  height: 60px;
+  width: 35vw;
+  font-family: Roboto;
+  margin-top: 7px;
+  margin-bottom: 7px;
 }
 
-.componentBasics {
+/* .componentBasics {
   margin-left: 35px;
   font-family: Roboto;
+} */
+
+.componentBasics {
+  display: flex;
+  flex-direction: column;
+  margin: 0 34px 10px 30vw;
+  padding: 10px;
+  background-color: #D9D9D9;
+  border-radius: 5px;
 }
 
-.componentHeader{
-  color: #f5f5f5;
-  text-transform: uppercase;
-  font-size: 18pt;
+.singleComponentBasics{
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: #D9D9D9;
+  margin: 5px 30px;
 }
 
 .userFormHeader{
-  color: #f5f5f5;
+  color: #282B30;
   text-transform: uppercase;
   font-size: 24pt;
+  text-align: center;
+  font-family:'Mulish', sans-serif;
 }
 
-.individualReviews {
+/* .individualReviews {
   background-color:#bebebe;
   border: 2px solid black;
   margin-bottom: 7px;
@@ -713,14 +840,41 @@ input[type="search"] {
   padding-bottom: 3px;
   padding-left: 5px;
   width: 68%;
-}
+} */
 
 .userReview{
   border-bottom: dashed 1px;
 }
 
-.reviewButton{
+/* .reviewButton{
   margin-left: 35px;
+} */
+
+.reviewButton{
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 35px;
+  
+}
+
+.reviewButton > button {
+  background-color: #282B30;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 8px;
+  align-items: center;
+}
+
+.reviewButton > button:hover,
+.individualReviews > button:hover,
+#add-movie-button:hover,
+.singleCart > button:hover,
+#purchase-button:hover,
+#userform-button:hover {
+  background-color: #1a1c20;
+  cursor: pointer;
 }
 
 .fsLogReg {
@@ -737,7 +891,7 @@ input[type="search"] {
 .compLogReg {
   margin: auto;
   font-family: Roboto;
-  background-color: #bebebe;
+  background-color: #D9D9D9;
   padding-left: 10px;
   padding-bottom: 20px;
   width: 50%;  
@@ -745,7 +899,7 @@ input[type="search"] {
 
 .compUserForm {
   font-family: Roboto;
-  background-color: #bebebe;
+  background-color: #D9D9D9;
   width: 75%;
   margin-left: 35px;
   padding-left: 10px;
@@ -773,25 +927,91 @@ input[type="search"] {
   margin-bottom: 2px;
 }
 
+.newEmail {
+  width: 215px;
+}
+
 .reviewsByMovie {
   margin-left: 35px;
   font-family: Roboto;
 }
 
-.componentHeader{
+/* .componentHeader{
   color: #f5f5f5;
   text-transform: uppercase;
   font-size: 18pt;
+} */
+
+.componentHeader {
+  color: black;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 18pt;
+  font-family: 'Nunito', sans-serif;
 }
 
-.individualReviews {
+.singleComponentHeader {
+  color: black;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 18pt;
+  font-family:'Mulish', sans-serif;
+}
+
+/* .individualReviews {
   background-color:#bebebe;
   border: 2px solid black;
   margin-bottom: 7px;
   padding-left: 5px;
   width: 68%;
+} */
+
+.individualReviews {
+  background-color: #bebebe;
+  border: 2px solid black;
+  margin-bottom: 7px;
+  padding: 10px;
+  font-family: 'Nunito', sans-serif;
 }
+
+.individualReviews > button {
+  border: none;
+  border-radius: 5px;
+  background-color: #282B30;
+  color: white;
+  padding: 5px;
+}
+
+/* .individualReviews > button:hover {
+  background-color: black;
+} */
 
 .userReview{
   border-bottom: dashed;
+}
+
+#userForm {
+  display: flex;
+  justify-content: center;
+}
+
+#userform-button {
+  border: none;
+  border-radius: 5px;
+  background-color: #282B30;
+  color: white;
+  padding: 5px;
+}
+
+#delete-address-button {
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #c81d25;
+  color: white;
+}
+
+#delete-address-button:hover {
+  background-color: #a91b22;
+  cursor: pointer;
 }

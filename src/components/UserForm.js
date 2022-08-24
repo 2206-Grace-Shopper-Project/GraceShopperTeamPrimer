@@ -30,6 +30,7 @@ console.log(myAddresses, "this is the myAddresses State")
             <div className="addressDisplay" key={index}>
               {address.address}{" "}
               <button
+                id='delete-address-button'
                 onClick={(event) => {
                   setShowDeleteAddress(true);
                   setClickId(`${address.id}`);
@@ -53,8 +54,8 @@ console.log(myAddresses, "this is the myAddresses State")
         })
       : null;
 
-// return for component starts here
-return (
+  return (
+    <div id='userForm'>
     <div className="compUserForm">
       <h1 className="userFormHeader">Hello {userDataObj.name}</h1>
 
@@ -63,6 +64,7 @@ return (
         <div>
           {userDataObj.name}{" "}
           <button
+            id='userform-button'
             onClick={(event) => {
               setShowUpdateName(true);
             }}
@@ -86,6 +88,7 @@ return (
         <div>
           {userDataObj.email}{" "}
           <button
+            id='userform-button'
             onClick={(event) => {
               setShowUpdateEmail(true);
             }}
@@ -110,6 +113,7 @@ return (
         <div className="addressDisplay">{mappedAddresses}</div>
         <div>
           <button
+            id='userform-button'
             onClick={(event) => {
               setShowAddAddress(true);
             }}
@@ -129,6 +133,7 @@ return (
           ) : null}
         </div>
       </fieldset>
+    </div>
     </div>
   );
 };

@@ -25,9 +25,9 @@ const AllUsers = ({userDataObj}) =>{
                     <div>
                     {user.name !== 'guest' ? 
                         <div key={index} id='all-users'>
-                            <p><span>Id:</span> {user.id}</p>
-                            <p><span>Name:</span> {user.name}</p>
-                            <p><span>Email: </span> {user.email}</p>
+                            <p><span id='users-span'>Id:</span> {user.id}</p>
+                            <p><span id='users-span'>Name:</span> {user.name}</p>
+                            <p><span id='users-span'>Email: </span> {user.email}</p>
                         </div>
                     : <></>}
                     </div>

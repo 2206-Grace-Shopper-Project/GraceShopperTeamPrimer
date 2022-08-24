@@ -40,8 +40,11 @@ const ReviewsByMovie = ({
 
   return (
     <div className="componentBasics">
-      <p className="componentHeader">
+      {/* <p className="componentHeader">
         reviews of {movieObj.title}
+      </p> */}
+      <p className="componentHeader">
+        Reviews
       </p>
       <div>{movieReviews.length > 0 ? MappedReviews : <div className="individualReviews">Looks like no one has reviewed {movieObj.title} yet</div>}</div>
     </div>
