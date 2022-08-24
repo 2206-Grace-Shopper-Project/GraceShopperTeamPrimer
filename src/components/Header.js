@@ -25,8 +25,6 @@ const Header = ({ setToken, userDataObj }) => {
               id="user-name"
               className="user-name"
               onClick={() => {
-                console.log("i was cliocked");
-                console.log(active);
                 setActive(!active);
               }}
             >
