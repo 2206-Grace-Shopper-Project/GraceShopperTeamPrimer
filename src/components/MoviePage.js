@@ -4,7 +4,6 @@ import AddReview from "./AddReview";
 import CartMovies from "./CartMovies";
 import Loading from "./Loading";
 import ReviewsByMovie from "./ReviewsByMovie";
-import "./extra.css";
 import EditMovie from "./EditMovie";
 import DeleteMovie from "./DeleteMovie";
 
