@@ -1,13 +1,18 @@
 import React from "react";
 import { deleteMovieAPI} from "../api";
 
-const DeleteMovie = ({movieId}) =>{
+const DeleteMovie = ({movieId, movieDeleted}) =>{
 
 
     const handleOnclick = async (event)=>{
         event.preventDefault()
-        console.log('I was clicked')
-        // await deleteMovieAPI(movieId)
+        if(movieDeleted){
+            alert('Movie has already been deleted')
+        }else{
+
+            console.log('I was clicked')
+            await deleteMovieAPI(movieId)
+        }
 
     }
 return(
