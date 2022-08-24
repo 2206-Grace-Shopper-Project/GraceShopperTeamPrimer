@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getMyReviews } from "../api";
 import { EditReview } from "./";
-import "./extra.css";
 
 const MyReviews = ({ userDataObj, token }) => {
   const [myReviews, setMyReviews] = useState([]);
   const [isShown, setIsShown] = useState(false);
-  const [clickId, setClickId] = useState("")
+  const [clickId, setClickId] = useState("");
 
   const reviewArray = async () => {
     const userId = userDataObj.id;
@@ -34,14 +33,14 @@ const MyReviews = ({ userDataObj, token }) => {
               <button
                 onClick={(event) => {
                   setIsShown(true);
-                  setClickId(`${reviewId}`)
+                  setClickId(`${reviewId}`);
                 }}
               >
                 Edit This Review
               </button>
               <div>
                 <div>
-                  {isShown && clickId ===`${reviewId}`? (
+                  {isShown && clickId === `${reviewId}` ? (
                     <EditReview
                       setIsShown={setIsShown}
                       myReviews={myReviews}

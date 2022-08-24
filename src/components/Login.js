@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { storeToken, storeUserData } from "../auth";
 import { loginUser } from "../api";
-import "./extra.css"
+import { storeToken, storeUserData } from "../auth";
 
 const Login = ({ setIsLoggedIn, setToken, token }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -16,22 +14,18 @@ const Login = ({ setIsLoggedIn, setToken, token }) => {
     if (loginInfo && loginInfo.message) {
       alert(loginInfo.message);
     }
-    const userData = {}
-    userData.id = loginInfo.user.id
-    userData.name = loginInfo.user.name
-    userData.email = loginInfo.user.email
-    console.log(loginInfo.user.password)
-    setToken(loginInfo.token)
-    storeToken(loginInfo.token)
-    storeUserData(userData)
-    console.log(loginInfo);
+    const userData = {};
+    userData.id = loginInfo.user.id;
+    userData.name = loginInfo.user.name;
+    userData.email = loginInfo.user.email;
+    setToken(loginInfo.token);
+    storeToken(loginInfo.token);
+    storeUserData(userData);
 
-    // setIsLoggedIn(true);
     setEmail("");
     setPassword("");
     window.location.assign("/");
   };
-
 
   return (
     <div className="compLogReg">
@@ -39,23 +33,23 @@ const Login = ({ setIsLoggedIn, setToken, token }) => {
       <form className="loginForm" onSubmit={handleSubmit}>
         <fieldset className="fsLogReg">
           <legend>Login</legend>
-        <div>
+          <div>
             <input
               className="loginInput"
               name="email"
               type="text"
               placeholder="email"
             />
-        </div>
-        <div>
+          </div>
+          <div>
             <input
               className="loginInput"
               name="password"
               type="password"
               placeholder="password"
             />
-        </div>
-        <button type="submit">Submit</button>
+          </div>
+          <button type="submit">Submit</button>
         </fieldset>
       </form>
     </div>
