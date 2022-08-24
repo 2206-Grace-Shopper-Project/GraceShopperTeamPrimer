@@ -8,21 +8,49 @@ const EditCart = ({
   setCanEdit,
   myCart,
   setMyCart,
+  guestUserObj
 }) => {
-  let userId = userDataObj.id;
+  
   let id = CMI;
 
   
   const handleSubmit = async (event) => {
     event.preventDefault();
-    let quantity = event.target.quantity.value;
-    console.log("userId in Edit cart", userId);
-    console.log("CMI", id);
+    if(guestUserObj && myCart){
+     let userId = guestUserObj.id
+     let quantity = event.target.quantity.value;
+     const cart = await getEachCartByUser(userId);
+     console.log(cart, "just chcking my cart for today");
+     const newQ = await updateMovieQuantity(id, quantity);
+     console.log(newQ, "newQuantity");
+     let cartId = newQ.cartId;
+     let movieId = newQ.movieId;
+     quantity = newQ.quantity;
+     console.log(quantity, "QUANTITY");
+     console.log(movieId, "MOVIEID");
+     console.log(cartId, "CARTID");
 
-    // going to bring in a addMovieToCart function
-    //  send the response to replace that movie and add it to a copy of an array and then try and splice the movies array in my cart to update the mycart object in whole and get it to automatically update
+     let newMovies = [...myCart.movies];
+     newMovies.map((element) => {
+       if (
+         movieId === element.id &&
+         cartId === element.cartId &&
+         CMI === element.cartMoviesId
+       ) {
+         element.quantity = quantity;
+       }
+       console.log(element.quantity, "this should be the new quantity");
+       let finalMovies = [...newMovies];
+       console.log(finalMovies, "is this possible");
+       cart.movies = finalMovies;
+     });
 
+     setMyCart(cart);
+     setCanEdit(false);
+
+    }else
     if (myCart) {
+      let userId = userDataObj.id;
       let quantity = event.target.quantity.value;
       const cart = await getEachCartByUser(userId);
       console.log(cart, "just chcking my cart for today");
