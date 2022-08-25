@@ -12,15 +12,8 @@ const {
   addAddress,
   getAllUserData
 } = require('./');
-// const fetch = require("node-fetch") 
-// globalThis.fetch = fetch
-// const movieJSON= require('./models/userData.json')
-// const movieData = JSON.parse(movieJSON)
-// console.log(movieData.items)
-// console.log(typeof populateMovieDatabase, '!!!!!')
 
 async function dropTables(){
-  console.log("Starting to drop tables")
   try {
     await client.query(`
     DROP TABLE IF EXISTS orders;
