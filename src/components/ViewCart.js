@@ -135,50 +135,37 @@ const ViewCart = ({ userDataObj, guestUserObj, currentUser }) => {
                     );
                   })}{" "}
                   <div>
-                    <p className="cart-total">
-                      TOTAL: {Math.round(totalPrice * 100) / 100}
-                    </p>
-                    <button
-                      id="checkout-button"
-                      onClick={() => {
-                        setConfirmPurchase(true);
-                      }}
-                    >
-                      Checkout Cart
-                    </button>{" "}
-                    {confirmPurchase ? (
-                      <div id="checkout-form">
+                    <p className='cart-total'>TOTAL: {Math.round(totalPrice * 100) / 100}</p>
+                    <button id='checkout-button' onClick={()=>{
+                      setConfirmPurchase(true)
+                    }}>Checkout Cart</button>{" "}
+                    { confirmPurchase ? <div id='checkout-form'>
+                      <form onSubmit={handleOnSubmit}>
+                        {addressOnOrder?.length ? 
+                        <div id='enter-address'>
                         <p>Choose Shipping Address:</p>
-                        <form onSubmit={handleOnSubmit}>
-                          {addressOnOrder?.length ? (
-                            <select
-                              name="address"
-                              onChange={(event) => {
-                                setOrderAddress(event.target.value);
-                              }}
-                            >
-                              {addressOnOrder.map((address, index) => {
-                                return (
-                                  <option key={index}>{address.address}</option>
-                                );
-                              })}
-                            </select>
-                          ) : (
-                            <input
-                              required
-                              name="address"
-                              type="text"
-                              placeholder="Street/City/State/Zip"
-                            />
-                          )}
-                          <button id="purchase-button" type="submit">
-                            Purchase
-                          </button>
-                        </form>
-                      </div>
-                    ) : (
-                      <></>
-                    )}
+                        <select
+                          name="address"
+                          onChange={(event) => {
+                            setOrderAddress(event.target.value);
+                          }}
+                        >
+                          {addressOnOrder.map((address, index) => {
+                            return (
+                              <option key={index}>{address.address}</option>
+                            );
+                          })}
+                        </select>
+                        </div>
+                        :  
+                        <div id='enter-address'>
+                         <p>Enter Shipping Address:</p>
+                        <input name="address" type="text" placeholder="Street, City, State, ZIP" required/></div>}
+                        <button id='purchase-button' type="submit">
+                          Purchase
+                        </button>
+                      </form>
+                    </div> : <></>}
                   </div>{" "}
                 </div>
               ) : (
