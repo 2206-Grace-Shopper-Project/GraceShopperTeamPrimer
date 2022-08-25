@@ -1,4 +1,4 @@
-export const BASE = `https://radiant-citadel-20620.herokuapp.com/api`;
+export const BASE = `https://cinemastop251.herokuapp.com//api`;
 
 // USER FUNCTIONS
 
