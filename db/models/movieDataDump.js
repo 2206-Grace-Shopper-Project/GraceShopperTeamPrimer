@@ -7,7 +7,6 @@ const gimmeMovies = async () =>{
         method: 'GET',
         redirect: 'follow'
       }) 
-    //   console.log(fetchFunction, '!!!!!!')
       return fetchFunction
 }
 const populateMovieDatabase = async () =>{
@@ -17,7 +16,6 @@ const populateMovieDatabase = async () =>{
          const response = await gimmeMovies()
               const result = await response.json()
               const movieList = result.items
-            //   console.log(movieList)
               return movieList
         
             } catch (error) {
@@ -35,26 +33,20 @@ const populateMovieDatabase = async () =>{
         const firstHalf = allMovieTitles.slice(200 , 250)
         const secondHalf = allMovieTitles.slice(121)
         
-        // console.log(allMovieTitles)
         const getDetailsOfMovie = async (movieString) =>{
             const url = `https://www.omdbapi.com/?apikey=fc79f399&t=${movieString}`
             try {
                 const response = await fetch(url)
-                // console.log( response, 'its gonna break!!!!!!!!!!!!')
                 
                 const result = await response.json()
                 
-                    // console.log( result, 'the map is working???????')
                   return result
             
                 } catch (error) {
                     console.error(error)
                 }
         }
-// console.log(firstHalf, '!!!!!!!!!!!!')
-// for(i = 0; i < firstHalf.length; i++){
 
-// }
 const firstHalfMovieDB = (async () => {
     for await (const element of firstHalf) {
     
@@ -65,7 +57,6 @@ const firstHalfMovieDB = (async () => {
     movieDetailedResult.Inventory = Math.floor(Math.random() * 10 + 5)
 
 
-    // console.log(sampleMovie, 'hopefully this works')
     const movieDetailedResultObj = {}
     movieDetailedResultObj.title = movieDetailedResult.Title
     movieDetailedResultObj.poster = movieDetailedResult.Poster
@@ -77,7 +68,6 @@ const firstHalfMovieDB = (async () => {
     movieDetailedResultObj.actors = movieDetailedResult.Actors
     movieDetailedResultObj.price = movieDetailedResult.Price
     movieDetailedResultObj.inventory = movieDetailedResult.Inventory
-    console.log(movieDetailedResultObj,",")
     // await createMovie(movieDetailedResultObj)
 
 }})
@@ -89,7 +79,6 @@ firstHalfMovieDB()
         //      await getDetailsOfMovie(movieTitle, index)
         //      return movieData
         // }))
-        // console.log(firstHalfWithData[0], "WHAT NOW!!!!!")
         // await Promise.all(firstHalfWithData.map( async (movie) => {
         //     await createMovie(movie)}))
     }
@@ -99,7 +88,6 @@ firstHalfMovieDB()
     // sampleMovie.Inventory = Math.floor(Math.random() * 10 + 5)
 
 
-    // console.log(sampleMovie, 'hopefully this works')
     // const sampleMovieObj = {}
     // sampleMovieObj.title = sampleMovie.Title
     // sampleMovieObj.poster = sampleMovie.Poster
@@ -111,18 +99,15 @@ firstHalfMovieDB()
     // sampleMovieObj.actors = sampleMovie.Actors
     // sampleMovieObj.price = sampleMovie.Price
     // sampleMovieObj.inventory = sampleMovie.Inventory
-    // console.log(sampleMovieObj, "what we're about to pass to function")
 
 
     const sampleCall = async ()=>{
         const url = `https://www.omdbapi.com/?apikey=fc79f399&t=The+Shawshank+Redemption`
         try {
             const response = await fetch(url)
-            // console.log( response, 'its gonna break!!!!!!!!!!!!')
             
             const result = await response.json()
             
-                // console.log( result, 'the map is working???????')
             
               return result
         

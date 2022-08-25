@@ -4,7 +4,6 @@ const {attachMoviesToCarts} = require('./movies')
 
 async function createCart ({userId}) {
 try {
-    console.log(userId)
     const {rows: [cart] } = await client.query(`
     INSERT INTO cart("userId")
     VALUES ($1)
@@ -37,7 +36,6 @@ async function getCartById (id) {
 
 async function getCartByUser (userId) {
   try {   
-    console.log(userId,"userID from db")
 
     const { rows: cart } = await client.query(`
     SELECT cart.*, users.name

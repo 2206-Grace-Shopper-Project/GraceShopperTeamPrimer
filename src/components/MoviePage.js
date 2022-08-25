@@ -80,7 +80,6 @@ const MoviePage = ({
                 max={movieObj.inventory}
                 onBlur={(event) => (event.target.value = 1)}
                 onChange={(event) => {
-                  console.log(event.target.value);
                   setPurchaseAmount(Number(event.target.value));
                   if (event.target.value > movieObj.inventory) {
                     alert("You cannot purchase more than what is in stock");

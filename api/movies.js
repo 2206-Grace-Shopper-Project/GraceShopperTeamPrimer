@@ -64,10 +64,8 @@ router.patch("/inventory/:movieId", async (req, res, next) => {
 router.patch('/delete/:movieId', async (req, res, next) =>{
     try {
         const id  = Number(req.params.movieId)
-        console.log(id, '####')
         const movieCheck = await getMovieById(id)
         if(!movieCheck){
-          console.log('in the if statemnt')
         next({
             name: "MovieNotFoundError",
             message: `Movie ${id} not found`,
@@ -75,7 +73,6 @@ router.patch('/delete/:movieId', async (req, res, next) =>{
           });
     }else{
     const response = await deleteMovieInDB(id)
-    console.log(response, 'what we got from query')
     res.send(response)}
 } catch (error) {
     next(error)

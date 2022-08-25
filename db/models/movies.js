@@ -14,8 +14,6 @@ const createMovie = async (movieIn) => {
     inventory,
   } = movieIn;
   try {
-    // console.log('I love movies!!!!!!!!!!!????????????')
-    // console.log(movieIn, title, genre, 'we made it!!!!!!$$$$')
     const {
       rows: [movie],
     } = await client.query(
@@ -37,7 +35,6 @@ const createMovie = async (movieIn) => {
         inventory,
       ]
     );
-    // console.log(movie, 'the tables they are empty*******')
     return movie;
   } catch (error) {
     console.error;
@@ -66,21 +63,13 @@ const getANumberOfMoviesBySearchCategory = async ({
   offsetNumber,
 }) => {
   try {
-    console.log(searchMethod, searchFlow, limitNumber, offsetNumber, "!!!!!");
 
-    // const query = `SELECT *
-    // FROM movies
-    // ORDER BY ${searchMethod} ${searchFlow}
-    // LIMIT ${limitNumber} OFFSET ${offsetNumber};`
-
-    // console.log(query)
     const { rows: movies } = await client.query(`
     SELECT *
     FROM movies
     ORDER BY ${searchMethod} ${searchFlow}
     LIMIT ${limitNumber} OFFSET ${offsetNumber};`);
 
-    // console.log(movies, "??????");
     return movies;
   } catch (error) {
     console.error("error in getNumber of movies function");
@@ -128,7 +117,6 @@ const getMovieInventory = async (id) => {
 };
 
 const deleteMovieInDB = async (id) => {
-  console.log('in the query??????')
   try {
     const {
       rows: [movie],

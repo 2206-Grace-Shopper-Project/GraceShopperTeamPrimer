@@ -40,7 +40,6 @@ const Movies = ({allMovies, token, userDataObj, filteredMovieList, setFilteredMo
     }
     const handlePageClick = (event) =>{
         event.preventDefault()
-        console.log(event.target)
         setPageNumber(Number(event.target.id))
         getCurrentPageMovies(Number(event.target.id))
     }

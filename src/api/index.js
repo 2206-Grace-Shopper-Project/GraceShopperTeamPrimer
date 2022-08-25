@@ -563,13 +563,12 @@ export async function NewAddress(token, userId, address) {
   }
 }
 
-export async function deleteAddy(token, addressId) {
+export async function deleteAddy(addressId) {
   try {
-    const response = await fetch(`${BASE}/address/${addressId}`, {
+    const response = await fetch(`${BASE}/users/address/${addressId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
     });
     const result = await response.json();
