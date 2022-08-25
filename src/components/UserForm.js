@@ -25,7 +25,7 @@ const UserForm = ({ userDataObj, setUserDataObj, token }) => {
     myAddresses.length > 0
       ? myAddresses.map((address, index) => {
           return (
-            <div>
+            <div key={index}>
               <div className="addressDisplay" key={index}>
                 {address.address}{" "}
                 <button
