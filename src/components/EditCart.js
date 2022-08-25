@@ -9,6 +9,7 @@ const EditCart = ({
   myCart,
   setMyCart,
   guestUserObj,
+  inventory,
 }) => {
   let id = CMI;
 
@@ -69,7 +70,7 @@ const EditCart = ({
     <div id="edit-cart">
       <form onSubmit={handleSubmit}>
         <label htmlFor="quantity">Qty:</label>
-        <input type="number" required name="quantity" min="1" />
+        <input type="number" required name="quantity" min="1" max={inventory} />
         <button type="submit">Update Qty</button>
       </form>
       <button

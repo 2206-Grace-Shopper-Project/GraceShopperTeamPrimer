@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {
-  addMovieToCart, createNewCart,
-  createUser, getEachCartByUser
+  addMovieToCart,
+  createNewCart,
+  createUser,
+  getEachCartByUser,
 } from "../api";
 import { grabGuestUser, storeGuestUserData } from "../auth";
 
@@ -38,7 +40,6 @@ const CartMovies = ({
       const movieId = id;
       let quantity = purchaseAmount;
       await addMovieToCart(cartId, movieId, quantity);
-   
     }
   };
 
