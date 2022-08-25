@@ -140,9 +140,10 @@ const ViewCart = ({ userDataObj, guestUserObj, currentUser }) => {
                       setConfirmPurchase(true)
                     }}>Checkout Cart</button>{" "}
                     { confirmPurchase ? <div id='checkout-form'>
-                      <p>Choose Shipping Address:</p>
                       <form onSubmit={handleOnSubmit}>
                         {addressOnOrder?.length ? 
+                        <div id='enter-address'>
+                        <p>Choose Shipping Address:</p>
                         <select
                           name="address"
                           onChange={(event) => {
@@ -155,8 +156,11 @@ const ViewCart = ({ userDataObj, guestUserObj, currentUser }) => {
                             );
                           })}
                         </select>
+                        </div>
                         :  
-                        <input name="address" type="text" placeholder="Enter Address"/>}
+                        <div id='enter-address'>
+                         <p>Enter Shipping Address:</p>
+                        <input name="address" type="text" placeholder="Street, City, State, ZIP" required/></div>}
                         <button id='purchase-button' type="submit">
                           Purchase
                         </button>
